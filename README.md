@@ -7,8 +7,8 @@ Usar:
 - Hubitat_TRATO_MolSmart_GW3_IR-TV_Driver.groovy-item<br>
 - Hubitat_TRATO_MolSmart_GW3_IR-TV_App.groovy-item <br>
 <br>
-- Instalar o código do Driver Hub.
-- Instalar o código do APP no Hub.
+- Instalar o código do Driver Hub. <br>
+- Instalar o código do APP no Hub.<br><br>
 <br>
 Antes de seguir para o passo 3, recomendamos já ter o Gateway instalado na rede, cadastrado no APP iDoor, e criado/aprendido o "Controle Remoto" como informa o manual
 <br><br>
