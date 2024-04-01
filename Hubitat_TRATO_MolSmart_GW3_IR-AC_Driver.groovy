@@ -68,7 +68,7 @@ def installed()
 {
    
 
-    sendEvent(name:"numberOfButtons", value:8)     
+    sendEvent(name:"numberOfButtons", value:12)     
     log.debug "installed()"
     
 }
@@ -76,7 +76,7 @@ def installed()
 def updated()
 {
    
-    sendEvent(name:"numberOfButtons", value:8)    
+    sendEvent(name:"numberOfButtons", value:12)    
     log.debug "updated()"
     
 }
