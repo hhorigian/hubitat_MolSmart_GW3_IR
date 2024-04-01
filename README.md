@@ -5,11 +5,11 @@ a) Podem ser enviados os códigos IR diretamente para ele usando alguma bibliote
 Para essa finalidade não precisa de nenhuma configuração adicional no Idoor. Só precisa ter o GW3 na rede, e os dados de acesso dele.
 Para esse método, Escolher o APP+Driver correto: <br><br>
 <strong>TV Com códigos Sendir</strong><br>
-  +Hubitat_TRATO_MolSmart_GW3_IR-TV_Driver.groovy-item<br>
-  +Hubitat_TRATO_MolSmart_GW3_IR-TV_App.groovy-item <br><br>
+  +Hubitat_TRATO_MolSmart_GW3_IR-TV_Driver.groovy<br>
+  +Hubitat_TRATO_MolSmart_GW3_IR-TV_App.groovy <br><br>
 <strong>AC Com códigos Sendir</strong><br>
-  +Hubitat_TRATO_MolSmart_GW3_IR-AC_Driver.groovy-item<br>
-  +Hubitat_TRATO_MolSmart_GW3_IR-AC_App.groovy-item <br>
+  +Hubitat_TRATO_MolSmart_GW3_IR-AC_Driver.groovy<br>
+  +Hubitat_TRATO_MolSmart_GW3_IR-AC_App.groovy <br>
   
 <br>
 1- Instalar o código do Driver Hub. <br>
