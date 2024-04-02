@@ -148,7 +148,6 @@ def updated()
 //Basico on e off para Switch 
 def on() {
      sendEvent(name: "switch", value: "on", isStateChange: true)
-     // def ircode = "38000,1,1,172,172,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,64,22,21,22,21,22,64,22,64,22,21,22,21,22,64,22,21,22,64,22,64,22,21,22,21,22,64,22,64,22,21,22,1820"
      def ircode =  (settings.OnIRsend ?: "")
      EnviaComando(ircode)
 
@@ -156,7 +155,6 @@ def on() {
 
 def off() {
      sendEvent(name: "switch", value: "off", isStateChange: true)
-     //def ircode = "38000,1,1,170,170,20,63,20,63,20,63,20,20,20,20,20,20,20,20,20,20,20,63,20,63,20,63,20,20,20,20,20,20,20,20,20,20,20,20,20,63,20,20,20,20,20,20,20,20,20,20,20,20,20,63,20,20,20,63,20,63,20,63,20,63,20,63,20,63,20,1798"
      def ircode =  (settings.OffIRsend ?: "")    
      EnviaComando(ircode)
          
@@ -213,7 +211,6 @@ def push(pushed) {
 //Botão #2 para dashboard
 def mute(){
 	sendEvent(name: "volume", value: "mute")
-//  def ircode = "38000,1,1,172,172,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,64,22,1820"
     def ircode =  (settings.muteIRsend ?: "")
     EnviaComando(ircode)    
 }
@@ -222,7 +219,6 @@ def mute(){
 //Botão #3 para dashboard
 def source(){
 	sendEvent(name: "action", value: "source")
-//  def ircode = "38000,1,1,172,172,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,64,22,1820"
     def ircode =  (settings.sourceIRsend ?: "")
     EnviaComando(ircode)    
 }
@@ -230,7 +226,6 @@ def source(){
 //Botão #4 para dashboard
 def back(){
 	sendEvent(name: "action", value: "back")
-//  def ircode = "38000,1,1,172,172,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,64,22,1820"
     def ircode =  (settings.backIRsend ?: "")
     EnviaComando(ircode)    
 }
@@ -238,7 +233,6 @@ def back(){
 //Botão #5 para dashboard
 def menu(){
 	sendEvent(name: "action", value: "menu")
-//  def ircode = "38000,1,1,172,172,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,64,22,1820"
     def ircode =  (settings.menuIRsend ?: "")
     EnviaComando(ircode)    
 }
@@ -247,7 +241,6 @@ def menu(){
 //Botão #6 para dashboard
 def hdmi1(){
     sendEvent(name: "input", value: "hdmi1")
-    //def ircode = "38000,1,1,173,173,21,65,21,65,21,65,21,21,21,21,21,21,21,21,21,21,21,65,21,65,21,65,21,21,21,21,21,21,21,21,21,21,21,65,21,21,21,21,21,65,21,21,21,65,21,65,21,65,21,21,21,65,21,65,21,21,21,65,21,21,21,21,21,21,21,1832"
     def ircode =  (settings.hdmi1IRsend ?: "")
     EnviaComando(ircode)
 }
@@ -255,7 +248,6 @@ def hdmi1(){
 //Botão #7 para dashboard
 def hdmi2(){
     sendEvent(name: "input", value: "hdmi2")
-    //def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.hdmi2IRsend ?: "")
     EnviaComando(ircode)
 }
@@ -265,7 +257,6 @@ def hdmi2(){
 //Botão #8 para dashboard
 def left(){
     sendEvent(name: "action", value: "left")
-//    def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.btnextra1IRsend ?: "")
     EnviaComando(ircode)
 }
@@ -273,7 +264,6 @@ def left(){
 //Botão #9 para dashboard
 def right(){
     sendEvent(name: "action", value: "right")
-    //def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.btnextra1IRsend ?: "")
     EnviaComando(ircode)
 }
@@ -283,7 +273,6 @@ def right(){
 //Botão #10 para dashboard
 def up(){
     sendEvent(name: "action", value: "up")
-    //def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.upIRsend ?: "")
     EnviaComando(ircode)
 }
@@ -291,7 +280,6 @@ def up(){
 //Botão #11 para dashboard
 def down(){
     sendEvent(name: "action", value: "down")
-    //def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.hdmi1 ?: "")
     EnviaComando(ircode)
 }
@@ -299,7 +287,6 @@ def down(){
 //Botão #12 para dashboard
 def confirm(){
     sendEvent(name: "action", value: "confirm")
-//   def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.confirmIRsend ?: "")
     EnviaComando(ircode)
 }
@@ -308,7 +295,6 @@ def confirm(){
 //Botão #13 para dashboard
 def exit(){
 	sendEvent(name: "action", value: "exit")
-//  def ircode = "38000,1,1,172,172,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,64,22,1820"
     def ircode =  (settings.exitIRsend ?: "")
     EnviaComando(ircode)    
 }
@@ -319,7 +305,6 @@ def exit(){
 //Botão #14 para dashboard
 def home(){
     sendEvent(name: "action", value: "home")
-    //def ircode = "38000,1,1,173,173,22,65,22,65,22,65,22,22,22,22,22,22,22,22,22,22,22,65,22,65,22,65,22,22,22,22,22,22,22,22,22,22,22,65,22,22,22,22,22,65,22,65,22,65,22,65,22,22,22,22,22,65,22,65,22,22,22,22,22,22,22,22,22,65,22,1787"
     def ircode =  (settings.homeIRsend ?: "")
     EnviaComando(ircode)
 }
@@ -329,7 +314,6 @@ def home(){
 //Botão #18 para dashboard
 def channelUp(){
 	sendEvent(name: "channel", value: "chup")
-//  def ircode = "38000,1,1,172,172,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,64,22,1820"
     def ircode =  (settings.ChanUpIRsend ?: "")
     EnviaComando(ircode)    
 }
@@ -337,7 +321,6 @@ def channelUp(){
 //Botão #19 para dashboard
 def channelDown(){
 	sendEvent(name: "channel", value: "chdown")
-//  def ircode = "38000,1,1,172,172,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,64,22,1820"
     def ircode =  (settings.ChanDownIRsend ?: "")
     EnviaComando(ircode)    
 }
@@ -345,7 +328,6 @@ def channelDown(){
 //Botão #21 para dashboard
 def volumeUp(){
 	sendEvent(name: "volume", value: "volup")
-//  def ircode = "38000,1,1,172,172,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,64,22,1820"
     def ircode =  (settings.VolUpIRsend ?: "")
     EnviaComando(ircode)    
 }
@@ -353,7 +335,6 @@ def volumeUp(){
 //Botão #22 para dashboard
 def volumeDown(){
 	sendEvent(name: "volume", value: "voldown")
-//  def ircode = "38000,1,1,172,172,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,64,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,64,22,64,22,64,22,64,22,1820"
     def ircode =  (settings.VolDownIRsend ?: "")
     EnviaComando(ircode)    
 }
@@ -362,7 +343,6 @@ def volumeDown(){
 //Botão #23 para dashboard
 def num0(){
     sendEvent(name: "action", value: "num0")
-//    def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.num0IRsend ?: "")
     EnviaComando(ircode)
 }
@@ -370,7 +350,6 @@ def num0(){
 //Botão #24 para dashboard
 def num1(){
     sendEvent(name: "action", value: "num1")
-//    def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.num1IRsend ?: "")
     EnviaComando(ircode)
 }
@@ -378,7 +357,6 @@ def num1(){
 //Botão #25 para dashboard
 def num2(){
     sendEvent(name: "action", value: "num2")
-//    def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.num2IRsend ?: "")
     EnviaComando(ircode)
 }
@@ -387,7 +365,6 @@ def num2(){
 //Botão #26 para dashboard
 def num3(){
     sendEvent(name: "action", value: "num3")
-//    def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.num3IRsend ?: "")
     EnviaComando(ircode)
 }
@@ -395,7 +372,6 @@ def num3(){
 //Botão #27 para dashboard
 def num4(){
     sendEvent(name: "action", value: "num4")
-//    def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.num4IRsend ?: "")
     EnviaComando(ircode)
 }
@@ -403,7 +379,6 @@ def num4(){
 //Botão #28 para dashboard
 def num5(){
     sendEvent(name: "action", value: "num5")
-//    def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.num5IRsend ?: "")
     EnviaComando(ircode)
 }
@@ -411,7 +386,6 @@ def num5(){
 //Botão #29 para dashboard
 def num6(){
     sendEvent(name: "action", value: "num6")
-//    def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.num6IRsend ?: "")
     EnviaComando(ircode)
 }
@@ -420,7 +394,6 @@ def num6(){
 //Botão #30 para dashboard
 def num7(){
     sendEvent(name: "action", value: "num7")
-//    def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.num7IRsend ?: "")
     EnviaComando(ircode)
 }
@@ -428,7 +401,6 @@ def num7(){
 //Botão #31 para dashboard
 def num8(){
     sendEvent(name: "action", value: "num8")
-//    def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.num8IRsend ?: "")
     EnviaComando(ircode)
 }
@@ -436,7 +408,6 @@ def num8(){
 //Botão #32 para dashboard
 def num9(){
     sendEvent(name: "action", value: "num9")
-//    def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.num9IRsend ?: "")
     EnviaComando(ircode)
 }
@@ -444,7 +415,6 @@ def num9(){
 //Botão #33 para dashboard
 def btnextra1(){
     sendEvent(name: "action", value: "confirm")
-//   def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.btnextra1IRsend ?: "")
     EnviaComando(ircode)
 }
@@ -452,7 +422,6 @@ def btnextra1(){
 //Botão #34 para dashboard
 def btnextra2(){
     sendEvent(name: "action", value: "btnextra2")
-//   def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.btnextra2IRsend ?: "")
     EnviaComando(ircode)
 }
@@ -460,7 +429,6 @@ def btnextra2(){
 //Botão #35 para dashboard
 def btnextra3(){
     sendEvent(name: "action", value: "btnextra3")
-//   def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.btnextra3IRsend ?: "")
     EnviaComando(ircode)
 }
@@ -468,7 +436,6 @@ def btnextra3(){
 //Botão #38 para dashboard
 def appAmazonPrime(){
     sendEvent(name: "input", value: "amazon")
-//  def ircode = "38000,1,1,173,173,22,65,22,65,22,65,22,22,22,22,22,22,22,22,22,22,22,65,22,65,22,65,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,65,22,22,22,65,22,65,22,65,22,65,22,65,22,65,22,22,22,65,22,22,22,22,22,22,22,22,22,1787"
     def ircode =  (settings.amazonIRsend ?: "")
     EnviaComando(ircode)
 }
@@ -476,7 +443,6 @@ def appAmazonPrime(){
 //Botão #39 para dashboard
 def appyoutube(){
     sendEvent(name: "input", value: "youtube")
-//  def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.youtubeIRsend ?: "")
     EnviaComando(ircode)
 }
@@ -485,7 +451,6 @@ def appyoutube(){
 //Botão #40 para dashboard
 def appnetflix(){
     sendEvent(name: "input", value: "netflix")
-//  def ircode = "38000,1,1,172,171,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,22,21,22,21,65,21,65,21,22,21,22,21,22,21,22,21,1673"
     def ircode =  (settings.netflixIRsend ?: "")
     EnviaComando(ircode)
 }
