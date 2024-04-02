@@ -2,16 +2,16 @@
 
 - Existem 2 formas de utilizar o GW3 via IR. <br><br>
 a) Podem ser enviados os códigos IR diretamente para ele usando alguma biblioteca (Global Caché ou outras), e enviar os comandos SENDIR direto para ele.
-Para essa finalidade não precisa de nenhuma configuração adicional no Idoor. Só precisa ter o GW3 na rede, e os dados de acesso dele.
+Para essa finalidade não precisa de nenhuma configuração adicional no Idoor. Só precisa ter o GW3 na rede, e os dados de acesso dele.<br>
 Para esse método, Escolher o APP+Driver correto: <br><br>
 <strong>TV Com códigos Sendir</strong><br>
   +Hubitat_TRATO_MolSmart_GW3_IR-TV-SendIR_Driver.groovy<br>
   +Hubitat_TRATO_MolSmart_GW3_IR-TV-SendIR_App.groovy <br><br>
-  - Nessa opção, os códigos SendIR para cada comando, devem ser gravados na página do dispositivo, dentro da configuração do HE. <br><br>
-  <strong>TV Com códigos HEX Pronto</strong><br>
+  *Nessa opção, os códigos SendIR para cada comando, devem ser gravados na página do dispositivo, dentro da configuração do HE. <br><br></li>
+<strong>TV Com códigos HEX Pronto</strong><br>
   +Hubitat_TRATO_MolSmart_GW3_IR-TV-HEX_Driver.groovy<br>
-  +Hubitat_TRATO_MolSmart_GW3_IR-TV-HEX_App.groovy <br>
-  - Nessa opção, os códigos HEX para cada comando, devem ser inseridos e configurados na pagina de configuração do DRIVER na HUbitat, dentro da configuração do HE. <br><br>
+  +Hubitat_TRATO_MolSmart_GW3_IR-TV-HEX_App.groovy <br><br>
+  *Nessa opção, os códigos HEX para cada comando, devem ser inseridos e configurados na pagina de configuração do DRIVER na HUbitat, dentro da configuração do HE. <br><br>
 <strong>AC Com códigos Sendir</strong><br>
   +Hubitat_TRATO_MolSmart_GW3_IR-AC-SendIR_Driver.groovy<br>
   +Hubitat_TRATO_MolSmart_GW3_IR-AC-SendIR_App.groovy <br><br>
