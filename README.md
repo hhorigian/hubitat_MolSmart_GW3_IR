@@ -1,6 +1,6 @@
 # hubitat_MolSmart_GW3_IR
 
-- Existem 2 formas de utilizar o GW3 via IR. <br><br>
+- Existem 3 formas de utilizar o GW3 via IR. <br><br>
 a) Podem ser enviados os códigos IR diretamente para ele usando alguma biblioteca (Global Caché ou outras), e enviar os comandos SENDIR direto para ele.
 Para essa finalidade não precisa de nenhuma configuração adicional no Idoor. Só precisa ter o GW3 na rede, e os dados de acesso dele.<br>
 Para esse método, Escolher o APP+Driver correto: <br><br>
@@ -21,9 +21,7 @@ Para esse método, Escolher o APP+Driver correto: <br><br>
 <strong>AC Com Learning via iDoor</strong><br>
   +Hubitat_TRATO_MolSmart_GW3_IR-AC-HEX_Driver.groovy<br>
   +Hubitat_TRATO_MolSmart_GW3_IR-AC-HEX_App.groovy <br><br>  
-<strong>Controle UNIVERSAL com Learning</strong><br>
-  +Hubitat_TRATO_MolSmart_GW3_IR_Universal_Learning_Driver<br>
-  +Hubitat_TRATO_MolSmart_GW3_IR_Universal_Learning_App<br><br>  
+
 
 <br>
 1- Instalar o código do Driver Hub. <br>
@@ -43,6 +41,12 @@ Dicas de integração do GW: https://youtu.be/Ex9b1RNuMUs?si=Kt0DbUi9_nxtS-E5<br
   c) Adicionar o device no Dashboard<br>
   d) Cada botão (comando do controle) pode ser accionado com os numeros que aparecem na configuração do device; ex: "Mute-Sendir(2)". O Mudo é o botão = 2 para ser accionado.<br>
 
-
-b) Pode ser aprendido o controle remoto diretamente no iDoor usando a biblioteca existente em ele, e enviar os comandos direto para o iDoor dos botões em ele. 
+<br>c) Pode ser aprendido o controle remoto diretamente no iDoor, e criando botões e cada botão com um número. Esse numero será usado no driver/hubitat device como referencia ao botão criado no iDoor. <br>
+<br>
+<strong>Controle UNIVERSAL com Learning</strong><br>
+  +Hubitat_TRATO_MolSmart_GW3_IR_Universal_Learning_Driver<br>
+  +Hubitat_TRATO_MolSmart_GW3_IR_Universal_Learning_App<br><br>  <br>
+  
+c) Pode ser aprendido o controle remoto diretamente no iDoor usando a biblioteca existente em ele, e enviar os comandos direto para o iDoor dos botões em ele. 
 - Driver em desenvolvimento. 
+
