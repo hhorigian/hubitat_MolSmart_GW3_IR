@@ -18,6 +18,12 @@ Para esse método, Escolher o APP+Driver correto: <br><br>
 <strong>AC Com códigos HEX Pronto</strong><br>
   +Hubitat_TRATO_MolSmart_GW3_IR-AC-HEX_Driver.groovy<br>
   +Hubitat_TRATO_MolSmart_GW3_IR-AC-HEX_App.groovy <br><br>
+<strong>AC Com Learning via iDoor</strong><br>
+  +Hubitat_TRATO_MolSmart_GW3_IR-AC-HEX_Driver.groovy<br>
+  +Hubitat_TRATO_MolSmart_GW3_IR-AC-HEX_App.groovy <br><br>  
+<strong>Controle UNIVERSAL com Learning</strong><br>
+  +Hubitat_TRATO_MolSmart_GW3_IR_Universal_Learning_Driver<br>
+  +Hubitat_TRATO_MolSmart_GW3_IR_Universal_Learning_App<br><br>  
 
 <br>
 1- Instalar o código do Driver Hub. <br>
