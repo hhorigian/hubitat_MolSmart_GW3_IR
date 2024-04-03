@@ -47,11 +47,11 @@ metadata {
     input name: "fanIRsend", title:"fan-Sendir(5)", type: "string"	
     input name: "dryIRsend", title:"dry-Sendir(6)", type: "string"
 	input name: "setCoolingSetpointIRsend", title:"setCooling-Sendir(7)", type: "string"
-	input name: "comandoextra1", title:"dry-Sendir(8)", type: "string"
-	input name: "comandoextra2", title:"dry-Sendir(9)", type: "string"
-	input name: "comandoextra3", title:"dry-Sendir(10)", type: "string"      
-	input name: "comandoextra4", title:"dry-Sendir(11)", type: "string"      
-	input name: "comandoextra5", title:"dry-Sendir(12)", type: "string"      
+	input name: "comandoextra1", title:"comandoextra1-Sendir(8)", type: "string"
+	input name: "comandoextra2", title:"comandoextra1-Sendir(9)", type: "string"
+	input name: "comandoextra3", title:"comandoextra1-Sendir(10)", type: "string"      
+	input name: "comandoextra4", title:"comandoextra1-Sendir(11)", type: "string"      
+	input name: "comandoextra5", title:"comandoextra1-Sendir(12)", type: "string"      
          
        
   }   
@@ -125,7 +125,7 @@ def push(pushed) {
 //Botão #2 para dashboard
 def auto(){
     sendEvent(name: "thermostatMode", value: "auto")
-    def ircode =  (settings.muteIRsend ?: "")
+    def ircode =  (settings.autoIRsend ?: "")
     EnviaComando(ircode)    
 }
 
@@ -133,21 +133,21 @@ def auto(){
 //Botão #3 para dashboard
 def heat(){
     sendEvent(name: "thermostatMode", value: "heat")
-    def ircode =  (settings.sourceIRsend ?: "")
+    def ircode =  (settings.heatIRsend ?: "")
     EnviaComando(ircode)    
 }
 
 //Botão #4 para dashboard
 def cool(){
     sendEvent(name: "thermostatMode", value: "cool")
-    def ircode =  (settings.backIRsend ?: "")
+    def ircode =  (settings.coolIRsend ?: "")
     EnviaComando(ircode)    
 }
 
 //Botão #5 para dashboard
 def fan(){
     sendEvent(name: "thermostatMode", value: "fan")
-    def ircode =  (settings.menuIRsend ?: "")
+    def ircode =  (settings.fanIRsend ?: "")
     EnviaComando(ircode)    
 }
 
@@ -155,49 +155,49 @@ def fan(){
 //Botão #6 para dashboard
 def dry(){
     sendEvent(name: "thermostatMode", value: "dry")
-    def ircode =  (settings.hdmi1IRsend ?: "")
+    def ircode =  (settings.dryIRsend ?: "")
     EnviaComando(ircode)
 }
 
 //Botão #7 para dashboard
 def setCoolingSetpoint(temperature){
     sendEvent(name: "thermostatMode", value: temperature )
-    def ircode =  (settings.hdmi2IRsend ?: "")
+    def ircode =  (settings.setCoolingSetpointIRsend ?: "")
     EnviaComando(ircode)
 }
 
 //Botão #8 para dashboard
 def comandoextra1(){
     sendEvent(name: "thermostatMode", value: "comandoextra1" )
-    def ircode =  (settings.hdmi2IRsend ?: "")
+    def ircode =  (settings.comandoextra1 ?: "")
     EnviaComando(ircode)
 }
 
 //Botão #9 para dashboard
 def comandoextra2(){
     sendEvent(name: "thermostatMode", value: "comandoextra2" )
-    def ircode =  (settings.hdmi2IRsend ?: "")
+    def ircode =  (settings.comandoextra2 ?: "")
     EnviaComando(ircode)
 }
 
 //Botão #10 para dashboard
 def comandoextra3(){
     sendEvent(name: "thermostatMode", value: "comandoextra3" )
-    def ircode =  (settings.hdmi2IRsend ?: "")
+    def ircode =  (settings.comandoextra3 ?: "")
     EnviaComando(ircode)
 }
 
 //Botão #11 para dashboard
 def comandoextra4(){
     sendEvent(name: "thermostatMode", value: "dcomandoextra4" )
-    def ircode =  (settings.hdmi2IRsend ?: "")
+    def ircode =  (settings.comandoextra4 ?: "")
     EnviaComando(ircode)
 }
 
 //Botão #12 para dashboard
 def comandoextra5(){
     sendEvent(name: "coolingSetpoint", value: "comandoextra5" )
-    def ircode =  (settings.hdmi2IRsend ?: "")
+    def ircode =  (settings.comandoextra5 ?: "")
     EnviaComando(ircode)
 }
 
@@ -213,7 +213,7 @@ def AtualizaDadosGW3(ipADD,TempserialNum,TempverifyCode,Tempchannel) {
 
 def EnviaComando(command) {
     
-    def URI = "https://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&cId=" + state.channel + "&gc=" + command       
+    def URI = "http://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&cId=" + state.channel + "&gc=" + command       
     httpPOSTExec(URI)
     log.info "HTTP" +  URI + "commando = "
     
