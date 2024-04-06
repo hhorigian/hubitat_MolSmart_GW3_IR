@@ -15,6 +15,7 @@
  *
  *            --- Driver para GW3 - IR Universal do iDoor ---
  *            V.1. 2/4/2024 
+ *	      V.1.1 6/4/2024 - corregimos bom joão o erro no código. 
  *
  */
 metadata {
@@ -200,7 +201,7 @@ def AtualizaDadosGW3(ipADD,TempserialNum,TempverifyCode,TempcId,TemprcId) {
 def EnviaComando(buttonnumber) {
 
 
-    def URI = "https://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&cId=" + state.cId + "&state=" + buttonnumber + "&rcId=" + state.rcId                                                                                                        
+    def URI = "http://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&cId=" + state.cId + "&state=" + buttonnumber + "&rcId=" + state.rcId                                                                                                        
     httpPOSTExec(URI)
     log.info "HTTP" +  URI + "+ commando = "
     
