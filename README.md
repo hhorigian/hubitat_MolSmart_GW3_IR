@@ -42,7 +42,7 @@ Dicas de integração do GW: https://youtu.be/Ex9b1RNuMUs?si=Kt0DbUi9_nxtS-E5<br
   d) Cada botão (comando do controle) pode ser accionado com os numeros que aparecem na configuração do device; ex: "Mute-Sendir(2)". O Mudo é o botão = 2 para ser accionado.<br><br>
 
 <strong>B)</strong> Pode ser aprendido o controle remoto diretamente no iDoor, e criando botões e cada botão com um número. Esse numero será usado no driver/hubitat device como referencia ao botão criado no iDoor. <br>
-<br>
+<br><br>
 <strong>Controle UNIVERSAL com Learning</strong><br>
   +Hubitat_TRATO_MolSmart_GW3_IR_Universal_Learning_Driver<br>
   +Hubitat_TRATO_MolSmart_GW3_IR_Universal_Learning_App<br><br>  <br>
