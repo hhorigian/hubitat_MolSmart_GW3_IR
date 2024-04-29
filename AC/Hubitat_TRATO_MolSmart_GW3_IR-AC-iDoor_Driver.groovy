@@ -15,6 +15,8 @@
  *
  *            --- Driver para GW3 - AC - idoor
  *            V.1. iDoor BETA 17/4/2024
+ *            V.1.1 iDoor BETA 28/4/2024 - fixed the temperature idoor codes, added tp=1. 
+
  *
  */
 
@@ -113,7 +115,7 @@ def auto(){
     sendEvent(name: "thermostatMode", value: "auto")
     def ircodetemp = 1
     state.pw = "1"
-    def ircode = ircodetemp + "&md=0"
+    def ircode = ircodetemp + "&md=0&tp=2"
     EnviaComando(ircode)  
 }
 
@@ -123,7 +125,7 @@ def heat(){
     sendEvent(name: "thermostatMode", value: "heat")
     def ircodetemp = 1
     state.pw = "1"
-    def ircode = ircodetemp + "&md=2"
+    def ircode = ircodetemp + "&md=2&tp=2"
     EnviaComando(ircode)  
 }
 
@@ -132,7 +134,7 @@ def cool(){
     sendEvent(name: "thermostatMode", value: "cool")
     def ircodetemp = 1
     state.pw = "1"
-    def ircode = ircodetemp + "&md=1"
+    def ircode = ircodetemp + "&md=1&tp=2"
     EnviaComando(ircode)     
 }
 
@@ -141,7 +143,7 @@ def fan(){
     sendEvent(name: "thermostatMode", value: "fan")
     def ircodetemp = 1
     state.pw = "1"
-    def ircode = ircodetemp + "&md=4"
+    def ircode = ircodetemp + "&md=4&tp=2"
     EnviaComando(ircode)      
 }
 
@@ -151,7 +153,7 @@ def dry(){
     sendEvent(name: "thermostatMode", value: "dry")
     def ircodetemp = 1
     state.pw = "1"
-    def ircode = ircodetemp + "&md=3"
+    def ircode = ircodetemp + "&md=3&tp=2"
     EnviaComando(ircode)  
 }
 
@@ -160,7 +162,7 @@ def setCoolingSetpoint(temperature){
     sendEvent(name: "CoolingSetpoint", value: temperature )
     def ircodetemp = 1
     state.pw = "1"
-    def ircode = ircodetemp + "&t=" + temperature
+    def ircode = ircodetemp + "&t=" + temperature + "&tp=1"
     EnviaComando(ircode)  
 }
 
@@ -169,7 +171,7 @@ def fanAuto(){
     sendEvent(name: "FanMode", value: "fanAuto")
     def ircodetemp = 1
     state.pw = "1"
-    def ircode = ircodetemp + "&s=0"
+    def ircode = ircodetemp + "&s=0&tp=3"
     EnviaComando(ircode)  
 }
 
@@ -178,7 +180,7 @@ def fanOn(){
     sendEvent(name: "FanMode", value: "fanOn")
     def ircodetemp = 1
     state.pw = "1"
-    def ircode = ircodetemp + "&s=3"
+    def ircode = ircodetemp + "&s=3&tp=3"
     EnviaComando(ircode)  
 }
 
@@ -187,7 +189,7 @@ def fanCirculate(){
     sendEvent(name: "FanMode", value: "fanCirculate")
     def ircodetemp = 1
     state.pw = "1"
-    def ircode = ircodetemp + "&s=1"
+    def ircode = ircodetemp + "&s=1&tp=3"
     EnviaComando(ircode)  
 }
 
@@ -196,7 +198,7 @@ def setHeatingSetpoint(temperature){
     sendEvent(name: "HeatingSetpoint", value: temperature )
     def ircodetemp = 1
     state.pw = "1"
-    def ircode = ircodetemp + "&t=" + temperature
+    def ircode = ircodetemp + "&t=" + temperature + "&tp=1"
     EnviaComando(ircode)  
 }
 
@@ -224,7 +226,7 @@ def setThermostatMode(modo){
             logDebug("push: Botão inválido.")
             break   
     }
-    def ircode = ircodetemp + "&md=" + valormodo 
+    def ircode = ircodetemp + "&md=" + valormodo + "&tp=2"
     EnviaComando(ircode)  
 }
 
