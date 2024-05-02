@@ -15,6 +15,8 @@
  *
  *            --- Driver para GW3 - IR - para Ar CondicionadoC ---
  *            V.1. 31/3/2024 
+ *            V.1.2 17/4/2024 Fixed the Error when using long codes. 
+ *	      V.1.3 5/1/2024 Added SetHeating and SetCooling Buttons. 
  *
  */
 metadata {
@@ -28,7 +30,7 @@ metadata {
 	capability "Configuration"
 	capability "Refresh"
 	capability "HealthCheck"   
-    capability "PushableButton"
+        capability "PushableButton"
       
  
           
@@ -39,19 +41,20 @@ metadata {
 
   preferences {
     input name: "logEnable", type: "bool", title: "Enable debug logging", defaultValue: false
-	input name: "OnIRsend", title:"On-Sendir", type: "string"
-	input name: "OffIRsend", title:"Off-Sendir", type: "string"
-    input name: "autoIRsend", title:"Auto-Sendir(2)", type: "string"  
-	input name: "heatIRsend", title:"Heat-Sendir(3)", type: "string"	
-    input name: "coolIRsend", title:"Cool-Sendir(4)", type: "string"  
-    input name: "fanIRsend", title:"fan-Sendir(5)", type: "string"	
-    input name: "dryIRsend", title:"dry-Sendir(6)", type: "string"
-	input name: "setCoolingSetpointIRsend", title:"setCooling-Sendir(7)", type: "string"
-	input name: "comandoextra1", title:"comandoextra1-Sendir(8)", type: "string"
-	input name: "comandoextra2", title:"comandoextra1-Sendir(9)", type: "string"
-	input name: "comandoextra3", title:"comandoextra1-Sendir(10)", type: "string"      
-	input name: "comandoextra4", title:"comandoextra1-Sendir(11)", type: "string"      
-	input name: "comandoextra5", title:"comandoextra1-Sendir(12)", type: "string"      
+	input name: "OnIRsend", title:"On-Sendir", type: "textarea"
+	input name: "OffIRsend", title:"Off-Sendir", type: "textarea"
+    input name: "autoIRsend", title:"Auto-Sendir(2)", type: "textarea"  
+	input name: "heatIRsend", title:"Heat-Sendir(3)", type: "textarea"	
+    input name: "coolIRsend", title:"Cool-Sendir(4)", type: "textarea"  
+    input name: "fanIRsend", title:"fan-Sendir(5)", type: "textarea"	
+    input name: "dryIRsend", title:"dry-Sendir(6)", type: "textarea"
+	input name: "setCoolingSetpointIRsend", title:"setCooling-Sendir(7)", type: "textarea"
+	input name: "setHeatingSetpointIRsend", title:"setHeating-Sendir(7)", type: "textarea"      
+	input name: "comandoextra1", title:"comandoextra1-Sendir(8)", type: "textarea"
+	input name: "comandoextra2", title:"comandoextra1-Sendir(9)", type: "textarea"
+	input name: "comandoextra3", title:"comandoextra1-Sendir(10)", type: "textarea"      
+	input name: "comandoextra4", title:"comandoextra1-Sendir(11)", type: "textarea"      
+	input name: "comandoextra5", title:"comandoextra1-Sendir(12)", type: "textarea"      
          
        
   }   
@@ -161,10 +164,19 @@ def dry(){
 
 //Botão #7 para dashboard
 def setCoolingSetpoint(temperature){
-    sendEvent(name: "thermostatMode", value: temperature )
+    sendEvent(name: "setCoolingSetpoint", value: temperature )
     def ircode =  (settings.setCoolingSetpointIRsend ?: "")
     EnviaComando(ircode)
 }
+
+
+//Botão #7 para dashboard
+def setHeatingSetpoint(temperature){
+    sendEvent(name: "setHeatingSetpoint", value: temperature )
+    def ircode =  (settings.setHeatingSetpointIRsend ?: "")
+    EnviaComando(ircode)
+}
+
 
 //Botão #8 para dashboard
 def comandoextra1(){
@@ -201,6 +213,62 @@ def comandoextra5(){
     EnviaComando(ircode)
 }
 
+//Botão #13 para dashboard
+def setThermostatMode(modo){
+    def varmodo = modo
+    sendEvent(name: "thermostatMode", value: modo)
+    def ircodetemp = 1
+    state.pw = "1"
+    def valormodo = " "
+    switch(modo) {
+		case "auto" : 
+            valormodo = "0"; 
+            break
+		case "heat" : 
+            valormodo = "2"; 
+            break  
+		case "cool" : 
+            valormodo = "1"  ; 
+            break
+        case "off"  : 
+            valormodo = "-1" ; 
+            break
+        default: 
+            logDebug("push: Botão inválido.")
+            break   
+    }
+    def ircode = (settings.heatIRsend ?: "")
+    EnviaComando(ircode)  
+}
+
+//Botão #13 para dashboard
+def setThermostatFanMode(modo){
+    def varmodo = modo
+    sendEvent(name: "setThermostatFanMode", value: modo)
+    def ircodetemp = 1
+    state.pw = "1"
+    def valormodo = " "
+    switch(modo) {
+		case "auto" : 
+            valormodo = "0"; 
+            break
+		case "circulate" : 
+            valormodo = "2"; 
+            break  
+		case "cool" : 
+            valormodo = "1"  ; 
+            break
+        case "on"  : 
+            valormodo = "-1" ; 
+            break
+        default: 
+            logDebug("push: Botão inválido.")
+            break   
+    }
+    def ircode = (settings.heatIRsend ?: "")
+    EnviaComando(ircode)  
+}
+
 
 def AtualizaDadosGW3(ipADD,TempserialNum,TempverifyCode,Tempchannel) {
     state.currentip = ipADD
@@ -213,7 +281,7 @@ def AtualizaDadosGW3(ipADD,TempserialNum,TempverifyCode,Tempchannel) {
 
 def EnviaComando(command) {
     
-    def URI = "https://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&cId=" + state.channel + "&gc=" + command       
+    def URI = "http://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&cId=" + state.channel + "&gc=" + command       
     httpPOSTExec(URI)
     log.info "HTTP" +  URI + "commando = "
     
