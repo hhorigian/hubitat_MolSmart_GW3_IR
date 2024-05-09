@@ -16,7 +16,8 @@
  *            --- Driver para GW3 - AC - idoor
  *            V.1. iDoor BETA 17/4/2024
  *            V.1.1 iDoor BETA 28/4/2024 - fixed the temperature idoor codes, added tp=1. 
-
+ *            V.1.2 idoor BETA 7/5/2024 - fixed bugs setthermostatheating point
+ *            V.1.3 idoor BETA 8/5/2024 - added fan modes speeds
  *
  */
 
@@ -33,6 +34,7 @@ metadata {
 	capability "Refresh"
 	capability "HealthCheck"   
     capability "PushableButton"
+    capability "FanControl"
       
  
           
@@ -103,7 +105,11 @@ def push(pushed) {
         case 7 : dry(); break
         case 8 : fanAuto(); break                
         case 9 : fanOn(); break                
-        case 10 : fanCirculate(); break             
+        case 10 : fanCirculate(); break    
+        case 13 : fanAuto(); break    
+        case 14 : fanLow(); break    
+        case 15 : fanMed(); break    
+        case 16 : fanHigh(); break  
 		default:
 			logDebug("push: Botão inválido.")
 			break
@@ -159,7 +165,7 @@ def dry(){
 
 //Botão #7 para dashboard
 def setCoolingSetpoint(temperature){
-    sendEvent(name: "CoolingSetpoint", value: temperature )
+    sendEvent(name: "setCoolingSetpoint", value: temperature )
     def ircodetemp = 1
     state.pw = "1"
     def ircode = ircodetemp + "&t=" + temperature + "&tp=1"
@@ -195,7 +201,7 @@ def fanCirculate(){
 
 //Botão #7 para dashboard
 def setHeatingSetpoint(temperature){
-    sendEvent(name: "HeatingSetpoint", value: temperature )
+    sendEvent(name: "setHeatingSetpoint", value: temperature )
     def ircodetemp = 1
     state.pw = "1"
     def ircode = ircodetemp + "&t=" + temperature + "&tp=1"
@@ -218,7 +224,7 @@ def setThermostatMode(modo){
             break  
 		case "cool" : 
             valormodo = "1"  ; 
-            break
+            break        
         case "off"  : 
             valormodo = "-1" ; 
             break
@@ -228,6 +234,53 @@ def setThermostatMode(modo){
     }
     def ircode = ircodetemp + "&md=" + valormodo + "&tp=2"
     EnviaComando(ircode)  
+}
+
+def setThermostatFanMode(modo){
+    def varmodo = modo
+    sendEvent(name: "setThermostatFanMode", value: modo)
+    def ircodetemp = 1
+    state.pw = "1"
+    def valormodo = " "
+    switch(modo) {
+		case "auto" : 
+            valormodo = "0"; 
+            break
+		case "circulate" : 
+            valormodo = "1"; 
+            break  
+        case "on"  : 
+            valormodo = "3" ; 
+            break
+        default: 
+            logDebug("push: Botão inválido.")
+            break   
+    }
+    def ircode = ircodetemp + "&s=" + valormodo + "&tp=3"
+    EnviaComando(ircode)  
+}
+
+
+
+//Botão #14 para dashboard
+def fanLow(){
+    sendEvent(name: "thermostatMode", value: "fanLow")
+    def ircode = ircodetemp + "&s=" + valormodo + "&tp=1"
+    EnviaComando(ircode)    
+}
+
+//Botão #15 para dashboard
+def fanMed(){
+    sendEvent(name: "thermostatMode", value: "fanMed")
+    def ircode = ircodetemp + "&s=" + valormodo + "&tp=3"
+    EnviaComando(ircode)    
+}
+
+//Botão #16 para dashboard
+def fanHigh(){
+    sendEvent(name: "thermostatMode", value: "fanHigh")
+    def ircode = ircodetemp + "&s=" + valormodo + "&tp=5"
+    EnviaComando(ircode)    
 }
 
 
@@ -291,4 +344,3 @@ private logDebug(msg) {
     log.debug "$msg"
   }
 }
-
