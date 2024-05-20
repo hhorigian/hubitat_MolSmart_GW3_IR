@@ -18,7 +18,7 @@
 */
 
 definition(
-    name: "MolSmart GW3-IR AC(Learning) App",
+    name: "MolSmart - GW3 - IR(Learning) AC",
     namespace: "TRATO",
     author: "VH",
     description: "MolSmart GW3-IR Learning Universal no Idoor para AC ",
@@ -77,7 +77,7 @@ def initialize() {
 	    logDebug "initialize(): adding driver = " + contactName
         
         def contactDev = getChildDevice(contactName)
-	    if(!contactDev) contactDev = addChildDevice("TRATO", "MolSmart GW3 - IR AC(Learning)", contactName, null, [name: "MolSmGW3 IR-AC" + Integer.toString(i), inputNumber: thisName])
+	    if(!contactDev) contactDev = addChildDevice("TRATO", "MolSmart - GW3 - IR(Learning) AC", contactName, null, [name: "MolSmGW3 IR-AC" + Integer.toString(i), inputNumber: thisName])
 
     
     }

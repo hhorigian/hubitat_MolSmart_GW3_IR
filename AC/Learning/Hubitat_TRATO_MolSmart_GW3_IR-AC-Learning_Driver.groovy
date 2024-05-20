@@ -18,7 +18,7 @@
  *
  */
 metadata {
-  definition (name: "MolSmart GW3 - IR AC(Learning)", namespace: "TRATO", author: "VH", vid: "generic-contact") {
+  definition (name: "MolSmart - GW3 - IR(Learning) AC", namespace: "TRATO", author: "VH", vid: "generic-contact") {
     capability "Switch"
 	capability "Thermostat"
 	capability "Thermostat Cooling Setpoint"
