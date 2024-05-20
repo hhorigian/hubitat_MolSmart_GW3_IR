@@ -18,7 +18,7 @@
 */
 
 definition(
-    name: "MolSmart - GW3-IR(SendIR) - AC",
+    name: "MolSmart - GW3 - IR(SendIR) - AC",
     namespace: "TRATO",
     author: "VH",
     description: "MolSmart GW3-IR para AC(SendIR)",
