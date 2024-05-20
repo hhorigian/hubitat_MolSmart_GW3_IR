@@ -18,7 +18,7 @@
 */
 
 definition(
-    name: "MolSmart GW3-IR AC(SendIR) App",
+    name: "MolSmart - GW3-IR(SendIR) - AC",
     namespace: "TRATO",
     author: "VH",
     description: "MolSmart GW3-IR para AC(SendIR)",
@@ -78,7 +78,7 @@ def initialize() {
 	    logDebug "initialize(): adding driver = " + contactName
         
         def contactDev = getChildDevice(contactName)
-	    if(!contactDev) contactDev = addChildDevice("TRATO", "MolSmart GW3 - IR - AC(SendIR)", contactName, null, [name: "MolSmGW3 IR-AC " + Integer.toString(i), inputNumber: thisName])
+	    if(!contactDev) contactDev = addChildDevice("TRATO", "MolSmart - GW3 - IR(SendIR) - AC", contactName, null, [name: "MolSmGW3 IR-AC " + Integer.toString(i), inputNumber: thisName])
 
     
     }

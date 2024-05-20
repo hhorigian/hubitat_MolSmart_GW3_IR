@@ -19,7 +19,7 @@
  *
  */
 metadata {
-  definition (name: "MolSmart GW3 - IR - TV(SendIR)", namespace: "TRATO", author: "VH", vid: "generic-contact") {
+  definition (name: "MolSmart - GW3 - IR(SendIR) - TV", namespace: "TRATO", author: "VH", vid: "generic-contact") {
     capability "Switch"  
     capability "Actuator"
     capability "TV"  
@@ -78,41 +78,41 @@ metadata {
 
   preferences {
     input name: "logEnable", type: "bool", title: "Enable debug logging", defaultValue: false
-	input name: "OnIRsend", title:"On-Sendir", type: "string"
-	input name: "OffIRsend", title:"Off-Sendir", type: "string"
-    input name: "muteIRsend", title:"Mute-Sendir(2)", type: "string"  
-	input name: "sourceIRsend", title:"Source-Sendir(3)", type: "string"	
-    input name: "backIRsend", title:"Back-Sendir(4)", type: "string"  
-    input name: "menuIRsend", title:"Menu-Sendir(5)", type: "string"	
-    input name: "hdmi1IRsend", title:"Hdmi1-Sendir(6)", type: "string"
-	input name: "hdmi2IRsend", title:"Hdmi2-Sendir(7)", type: "string"
-	input name: "upIRsend", title:"Up-Sendir(8)", type: "string"
-	input name: "downIRsend", title:"Down-Sendir(9)", type: "string"
-	input name: "rightIRsend", title:"Right-Sendir(10)", type: "string"
-	input name: "leftIRsend", title:"Left-Sendir(11)", type: "string"
-	input name: "confirmIRsend", title:"Confirm-Sendir(12)", type: "string"      
-    input name: "exitIRsend", title:"Exit-Sendir(13)", type: "string"  
-    input name: "homeIRsend", title:"Home-Sendir(14)", type: "string"  
-    input name: "ChanUpIRsend", title:"Channel Up-Sendir(18)", type: "string"
- 	input name: "ChanDownIRsend", title:"Channel Down-Sendir(19)", type: "string"
- 	input name: "VolUpIRsend", title:"Volume Up-Sendir(21)", type: "string"
- 	input name: "VolDownIRsend", title:"Volume Down-Sendir(22)", type: "string"
-	input name: "num0IRsend", title:"Num0-Sendir(23)", type: "string"
-    input name: "num1IRsend", title:"Num1-Sendir(24)", type: "string"
-	input name: "num2IRsend", title:"Num2-Sendir(25)", type: "string"
-	input name: "num3IRsend", title:"Num3-Sendir(26)", type: "string"
-	input name: "num4IRsend", title:"Num4-Sendir(27)", type: "string"
-	input name: "num5IRsend", title:"Num5-Sendir(28)", type: "string"
-	input name: "num6IRsend", title:"Num6-Sendir(29)", type: "string"
-	input name: "num7IRsend", title:"Num7-Sendir(30)", type: "string"
-	input name: "num8IRsend", title:"Num8-Sendir(31)", type: "string"
+	input name: "OnIRsend", title:"On-Sendir", type: "textarea"
+	input name: "OffIRsend", title:"Off-Sendir", type: "textarea"
+    input name: "muteIRsend", title:"Mute-Sendir(2)", type: "textarea"  
+	input name: "sourceIRsend", title:"Source-Sendir(3)", type: "textarea"	
+    input name: "backIRsend", title:"Back-Sendir(4)", type: "textarea"  
+    input name: "menuIRsend", title:"Menu-Sendir(5)", type: "textarea"	
+    input name: "hdmi1IRsend", title:"Hdmi1-Sendir(6)", type: "textarea"
+	input name: "hdmi2IRsend", title:"Hdmi2-Sendir(7)", type: "textarea"
+	input name: "upIRsend", title:"Up-Sendir(8)", type: "textarea"
+	input name: "downIRsend", title:"Down-Sendir(9)", type: "textarea"
+	input name: "rightIRsend", title:"Right-Sendir(10)", type: "textarea"
+	input name: "leftIRsend", title:"Left-Sendir(11)", type: "textarea"
+	input name: "confirmIRsend", title:"Confirm-Sendir(12)", type: "textarea"      
+    input name: "exitIRsend", title:"Exit-Sendir(13)", type: "textarea"  
+    input name: "homeIRsend", title:"Home-Sendir(14)", type: "textarea"  
+    input name: "ChanUpIRsend", title:"Channel Up-Sendir(18)", type: "textarea"
+ 	input name: "ChanDownIRsend", title:"Channel Down-Sendir(19)", type: "textarea"
+ 	input name: "VolUpIRsend", title:"Volume Up-Sendir(21)", type: "textarea"
+ 	input name: "VolDownIRsend", title:"Volume Down-Sendir(22)", type: "textarea"
+	input name: "num0IRsend", title:"Num0-Sendir(23)", type: "textarea"
+    input name: "num1IRsend", title:"Num1-Sendir(24)", type: "textarea"
+	input name: "num2IRsend", title:"Num2-Sendir(25)", type: "textarea"
+	input name: "num3IRsend", title:"Num3-Sendir(26)", type: "textarea"
+	input name: "num4IRsend", title:"Num4-Sendir(27)", type: "textarea"
+	input name: "num5IRsend", title:"Num5-Sendir(28)", type: "textarea"
+	input name: "num6IRsend", title:"Num6-Sendir(29)", type: "textarea"
+	input name: "num7IRsend", title:"Num7-Sendir(30)", type: "textarea"
+	input name: "num8IRsend", title:"Num8-Sendir(31)", type: "textarea"
 	input name: "num9IRsend", title:"Num9-Sendir(32)", type: "string"
-    input name: "btnextra1IRsend", title:"Botonextra1-Sendir(33)", type: "string"  
-    input name: "btnextra2IRsend", title:"Botonextra2-Sendir(34)", type: "string"        
-    input name: "btnextra3IRsend", title:"Botonextra2-Sendir(35)", type: "string"     
-    input name: "netflixIRsend", title:"Netflix-Sendir(38)", type: "string"
-	input name: "amazonIRsend", title:"Amazon Prime-Sendir(39)", type: "string" 
-    input name: "youtubeIRsend", title:"Youtube-Sendir(40)", type: "string"             
+    input name: "btnextra1IRsend", title:"Botonextra1-Sendir(33)", type: "textarea"  
+    input name: "btnextra2IRsend", title:"Botonextra2-Sendir(34)", type: "textarea"        
+    input name: "btnextra3IRsend", title:"Botonextra2-Sendir(35)", type: "textarea"     
+    input name: "netflixIRsend", title:"Netflix-Sendir(38)", type: "textarea"
+	input name: "amazonIRsend", title:"Amazon Prime-Sendir(39)", type: "textarea" 
+    input name: "youtubeIRsend", title:"Youtube-Sendir(40)", type: "textarea"             
          
       
       
@@ -505,6 +505,5 @@ def httpPOSTExec(URI)
     }
     
 }
-
 
 

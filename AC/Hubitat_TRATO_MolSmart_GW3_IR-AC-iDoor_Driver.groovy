@@ -1,5 +1,5 @@
 /**
- *  MolSmart GW3 Driver - AC - iDoor
+ *  MolSmart GW3 Driver - AC - iDoor (usando os códigos e controles do idoor)
  *
  *  Copyright 2024 VH 
  *
@@ -23,7 +23,7 @@
 
 
 metadata {
-  definition (name: "MolSmart GW3 - IR - AC(idoor)", namespace: "TRATO", author: "VH", vid: "generic-contact") {
+  definition (name: "MolSmart - GW3 - IR(idoor) - AC", namespace: "TRATO", author: "VH", vid: "generic-contact") {
     capability "Switch"
 	capability "Thermostat"
 	capability "Thermostat Cooling Setpoint"

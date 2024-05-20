@@ -18,10 +18,10 @@
 */
 
 definition(
-    name: "MolSmart GW3-IR AC(HEX) App ",
+    name: "MolSmart - GW3-IR(HEX) - AC",
     namespace: "TRATO",
     author: "VH",
-    description: "MolSmart GW3-IR para AC(HEX)",
+    description: "MolSmart - GW3-IR para AC(HEX)",
     category: "Remote Controls / IR / AC",
     iconUrl: "",
     iconX2Url: "")
@@ -78,7 +78,7 @@ def initialize() {
 	    logDebug "initialize(): adding driver = " + contactName
         
         def contactDev = getChildDevice(contactName)
-	    if(!contactDev) contactDev = addChildDevice("TRATO", "MolSmart GW3 - IR - AC-(HEX)", contactName, null, [name: "MolSmGW3 IR-AC " + Integer.toString(i), inputNumber: thisName])
+	    if(!contactDev) contactDev = addChildDevice("TRATO", "MolSmart - GW3 - IR(HEX)- AC", contactName, null, [name: "MolSmGW3 IR-AC " + Integer.toString(i), inputNumber: thisName])
 
     
     }

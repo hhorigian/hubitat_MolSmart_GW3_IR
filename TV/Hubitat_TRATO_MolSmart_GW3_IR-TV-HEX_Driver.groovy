@@ -1,5 +1,5 @@
 /**
- *  MolSmart GW3 Driver - IR para TV. Usando HEX PRONTO
+ *  MolSmart GW3 Driver - IR(HEX) para TV. Usando HEX PRONTO
  *
  *  Copyright 2024 VH 
  *
@@ -19,7 +19,7 @@
  *
  */
 metadata {
-  definition (name: "MolSmart GW3 - IR - TV(HEX)", namespace: "TRATO", author: "VH", vid: "generic-contact") {
+  definition (name: "MolSmart - GW3 - IR(HEX) - TV", namespace: "TRATO", author: "VH", vid: "generic-contact") {
     capability "Switch"  
     capability "Actuator"
     capability "TV"  
@@ -74,11 +74,46 @@ metadata {
           
   }
       
-  }
+}
 
   preferences {
     input name: "logEnable", type: "bool", title: "Enable debug logging", defaultValue: false
-    input name: "repeatSendHEX", title:"Repeat for SendHex", type: "string", defaultValue: "1"   
+	input name: "OnIRsend", title:"On-Sendir", type: "textarea"
+	input name: "OffIRsend", title:"Off-Sendir", type: "textarea"
+    input name: "muteIRsend", title:"Mute-Sendir(2)", type: "textarea"  
+	input name: "sourceIRsend", title:"Source-Sendir(3)", type: "textarea"	
+    input name: "backIRsend", title:"Back-Sendir(4)", type: "textarea"  
+    input name: "menuIRsend", title:"Menu-Sendir(5)", type: "textarea"	
+    input name: "hdmi1IRsend", title:"Hdmi1-Sendir(6)", type: "textarea"
+	input name: "hdmi2IRsend", title:"Hdmi2-Sendir(7)", type: "textarea"
+	input name: "upIRsend", title:"Up-Sendir(8)", type: "textarea"
+	input name: "downIRsend", title:"Down-Sendir(9)", type: "textarea"
+	input name: "rightIRsend", title:"Right-Sendir(10)", type: "textarea"
+	input name: "leftIRsend", title:"Left-Sendir(11)", type: "textarea"
+	input name: "confirmIRsend", title:"Confirm-Sendir(12)", type: "textarea"      
+    input name: "exitIRsend", title:"Exit-Sendir(13)", type: "textarea"  
+    input name: "homeIRsend", title:"Home-Sendir(14)", type: "textarea"  
+    input name: "ChanUpIRsend", title:"Channel Up-Sendir(18)", type: "textarea"
+ 	input name: "ChanDownIRsend", title:"Channel Down-Sendir(19)", type: "textarea"
+ 	input name: "VolUpIRsend", title:"Volume Up-Sendir(21)", type: "textarea"
+ 	input name: "VolDownIRsend", title:"Volume Down-Sendir(22)", type: "textarea"
+	input name: "num0IRsend", title:"Num0-Sendir(23)", type: "textarea"
+    input name: "num1IRsend", title:"Num1-Sendir(24)", type: "textarea"
+	input name: "num2IRsend", title:"Num2-Sendir(25)", type: "textarea"
+	input name: "num3IRsend", title:"Num3-Sendir(26)", type: "textarea"
+	input name: "num4IRsend", title:"Num4-Sendir(27)", type: "textarea"
+	input name: "num5IRsend", title:"Num5-Sendir(28)", type: "textarea"
+	input name: "num6IRsend", title:"Num6-Sendir(29)", type: "textarea"
+	input name: "num7IRsend", title:"Num7-Sendir(30)", type: "textarea"
+	input name: "num8IRsend", title:"Num8-Sendir(31)", type: "textarea"
+	input name: "num9IRsend", title:"Num9-Sendir(32)", type: "string"
+    input name: "btnextra1IRsend", title:"Botonextra1-Sendir(33)", type: "textarea"  
+    input name: "btnextra2IRsend", title:"Botonextra2-Sendir(34)", type: "textarea"        
+    input name: "btnextra3IRsend", title:"Botonextra2-Sendir(35)", type: "textarea"     
+    input name: "netflixIRsend", title:"Netflix-Sendir(38)", type: "textarea"
+	input name: "amazonIRsend", title:"Amazon Prime-Sendir(39)", type: "textarea" 
+    input name: "youtubeIRsend", title:"Youtube-Sendir(40)", type: "textarea"             
+    input name: "repeatSendHEX", title:"Repeat for SendHex", type: "string", defaultValue: "1"   // REPEAT SEND PRONTO HEX
          
       
       
@@ -114,17 +149,18 @@ def updated()
 //Basico on e off para Switch 
 def on() {
      sendEvent(name: "switch", value: "on", isStateChange: true)
-     def ircode = "0000 006D 0000 0022 00ac 00ac 0016 0040 0016 0040 0016 0040 0016 0015 0016 0015 0016 0015 0016 0015 0016 0015 0016 0040 0016 0040 0016 0040 0016 0015 0016 0015 0016 0015 0016 0015 0016 0015 0016 0040 0016 0015 0016 0015 0016 0040 0016 0040 0016 0015 0016 0015 0016 0040 0016 0015 0016 0040 0016 0040 0016 0015 0016 0015 0016 0040 0016 0040 0016 0015 0016 071c"
+     def ircode =  (settings.OnIRsend ?: "")
      EnviaComando(ircode)
 
 }
 
 def off() {
      sendEvent(name: "switch", value: "off", isStateChange: true)
-     def ircode = "0000 006D 0022 0000 00ad 00ad 0015 0041 0015 0041 0015 0041 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0041 0015 0041 0015 0041 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0041 0015 0041 0015 0015 0015 0015 0015 0041 0015 0041 0015 0041 0015 0041 0015 0015 0015 0015 0015 0041 0015 0041 0015 0015 0015 0728" 
+     def ircode =  (settings.OffIRsend ?: "")    
      EnviaComando(ircode)
          
 }
+
 
 //Case para los botones de push en el dashboard. 
 def push(pushed) {
@@ -177,7 +213,7 @@ def push(pushed) {
 //Botão #2 para dashboard
 def mute(){
 	sendEvent(name: "volume", value: "mute")
-     def ircode = "0000 006D 0000 0022 00ac 00ac 0016 0040 0016 0040 0016 0040 0016 0015 0016 0015 0016 0015 0016 0015 0016 0015 0016 0040 0016 0040 0016 0040 0016 0015 0016 0015 0016 0015 0016 0015 0016 0015 0016 0040 0016 0040 0016 0040 0016 0040 0016 0015 0016 0015 0016 0015 0016 0015 0016 0015 0016 0015 0016 0015 0016 0015 0016 0040 0016 0040 0016 0040 0016 0040 0016 071c"
+    def ircode =  (settings.muteIRsend ?: "")
     EnviaComando(ircode)    
 }
 
@@ -185,21 +221,21 @@ def mute(){
 //Botão #3 para dashboard
 def source(){
 	sendEvent(name: "action", value: "source")
-     def ircode = ""
+    def ircode =  (settings.sourceIRsend ?: "")
     EnviaComando(ircode)    
 }
 
 //Botão #4 para dashboard
 def back(){
 	sendEvent(name: "action", value: "back")
-     def ircode = ""
+    def ircode =  (settings.backIRsend ?: "")
     EnviaComando(ircode)    
 }
 
 //Botão #5 para dashboard
 def menu(){
 	sendEvent(name: "action", value: "menu")
-    def ircode = ""
+    def ircode =  (settings.menuIRsend ?: "")
     EnviaComando(ircode)    
 }
 
@@ -207,14 +243,14 @@ def menu(){
 //Botão #6 para dashboard
 def hdmi1(){
     sendEvent(name: "input", value: "hdmi1")
-     def ircode = ""
+    def ircode =  (settings.hdmi1IRsend ?: "")
     EnviaComando(ircode)
 }
 
 //Botão #7 para dashboard
 def hdmi2(){
     sendEvent(name: "input", value: "hdmi2")
-     def ircode = ""
+    def ircode =  (settings.hdmi2IRsend ?: "")
     EnviaComando(ircode)
 }
 
@@ -223,14 +259,14 @@ def hdmi2(){
 //Botão #8 para dashboard
 def left(){
     sendEvent(name: "action", value: "left")
-     def ircode = ""
+    def ircode =  (settings.btnextra1IRsend ?: "")
     EnviaComando(ircode)
 }
 
 //Botão #9 para dashboard
 def right(){
     sendEvent(name: "action", value: "right")
-    def ircode =  (settings.btnextra1IRsend ?: "")
+     def ircode =  (settings.btnextra1IRsend ?: "")
     EnviaComando(ircode)
 }
 
@@ -239,21 +275,21 @@ def right(){
 //Botão #10 para dashboard
 def up(){
     sendEvent(name: "action", value: "up")
-     def ircode = ""
+    def ircode =  (settings.upIRsend ?: "")
     EnviaComando(ircode)
 }
 
 //Botão #11 para dashboard
 def down(){
     sendEvent(name: "action", value: "down")
-     def ircode = ""
+    def ircode =  (settings.hdmi1 ?: "")
     EnviaComando(ircode)
 }
 
 //Botão #12 para dashboard
 def confirm(){
     sendEvent(name: "action", value: "confirm")
-     def ircode = ""
+    def ircode =  (settings.confirmIRsend ?: "")
     EnviaComando(ircode)
 }
 
@@ -261,15 +297,17 @@ def confirm(){
 //Botão #13 para dashboard
 def exit(){
 	sendEvent(name: "action", value: "exit")
-     def ircode = ""
+    def ircode =  (settings.exitIRsend ?: "")
     EnviaComando(ircode)    
 }
+
+
 
 
 //Botão #14 para dashboard
 def home(){
     sendEvent(name: "action", value: "home")
-     def ircode = ""
+    def ircode =  (settings.homeIRsend ?: "")
     EnviaComando(ircode)
 }
 
@@ -278,7 +316,7 @@ def home(){
 //Botão #18 para dashboard
 def channelUp(){
 	sendEvent(name: "channel", value: "chup")
-     def ircode = ""
+   def ircode =  (settings.ChanUpIRsend ?: "")
     EnviaComando(ircode)    
 }
 
@@ -292,14 +330,14 @@ def channelDown(){
 //Botão #21 para dashboard
 def volumeUp(){
 	sendEvent(name: "volume", value: "volup")
-     def ircode = ""
+    def ircode =  (settings.VolUpIRsend ?: "")
     EnviaComando(ircode)    
 }
 
 //Botão #22 para dashboard
 def volumeDown(){
 	sendEvent(name: "volume", value: "voldown")
-     def ircode = ""
+    def ircode =  (settings.VolDownIRsend ?: "")
     EnviaComando(ircode)    
 }
 
@@ -307,21 +345,21 @@ def volumeDown(){
 //Botão #23 para dashboard
 def num0(){
     sendEvent(name: "action", value: "num0")
-     def ircode = ""
+    def ircode =  (settings.num0IRsend ?: "")
     EnviaComando(ircode)
 }
 
 //Botão #24 para dashboard
 def num1(){
     sendEvent(name: "action", value: "num1")
-     def ircode = ""
+   def ircode =  (settings.num1IRsend ?: "")
     EnviaComando(ircode)
 }
 
 //Botão #25 para dashboard
 def num2(){
     sendEvent(name: "action", value: "num2")
-     def ircode = ""
+    def ircode =  (settings.num2IRsend ?: "")
     EnviaComando(ircode)
 }
 
@@ -329,7 +367,7 @@ def num2(){
 //Botão #26 para dashboard
 def num3(){
     sendEvent(name: "action", value: "num3")
-     def ircode = ""
+    def ircode =  (settings.num3IRsend ?: "")
     EnviaComando(ircode)
 }
 
@@ -343,14 +381,14 @@ def num4(){
 //Botão #28 para dashboard
 def num5(){
     sendEvent(name: "action", value: "num5")
-     def ircode = ""
+    def ircode =  (settings.num5IRsend ?: "")
     EnviaComando(ircode)
 }
 
 //Botão #29 para dashboard
 def num6(){
     sendEvent(name: "action", value: "num6")
-     def ircode = ""
+    def ircode =  (settings.num6IRsend ?: "")
     EnviaComando(ircode)
 }
 
@@ -358,56 +396,56 @@ def num6(){
 //Botão #30 para dashboard
 def num7(){
     sendEvent(name: "action", value: "num7")
-     def ircode = ""
+    def ircode =  (settings.num7IRsend ?: "")
     EnviaComando(ircode)
 }
 
 //Botão #31 para dashboard
 def num8(){
     sendEvent(name: "action", value: "num8")
-     def ircode = ""
+    def ircode =  (settings.num8IRsend ?: "")
     EnviaComando(ircode)
 }
 
 //Botão #32 para dashboard
 def num9(){
     sendEvent(name: "action", value: "num9")
-     def ircode = ""
+    def ircode =  (settings.num9IRsend ?: "")
     EnviaComando(ircode)
 }
 
 //Botão #33 para dashboard
 def btnextra1(){
     sendEvent(name: "action", value: "confirm")
-     def ircode = ""
+    def ircode =  (settings.btnextra1IRsend ?: "")
     EnviaComando(ircode)
 }
 
 //Botão #34 para dashboard
 def btnextra2(){
     sendEvent(name: "action", value: "btnextra2")
-     def ircode = ""
+    def ircode =  (settings.btnextra2IRsend ?: "")
     EnviaComando(ircode)
 }
 
 //Botão #35 para dashboard
 def btnextra3(){
     sendEvent(name: "action", value: "btnextra3")
-     def ircode = ""
+    def ircode =  (settings.btnextra3IRsend ?: "")
     EnviaComando(ircode)
 }
 
 //Botão #38 para dashboard
 def appAmazonPrime(){
     sendEvent(name: "input", value: "amazon")
-     def ircode = ""
+    def ircode =  (settings.amazonIRsend ?: "")
     EnviaComando(ircode)
 }
 
 //Botão #39 para dashboard
 def appyoutube(){
     sendEvent(name: "input", value: "youtube")
-     def ircode = ""
+   def ircode =  (settings.youtubeIRsend ?: "")
     EnviaComando(ircode)
 }
 
@@ -415,7 +453,7 @@ def appyoutube(){
 //Botão #40 para dashboard
 def appnetflix(){
     sendEvent(name: "input", value: "netflix")
-     def ircode = "0000 006D 0000 0022 00AC 00AB 0015 0041 0015 0041 0015 0041 0015 0016 0015 0016 0015 0016 0015 0016 0015 0016 0015 0041 0015 0041 0015 0041 0015 0016 0015 0016 0015 0016 0015 0016 0015 0016 0015 0041 0015 0041 0015 0016 0015 0016 0015 0041 0015 0041 0015 0041 0015 0041 0015 0016 0015 0016 0015 0041 0015 0041 0015 0016 0015 0016 0015 0016 0015 0016 0015 0689"
+    def ircode =  (settings.netflixIRsend ?: "")
     EnviaComando(ircode)
 }
   
@@ -431,7 +469,7 @@ def AtualizaDadosGW3(ipADD,TempserialNum,TempverifyCode,Tempchannel) {
 
 def EnviaComando(command) {
     
-    def URI = "https://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&pronto=" + command + "&cId=" + state.channel + "&r=" + settings.repeatSendHEX        
+    def URI = "http://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&pronto=" + command + "&cId=" + state.channel + "&r=" + settings.repeatSendHEX        
     httpPOSTExec(URI)
     log.info "HTTP" +  URI + "commando = "
     

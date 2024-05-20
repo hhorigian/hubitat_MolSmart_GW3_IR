@@ -18,7 +18,7 @@
 */
 
 definition(
-    name: "MolSmart GW3-IR TV(HEX) App ",
+    name: "MolSmart - GW3-IR(HEX) - TV",
     namespace: "TRATO",
     author: "VH",
     description: "MolSmart GW3-IR para TV(HEX Pronto)",
@@ -78,7 +78,7 @@ def initialize() {
 	    logDebug "initialize(): adding driver = " + contactName
         
         def contactDev = getChildDevice(contactName)
-	    if(!contactDev) contactDev = addChildDevice("TRATO", "MolSmart GW3 - IR - TV(HEX)", contactName, null, [name: "MolSmGW3 IR-TV " + Integer.toString(i), inputNumber: thisName])
+	    if(!contactDev) contactDev = addChildDevice("TRATO", "MolSmart - GW3 - IR(HEX) - TV", contactName, null, [name: "MolSmGW3 IR-TV " + Integer.toString(i), inputNumber: thisName])
 
     
     }

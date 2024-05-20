@@ -1,5 +1,5 @@
 /**
- *  MolSmart GW3 Driver - IR para Ar Condicionado
+ *  MolSmart GW3 Driver - IR(SendIR) para Ar Condicionado
  *
  *  Copyright 2024 VH 
  *
@@ -16,11 +16,11 @@
  *            --- Driver para GW3 - IR - para Ar CondicionadoC ---
  *            V.1. 31/3/2024 
  *            V.1.2 17/4/2024 Fixed the Error when using long codes. 
- *	      V.1.3 5/1/2024 Added SetHeating and SetCooling Buttons. 
+ *            V.1.3 8/5/2024 Fixed bugs. Added fan control.  
  *
  */
 metadata {
-  definition (name: "MolSmart GW3 - IR - AC(SendIR)", namespace: "TRATO", author: "VH", vid: "generic-contact") {
+  definition (name: "MolSmart - GW3 - IR(SendIR) - AC", namespace: "TRATO", author: "VH", vid: "generic-contact") {
     capability "Switch"
 	capability "Thermostat"
 	capability "Thermostat Cooling Setpoint"
@@ -30,9 +30,10 @@ metadata {
 	capability "Configuration"
 	capability "Refresh"
 	capability "HealthCheck"   
-        capability "PushableButton"
+    capability "PushableButton"
+    capability "FanControl"
+
       
- 
           
   }
     
@@ -54,7 +55,11 @@ metadata {
 	input name: "comandoextra2", title:"comandoextra1-Sendir(9)", type: "textarea"
 	input name: "comandoextra3", title:"comandoextra1-Sendir(10)", type: "textarea"      
 	input name: "comandoextra4", title:"comandoextra1-Sendir(11)", type: "textarea"      
-	input name: "comandoextra5", title:"comandoextra1-Sendir(12)", type: "textarea"      
+	input name: "comandoextra5", title:"comandoextra1-Sendir(12)", type: "textarea"
+    input name: "fanAuto", title:"fanAuto-Sendir(13)", type: "textarea"	
+    input name: "fanLow", title:"fanLow-Sendir(14)", type: "textarea"	
+    input name: "fanMed", title:"fanMed-Sendir(15)", type: "textarea"	
+    input name: "fanHigh", title:"fanHigh-Sendir(16)", type: "textarea"	
          
        
   }   
@@ -118,7 +123,12 @@ def push(pushed) {
         case 9 : comandoextra2(); break            
         case 10 : comandoextra3(); break            
         case 11 : comandoextra4(); break    
-        case 12 : comandoextra5(); break            
+        case 12 : comandoextra5(); break    
+        case 13 : fanAuto(); break    
+        case 14 : fanLow(); break    
+        case 15 : fanMed(); break    
+        case 16 : fanHigh(); break    
+        
 		default:
 			logDebug("push: Botão inválido.")
 			break
@@ -213,7 +223,38 @@ def comandoextra5(){
     EnviaComando(ircode)
 }
 
+
 //Botão #13 para dashboard
+def fanAuto(){
+    sendEvent(name: "thermostatMode", value: "fanAuto")
+    def ircode =  (settings.fanAuto ?: "")
+    EnviaComando(ircode)    
+}
+
+//Botão #14 para dashboard
+def fanLow(){
+    sendEvent(name: "thermostatMode", value: "fanLow")
+    def ircode =  (settings.fanLow ?: "")
+    EnviaComando(ircode)    
+}
+
+//Botão #15 para dashboard
+def fanMed(){
+    sendEvent(name: "thermostatMode", value: "fanMed")
+    def ircode =  (settings.fanMed ?: "")
+    EnviaComando(ircode)    
+}
+
+//Botão #16 para dashboard
+def fanHigh(){
+    sendEvent(name: "thermostatMode", value: "fanHigh")
+    def ircode =  (settings.fanHigh ?: "")
+    EnviaComando(ircode)    
+}
+
+
+
+
 def setThermostatMode(modo){
     def varmodo = modo
     sendEvent(name: "thermostatMode", value: modo)
@@ -223,25 +264,28 @@ def setThermostatMode(modo){
     switch(modo) {
 		case "auto" : 
             valormodo = "0"; 
+            ircode =  (settings.autoIRsend ?: "")
             break
 		case "heat" : 
             valormodo = "2"; 
+            ircode = (settings.heatIRsend ?: "")        
             break  
 		case "cool" : 
             valormodo = "1"  ; 
+            ircode =  (settings.coolIRsend ?: "")
             break
         case "off"  : 
             valormodo = "-1" ; 
+            ircode =  (settings.OffIRsend ?: "")            
             break
         default: 
             logDebug("push: Botão inválido.")
             break   
     }
-    def ircode = (settings.heatIRsend ?: "")
+    //def ircode = (settings.heatIRsend ?: "")
     EnviaComando(ircode)  
 }
 
-//Botão #13 para dashboard
 def setThermostatFanMode(modo){
     def varmodo = modo
     sendEvent(name: "setThermostatFanMode", value: modo)
@@ -251,23 +295,24 @@ def setThermostatFanMode(modo){
     switch(modo) {
 		case "auto" : 
             valormodo = "0"; 
+            ircode =  (settings.fanIRsend ?: "")        
             break
 		case "circulate" : 
             valormodo = "2"; 
+            ircode =  (settings.fanIRsend ?: "")        
             break  
-		case "cool" : 
-            valormodo = "1"  ; 
-            break
         case "on"  : 
             valormodo = "-1" ; 
+            ircode =  (settings.fanIRsend ?: "")        
             break
         default: 
             logDebug("push: Botão inválido.")
             break   
     }
-    def ircode = (settings.heatIRsend ?: "")
+    //def ircode = (settings.heatIRsend ?: "")
     EnviaComando(ircode)  
 }
+
 
 
 def AtualizaDadosGW3(ipADD,TempserialNum,TempverifyCode,Tempchannel) {
@@ -322,5 +367,11 @@ def httpPOSTExec(URI)
     
 }
 
+
+private logDebug(msg) {
+  if (settings?.debugOutput || settings?.debugOutput == null) {
+    log.debug "$msg"
+  }
+}
 
 
