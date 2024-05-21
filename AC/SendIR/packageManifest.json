@@ -11,7 +11,7 @@
      "id":"3e02723f-fee9-4786-a684-5b2b33fb7b8a",
      "name":"MolSmart - GW3 - IR(SendIR) - AC",
      "namespace":"TRATO",
-     "location":"https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/blob/main/AC/SendIR/Hubitat_TRATO_MolSmart_GW3_IR-AC-SendIR_App.groovy",
+     "location":"https://raw.githubusercontent.com/hhorigian/hubitat_MolSmart_GW3_IR/main/AC/SendIR/Hubitat_TRATO_MolSmart_GW3_IR-AC-SendIR_App.groovy",
      "required":true,
      "oauth":false,
      "primary":true
