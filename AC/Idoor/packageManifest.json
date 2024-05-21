@@ -11,7 +11,7 @@
        "id":"7e6a8bd9-7fa7-471d-960d-b89942ec3d7b",
        "name":"MolSmart - GW3-IR(idoor) - AC",
        "namespace":"TRATO",
-       "location":"https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/blob/main/AC/Idoor/Hubitat_TRATO_MolSmart_GW3_IR-AC-iDoor_App.groovy",
+       "location":"https://raw.githubusercontent.com/hhorigian/hubitat_MolSmart_GW3_IR/main/AC/Idoor/Hubitat_TRATO_MolSmart_GW3_IR-AC-iDoor_App.groovy",
        "required":true,
        "oauth":false,
        "primary":true
@@ -22,7 +22,7 @@
        "id":"5f5ad4b1-de60-4acd-9d32-ca59c24d665a",
        "name":"MolSmart - GW3 - IR(idoor) - AC",
        "namespace":"TRATO",
-       "location":"https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/blob/main/AC/Idoor/Hubitat_TRATO_MolSmart_GW3_IR-AC-iDoor_Driver.groovy",
+       "location":"https://raw.githubusercontent.com/hhorigian/hubitat_MolSmart_GW3_IR/main/AC/Idoor/Hubitat_TRATO_MolSmart_GW3_IR-AC-iDoor_Driver.groovy",
        "required":true
     }
     ]
