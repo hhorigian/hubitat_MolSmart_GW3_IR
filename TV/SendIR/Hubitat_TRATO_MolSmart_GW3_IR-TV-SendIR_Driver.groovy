@@ -15,6 +15,7 @@
  *
  *            --- Driver para GW3 - IR - para TV --- Usando códigos SendIR
  *            V.2. com botões para o dashboard. Cada comando tem um numero de botão para incluir no dashboard. 31/3/2024 
+ *	      V.2.1 fixed sendir command + log enable
  *            
  *
  */
@@ -467,9 +468,9 @@ def AtualizaDadosGW3(ipADD,TempserialNum,TempverifyCode,Tempchannel) {
 
 def EnviaComando(command) {
     
-    def URI = "https://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&cId=" + state.channel + "&gc=" + command       
+    def URI = "http://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&cId=" + state.channel + "&gc=" + command       
     httpPOSTExec(URI)
-    log.info "HTTP" +  URI + "commando = "
+    log.info "Enviado...HTTP" +  URI + "commando = "
     
     
 }
@@ -506,4 +507,9 @@ def httpPOSTExec(URI)
     
 }
 
+void logDebug(String msg) {
+    if ((Boolean)settings.logDebug != false) {
+        log.debug "${drvThis}: ${msg}"
+    }
+}
 
