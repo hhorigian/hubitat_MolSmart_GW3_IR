@@ -506,4 +506,9 @@ def httpPOSTExec(URI)
     
 }
 
+void logDebug(String msg) {
+    if ((Boolean)settings.logDebug != false) {
+        log.debug "${drvThis}: ${msg}"
+    }
+}
 
