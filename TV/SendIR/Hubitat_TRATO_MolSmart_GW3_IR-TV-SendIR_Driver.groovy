@@ -25,7 +25,9 @@ metadata {
     capability "TV"  
     capability "SamsungTV"
     capability "PushableButton"
-	capability "Variable"      
+	capability "Variable"  
+    capability "AudioVolume"
+    capability "MusicPlayer"        
   
       
       
