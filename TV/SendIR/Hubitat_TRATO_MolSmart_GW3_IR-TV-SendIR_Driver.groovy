@@ -467,9 +467,9 @@ def AtualizaDadosGW3(ipADD,TempserialNum,TempverifyCode,Tempchannel) {
 
 def EnviaComando(command) {
     
-    def URI = "https://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&cId=" + state.channel + "&gc=" + command       
+    def URI = "http://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&cId=" + state.channel + "&gc=" + command       
     httpPOSTExec(URI)
-    log.info "HTTP" +  URI + "commando = "
+    log.info "Enviado...HTTP" +  URI + "commando = "
     
     
 }
