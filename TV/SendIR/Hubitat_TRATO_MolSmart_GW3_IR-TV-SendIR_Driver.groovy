@@ -15,6 +15,7 @@
  *
  *            --- Driver para GW3 - IR - para TV --- Usando códigos SendIR
  *            V.2. com botões para o dashboard. Cada comando tem um numero de botão para incluir no dashboard. 31/3/2024 
+ *	      V.2.1 fixed sendir command + log enable
  *            
  *
  */
