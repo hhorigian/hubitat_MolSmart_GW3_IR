@@ -3,26 +3,15 @@
    "author":"TRATO",
    "version":"1.0",
    "minimumHEVersion":"2.3.7.100",
-   "dateReleased":"2024-05-20",
-   "releaseNotes":"first version pushed to HPM",
-   "documentationLink":"https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main/AC",
-   "apps": [
-    {
-       "id":"7e6a8bd9-7fa7-471d-960d-b89942ec3d7b",
-       "name":"MolSmart - GW3-IR(idoor) - AC",
-       "namespace":"TRATO",
-       "location":"https://raw.githubusercontent.com/hhorigian/hubitat_MolSmart_GW3_IR/main/AC/Idoor/Hubitat_TRATO_MolSmart_GW3_IR-AC-iDoor_App.groovy",
-       "required":true,
-       "oauth":false,
-       "primary":true
-    }
-    ],
+   "dateReleased":"2024-05-30",
+   "releaseNotes":"New Version with Driver File Only",
+   "documentationLink":"https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main",
    "drivers": [
     {
        "id":"5f5ad4b1-de60-4acd-9d32-ca59c24d665a",
        "name":"MolSmart - GW3 - IR(idoor) - AC",
        "namespace":"TRATO",
-       "location":"https://raw.githubusercontent.com/hhorigian/hubitat_MolSmart_GW3_IR/main/AC/Idoor/Hubitat_TRATO_MolSmart_GW3_IR-AC-iDoor_Driver.groovy",
+       "location":"https://raw.githubusercontent.com/hhorigian/hubitat_MolSmart_GW3_IR/main/AC/Idoor/Hubitat_TRATO_MolSmart_GW3_IR-AC-iDoor_Driver_v2",
        "required":true
     }
     ]
