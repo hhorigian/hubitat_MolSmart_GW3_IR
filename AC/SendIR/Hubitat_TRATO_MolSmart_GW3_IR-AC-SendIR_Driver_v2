@@ -1,5 +1,5 @@
 /**
- *  MolSmart GW3 Driver - IR(HEX) v.2 para Ar Condicionado. Usando HEX
+ *  MolSmart GW3 Driver - IR(SendIR) v.2 para Ar Condicionado. Usando SendIR
  *
  *  Copyright 2024 VH 
  *
@@ -13,14 +13,14 @@
  *  for the specific language governing permissions and limitations under the License.
  *
  *
- *            --- Driver para GW3 - IR - para Ar Condicionado ---
- *                  V.2.0  - 30/05/2024 - Versão com Driver sem precissar do APP
+ *            --- Driver para GW3 - IR - SendIR para Ar Condicionado ---
+  *                  V.2.0  - 30/05/2024 - Versão com Driver sem precissar do APP
  * 
 */
 
 
 metadata {
-  definition (name: "MolSmart - GW3 - IR(HEX)- AC", namespace: "TRATO", author: "VH", vid: "generic-contact") {
+  definition (name: "MolSmart - GW3 - IR(SendIR)- AC", namespace: "TRATO", author: "VH", vid: "generic-contact") {
     capability "Switch"
 	capability "Thermostat"
 	capability "Thermostat Cooling Setpoint"
@@ -41,63 +41,63 @@ metadata {
 		command "setSupportedThermostatModes", ["JSON_OBJECT"]
 		command "setTemperature", ["NUMBER"]
 
-              command "CodigoHEXON", [
-            [name: "HEXcode", type: "STRING", description: "ON = COLAR O CODIGO HEX"]
+              command "CodigoSendIRON", [
+            [name: "SendIRcode", type: "STRING", description: "ON = COLAR O CODIGO SENDIR"]
         ]      
-               command "CodigoHEXOFF", [
-            [name: "HEXcode", type: "STRING", description: "OFF = COLAR O CODIGO HEX"]
+               command "CodigoSendIROFF", [
+            [name: "SendIRcode", type: "STRING", description: "OFF = COLAR O CODIGO SENDIR"]
         ]        
-              command "CodigoHEXAUTO", [
-            [name: "HEXcode", type: "STRING", description: "AUTO = COLAR O CODIGO HEX"]
+              command "CodigoSendIRAUTO", [
+            [name: "SendIRcode", type: "STRING", description: "AUTO = COLAR O CODIGO SENDIR"]
         ]      
-              command "CodigoHEXCOOL", [
-            [name: "HEXcode", type: "STRING", description: "COOL = COLAR O CODIGO HEX"]
+              command "CodigoSendIRCOOL", [
+            [name: "SendIRcode", type: "STRING", description: "COOL = COLAR O CODIGO SENDIR"]
         ]      
-              command "CodigoHEXHEAT", [
-            [name: "HEXcode", type: "STRING", description: "HEAT = COLAR O CODIGO HEX"]
+              command "CodigoSendIRHEAT", [
+            [name: "SendIRcode", type: "STRING", description: "HEAT = COLAR O CODIGO SENDIR"]
         ]          
-              command "CodigoHEXFAN", [
-            [name: "HEXcode", type: "STRING", description: "FAN = COLAR O CODIGO HEX"]
+              command "CodigoSendIRFAN", [
+            [name: "SendIRcode", type: "STRING", description: "FAN = COLAR O CODIGO SENDIR"]
         ]
-              command "CodigoHEXDRY", [
-            [name: "HEXcode", type: "STRING", description: "DRY = COLAR O CODIGO HEX"]
+              command "CodigoSendIRDRY", [
+            [name: "SendIRcode", type: "STRING", description: "DRY = COLAR O CODIGO SENDIR"]
         ]      
-              command "CodigoHEXFANAUTO", [
-            [name: "HEXcode", type: "STRING", description: "FANAUTO = COLAR O CODIGO HEX"]
+              command "CodigoSendIRFANAUTO", [
+            [name: "SendIRcode", type: "STRING", description: "FANAUTO = COLAR O CODIGO SENDIR"]
         ]      
-              command "CodigoHEXFANLOW", [
-            [name: "HEXcode", type: "STRING", description: "FANLOW = COLAR O CODIGO HEX"]
+              command "CodigoSendIRFANLOW", [
+            [name: "SendIRcode", type: "STRING", description: "FANLOW = COLAR O CODIGO SENDIR"]
         ]
-              command "CodigoHEXFANMED", [
-            [name: "HEXcode", type: "STRING", description: "FANMED = COLAR O CODIGO HEX"]
+              command "CodigoSendIRFANMED", [
+            [name: "SendIRcode", type: "STRING", description: "FANMED = COLAR O CODIGO SENDIR"]
         ]
-              command "CodigoHEXFANHIGH", [
-            [name: "HEXcode", type: "STRING", description: "FANHIGH = COLAR O CODIGO HEX"]
+              command "CodigoSendIRFANHIGH", [
+            [name: "SendIRcode", type: "STRING", description: "FANHIGH = COLAR O CODIGO SENDIR"]
         ]      
-              command "CodigoHEXEXTRA1(BTN8)", [
-            [name: "HEXcode", type: "STRING", description: "EXTRA1 = COLAR O CODIGO HEX"]
+              command "CodigoSendIREXTRA1(BTN8)", [
+            [name: "SendIRcode", type: "STRING", description: "EXTRA1 = COLAR O CODIGO SENDIR"]
         ]      
-              command "CodigoHEXEXTRA2(BTN9)", [
-            [name: "HEXcode", type: "STRING", description: "EXTRA2 = COLAR O CODIGO HEX"]
+              command "CodigoSendIREXTRA2(BTN9)", [
+            [name: "SendIRcode", type: "STRING", description: "EXTRA2 = COLAR O CODIGO SENDIR"]
         ]    
-              command "CodigoHEXEXTRA3(BTN10)", [
-            [name: "HEXcode", type: "STRING", description: "EXTRA3 = COLAR O CODIGO HEX"]
+              command "CodigoSendIREXTRA3(BTN10)", [
+            [name: "SendIRcode", type: "STRING", description: "EXTRA3 = COLAR O CODIGO SENDIR"]
         ]            
-              command "CodigoHEXEXTRA4(BTN11)", [
-            [name: "HEXcode", type: "STRING", description: "EXTRA4 = COLAR O CODIGO HEX"]
+              command "CodigoSendIREXTRA4(BTN11)", [
+            [name: "SendIRcode", type: "STRING", description: "EXTRA4 = COLAR O CODIGO SENDIR"]
         ]
-              command "CodigoHEXEXTRA5(BTN12)", [
-            [name: "HEXcode", type: "STRING", description: "EXTRA5 = COLAR O CODIGO HEX"]
+              command "CodigoSendIREXTRA5(BTN12)", [
+            [name: "SendIRcode", type: "STRING", description: "EXTRA5 = COLAR O CODIGO SENDIR"]
         ]
-              command "CodigoHEXEXTRA6(BTN17)", [
-            [name: "HEXcode", type: "STRING", description: "EXTRA6 = COLAR O CODIGO HEX"]
+              command "CodigoSendIREXTRA6(BTN17)", [
+            [name: "SendIRcode", type: "STRING", description: "EXTRA6 = COLAR O CODIGO SENDIR"]
         ]   
-              command "CodigoHEXEXTRA7(BTN18)", [
-            [name: "HEXcode", type: "STRING", description: "EXTRA7 = COLAR O CODIGO HEX"]
-        ]    
-              command "CodigoHEXEXTRA8(BTN19)", [
-            [name: "HEXcode", type: "STRING", description: "EXTRA8 = COLAR O CODIGO HEX"]
-        ]                                        
+              command "CodigoSendIREXTRA7(BTN18)", [
+            [name: "SendIRcode", type: "STRING", description: "EXTRA7 = COLAR O CODIGO SENDIR"]
+        ]   
+              command "CodigoSendIREXTRA8(BTN19)", [
+            [name: "SendIRcode", type: "STRING", description: "EXTRA8 = COLAR O CODIGO SENDIR"]
+        ] 
   }
     
     
@@ -108,7 +108,7 @@ metadata {
     input name: "serialNum", title:"Numero de serie (Etiqueta GW3)", type: "string", defaultValue: "111111" 
 	input name: "verifyCode", title:"Verify code (Etiqueta GW3)", type: "string", defaultValue: "111111" 
 	input name: "channel", title:"Canal Infravermelho (1/2 ou 3)", type: "string", defaultValue: "1"                 	
-    input name: "repeatSendHEX", title:"Repeat for SendHex", type: "string", defaultValue: "1"        
+    //input name: "repeatSendHEX", title:"Repeat for SendHex", type: "string", defaultValue: "1"        
 	input name: "setCoolingSetpointIRsend", title:"setCooling-HEX(7)", type: "string"
 	input name: "setHeatingSetpointIRsend", title:"setHeating-HEX(8)", type: "string"      
     input name: "logEnable", type: "bool", title: "Enable debug logging", defaultValue: false
@@ -154,101 +154,123 @@ def AtualizaDadosGW3() {
     state.channel = settings.channel
 }
 
-def CodigoHEXON(final String HEXcode){
-    info "CodigoHEXON(${HEXcode})"
-    varOnIRsend = HEXcode
-    state.OnIRsend  = HEXcode
+def CodigoSendIRON(final String SendIRcode){
+    info "CodigoSendIRON(${SendIRcode})"
+    varOnIRsend = SendIRcode
+    state.OnIRsend  = SendIRcode
 }
 
-def CodigoHEXOFF(final String HEXcode){
-    info "CodigoHEXOFF(${HEXcode})"
-//    varOnIRsend = HEXcode
-    state.OFFIRsend  = HEXcode
+def CodigoSendIROFF(final String SendIRcode){
+    info "CodigoSendIROFF(${SendIRcode})"
+//    varOnIRsend = SendIRcode
+    state.OFFIRsend  = SendIRcode
 }
 
-def CodigoHEXAUTO(final String HEXcode){
-    info "CodigoHEXAUTO(${HEXcode})"
-//    varOnIRsend = HEXcode
-    state.AUTOIRsend  = HEXcode
+def CodigoSendIRAUTO(final String SendIRcode){
+    info "CodigoSendIRAUTO(${SendIRcode})"
+//    varOnIRsend = SendIRcode
+    state.AUTOIRsend  = SendIRcode
 }
 
-def CodigoHEXCOOL(final String HEXcode){
-    info "CodigoHEXCOOL(${HEXcode})"
-//    varOnIRsend = HEXcode
-    state.COOLIRsend  = HEXcode
+def CodigoSendIRCOOL(final String SendIRcode){
+    info "CodigoSendIRCOOL(${SendIRcode})"
+//    varOnIRsend = SendIRcode
+    state.COOLIRsend  = SendIRcode
 }
 
-def CodigoHEXHEAT(final String HEXcode){
-    info "CodigoHEXHEAT(${HEXcode})"
-//    varOnIRsend = HEXcode
-    state.HEATIRsend  = HEXcode
+def CodigoSendIRHEAT(final String SendIRcode){
+    info "CodigoSendIRHEAT(${SendIRcode})"
+//    varOnIRsend = SendIRcode
+    state.HEATIRsend  = SendIRcode
 }
 
-def CodigoHEXDRY(final String HEXcode){
-    info "CodigoHEXDRY(${HEXcode})"
-//   varOnIRsend = HEXcode
-    state.DRYIRsend  = HEXcode
+def CodigoSendIRDRY(final String SendIRcode){
+    info "CodigoSendIRDRY(${SendIRcode})"
+//   varOnIRsend = SendIRcode
+    state.DRYIRsend  = SendIRcode
 }
 
-def CodigoHEXFAN(final String HEXcode){
-    info "CodigoHEXFAN(${HEXcode})"
-//    varOnIRsend = HEXcode
-    state.FANIRsend  = HEXcode
+def CodigoSendIRFAN(final String SendIRcode){
+    info "CodigoSendIRFAN(${SendIRcode})"
+//    varOnIRsend = SendIRcode
+    state.FANIRsend  = SendIRcode
 }
 
-def CodigoHEXFANAUTO(final String HEXcode){
-    info "CodigoHEXFANAUTO(${HEXcode})"
-//    varOnIRsend = HEXcode
-    state.FANAUTOIRsend  = HEXcode
+def CodigoSendIRFANAUTO(final String SendIRcode){
+    info "CodigoSendIRFANAUTO(${SendIRcode})"
+//    varOnIRsend = SendIRcode
+    state.FANAUTOIRsend  = SendIRcode
 }
 
-def CodigoHEXFANMED(final String HEXcode){
-    info "CodigoHEXFANMED(${HEXcode})"
-//    varOnIRsend = HEXcode
-    state.FANMEDIRsend  = HEXcode
+def CodigoSendIRFANMED(final String SendIRcode){
+    info "CodigoSendIRFANMED(${SendIRcode})"
+//    varOnIRsend = SendIRcode
+    state.FANMEDIRsend  = SendIRcode
 }
 
-def CodigoHEXFANHIGH(final String HEXcode){
-    info "CodigoHEXFANHIGH(${HEXcode})"
-//    varOnIRsend = HEXcode
-    state.FANHIGHIRsend  = HEXcode
+def CodigoSendIRFANHIGH(final String SendIRcode){
+    info "CodigoSendIRFANHIGH(${SendIRcode})"
+//    varOnIRsend = SendIRcode
+    state.FANHIGHIRsend  = SendIRcode
 }
 
-def CodigoHEXFANLOW(final String HEXcode){
-    info "CodigoHEXFANLOW(${HEXcode})"
-//    varOnIRsend = HEXcode
-    state.FANLOWIRsend  = HEXcode
+def CodigoSendIRFANLOW(final String SendIRcode){
+    info "CodigoSendIRFANLOW(${SendIRcode})"
+//    varOnIRsend = SendIRcode
+    state.FANLOWIRsend  = SendIRcode
 }
 
-def CodigoHEXEXTRA1(final String HEXcode){
-    info "CodigoHEXEXTRA1(${HEXcode})"
-//    varOnIRsend = HEXcode
-    state.EXTRA1IRsend  = HEXcode
+def CodigoSendIREXTRA1(final String SendIRcode){
+    info "CodigoSendIREXTRA1(${SendIRcode})"
+//    varOnIRsend = SendIRcode
+    state.EXTRA1IRsend  = SendIRcode
 }
 
-def CodigoHEXEXTRA2(final String HEXcode){
-    info "CodigoHEXEXTRA2(${HEXcode})"
-//    varOnIRsend = HEXcode
-    state.EXTRA2IRsend  = HEXcode
+def CodigoSendIREXTRA2(final String SendIRcode){
+    info "CodigoSendIREXTRA2(${SendIRcode})"
+//    varOnIRsend = SendIRcode
+    state.EXTRA2IRsend  = SendIRcode
 }
 
-def CodigoHEXEXTRA3(final String HEXcode){
-    info "CodigoHEXEXTRA3(${HEXcode})"
-//    varOnIRsend = HEXcode
-    state.EXTRA3IRsend  = HEXcode
+def CodigoSendIREXTRA3(final String SendIRcode){
+    info "CodigoSendIREXTRA3(${SendIRcode})"
+//    varOnIRsend = SendIRcode
+    state.EXTRA3IRsend  = SendIRcode
 }
 
-def CodigoHEXEXTRA4(final String HEXcode){
-    info "CodigoHEXEXTRA4(${HEXcode})"
-//    varOnIRsend = HEXcode
-    state.EXTRA4IRsend  = HEXcode
+def CodigoSendIREXTRA4(final String SendIRcode){
+    info "CodigoSendIREXTRA4(${SendIRcode})"
+//    varOnIRsend = SendIRcode
+    state.EXTRA4IRsend  = SendIRcode
 }
 
-def CodigoHEXEXTRA5(final String HEXcode){
-    info "CodigoHEXEXTRA5(${HEXcode})"
-//    varOnIRsend = HEXcode
-    state.EXTRA5IRsend  = HEXcode
+def CodigoSendIREXTRA5(final String SendIRcode){
+    info "CodigoSendIREXTRA5(${SendIRcode})"
+//    varOnIRsend = SendIRcode
+    state.EXTRA5IRsend  = SendIRcode
 }
+
+//Botão #17 para dashboard
+def comandoextra6(){
+    sendEvent(name: "thermostatMode", value: "comandoextra6" )
+    def ircode = state.EXTRA6IRsend
+    EnviaComando(ircode)
+}
+
+//Botão #18 para dashboard
+def comandoextra7(){
+    sendEvent(name: "thermostatMode", value: "comandoextra7" )
+    def ircode = state.EXTRA7IRsend
+    EnviaComando(ircode)
+}
+
+//Botão #19 para dashboard
+def comandoextra8(){
+    sendEvent(name: "thermostatMode", value: "comandoextra8" )
+    def ircode = state.EXTRA8IRsend
+    EnviaComando(ircode)
+}
+
 
 def parse(String description) {
 	logDebug "$description"
@@ -307,10 +329,10 @@ def push(pushed) {
         case 13 : fanAuto(); break    
         case 14 : fanLow(); break    
         case 15 : fanMed(); break    
-        case 16 : fanHigh(); break    
-        case 17 : comandoextra6(); break   
-        case 18 : comandoextra7(); break   
-        case 19 : comandoextra8(); break                           
+        case 16 : fanHigh(); break   
+        case 17 : comandoextra6(); break  
+        case 18 : comandoextra7(); break  
+        case 19 : comandoextra8(); break                 
 		default:
 			logDebug("push: Botão inválido.")
 			break
@@ -403,30 +425,6 @@ def comandoextra5(){
     def ircode = state.EXTRA5IRsend
     EnviaComando(ircode)
 }
-
-//Botão #17 para dashboard
-def comandoextra6(){
-    sendEvent(name: "thermostatMode", value: "comandoextra6" )
-    def ircode = state.EXTRA6IRsend
-    EnviaComando(ircode)
-}
-
-//Botão #18 para dashboard
-def comandoextra7(){
-    sendEvent(name: "thermostatMode", value: "comandoextra7" )
-    def ircode = state.EXTRA7IRsend
-    EnviaComando(ircode)
-}
-
-//Botão #19 para dashboard
-def comandoextra8(){
-    sendEvent(name: "thermostatMode", value: "comandoextra8" )
-    def ircode = state.EXTRA8IRsend
-    EnviaComando(ircode)
-}
-
-
-
 
 
 
@@ -585,12 +583,13 @@ def setThermostatFanMode(modo){
 
 
 
-//CONSTRUCT URI
 def EnviaComando(command) {
     
-    def URI = "http://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&pronto=" + command + "&cId=" + state.channel + "&r=" + settings.repeatSendHEX        
+    def URI = "http://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&cId=" + state.channel + "&gc=" + command       
     httpPOSTExec(URI)
-    log.info "Sent HTTP: " +  URI + " // com commando = " + command
+    log.info "HTTP" +  URI + "commando = "
+    
+    //sendEvent(name: "status", value: tempStatus)
     
     
 }
