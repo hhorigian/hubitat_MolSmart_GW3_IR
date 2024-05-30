@@ -1,28 +1,17 @@
 {
  "packageName":"MolSmart GW3 - IR(Learning) - AC",
  "author":"TRATO",
- "version":"1.0",
+ "version":"2.0",
  "minimumHEVersion":"2.3.7.100",
  "dateReleased":"2024-05-20",
- "releaseNotes":"first version pushed to HPM",
+ "releaseNotes":"New Version",
  "documentationLink":"https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main/AC",
- "apps": [
-  {
-     "id":"9e6c96bc-451b-47d0-80b7-288e6266cf59",
-     "name":"MolSmart - GW3 - IR(Learning) AC",
-     "namespace":"TRATO",
-     "location":"https://raw.githubusercontent.com/hhorigian/hubitat_MolSmart_GW3_IR/main/AC/Learning/Hubitat_TRATO_MolSmart_GW3_IR-AC-Learning_App.groovy",
-     "required":true,
-     "oauth":false,
-     "primary":true
-  }
-  ],
  "drivers": [
   {
      "id":"7535a648-a437-40dd-85c7-921dfe27d21c",
      "name":"MolSmart - GW3 - IR(Learning) AC",
      "namespace":"TRATO",
-     "location":"https://raw.githubusercontent.com/hhorigian/hubitat_MolSmart_GW3_IR/main/AC/Learning/Hubitat_TRATO_MolSmart_GW3_IR-AC-Learning_Driver.groovy",
+     "location":"https://raw.githubusercontent.com/hhorigian/hubitat_MolSmart_GW3_IR/main/AC/Learning/Hubitat_TRATO_MolSmart_GW3_IR-AC-Learning_Driver_v2",
      "required":true
   }
   ]
