@@ -11,7 +11,7 @@
      "id":"7535a648-a437-40dd-85c7-921dfe27d21c",
      "name":"MolSmart - GW3 - IR(Learning) AC",
      "namespace":"TRATO",
-     "location":"https://raw.githubusercontent.com/hhorigian/hubitat_MolSmart_GW3_IR/main/AC/Learning/Hubitat_TRATO_MolSmart_GW3_IR-AC-Learning_Driver_v2",
+     "location":"https://raw.githubusercontent.com/hhorigian/hubitat_MolSmart_GW3_IR/main/AC/Learning/Hubitat_TRATO_MolSmart_GW3_IR-AC-Learning_Driver_v2.groovy",
      "required":true
   }
   ]
