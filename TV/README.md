@@ -1,7 +1,6 @@
-<div>
-<div>Para usar no controle remoto do IR do GW3 no dashboard, adicionar bot&otilde;es. &lt;br&gt;</div>
-<div>Aqui a referencia dos Bot&otilde;es para adicionar no Dashboard &lt;br&gt;</div>
-<div>&lt;br&gt;</div>
+<div>Para usar no controle remoto do IR do GW3 no dashboard, adicionar bot&otilde;es.&nbsp;</div>
+<div>Aqui a referencia dos Bot&otilde;es para adicionar no Dashboard&nbsp;&nbsp;</div>
+<div>&nbsp;</div>
 <div>Bot&atilde;o# 2 = mute</div>
 <div>Bot&atilde;o# 3 = source</div>
 <div>Bot&atilde;o# 4 = back</div>
@@ -35,4 +34,3 @@
 <div>Bot&atilde;o# 38= appAmazonPrime</div>
 <div>Bot&atilde;o# 39= appYouTube</div>
 <div>Bot&atilde;o# 40= appNetflix</div>
-</div>
