@@ -1,5 +1,5 @@
 /**
- *  MolSmart GW3 Driver - IR(HEX) para TV. Usando HEX PRONTO v.2
+ *  MolSmart GW3 Driver - IR(HEX) para TV  e SOM. Usando HEX PRONTO v.2
  *
  *  Copyright 2024 VH 
  *
