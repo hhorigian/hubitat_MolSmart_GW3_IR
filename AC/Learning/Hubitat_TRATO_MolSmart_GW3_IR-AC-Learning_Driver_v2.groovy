@@ -97,6 +97,7 @@ def updated()
     log.debug "updated()"
     setdefaults()
     off()    
+    AtualizaDadosGW3()
     
 }
 
