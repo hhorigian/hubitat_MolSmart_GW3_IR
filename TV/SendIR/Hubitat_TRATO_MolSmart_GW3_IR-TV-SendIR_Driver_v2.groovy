@@ -1,5 +1,5 @@
 /**
- *  MolSmart GW3 Driver - IR(HEX) para TV  e SOM. Usando HEX PRONTO v.2
+ *  MolSmart GW3 Driver - IR(SendIR) para TV  e SOM. Usando SendIR v.2
  *
  *  Copyright 2024 VH 
  *
@@ -13,12 +13,12 @@
  *  for the specific language governing permissions and limitations under the License.
  *
  *
- *            --- Driver para GW3 - IR - para TV --- Usando HEX PRONTO
+ *            --- Driver para GW3 - IR - para TV --- Usando SendIR PRONTO
  *              V.2.0   - Versão com Driver sem precissar do APP + Códigos salvos no driver page.
  *
  */
 metadata {
-  definition (name: "MolSmart - GW3 - IR(HEX) - TV e SOM", namespace: "TRATO", author: "VH", vid: "generic-contact") {
+  definition (name: "MolSmart - GW3 - IR(SendIR) - TV e SOM", namespace: "TRATO", author: "VH", vid: "generic-contact") {
     capability "TV"  
     capability "SamsungTV"
     capability "Switch"  
@@ -34,110 +34,110 @@ metadata {
 	attribute "picture", "string"  
     
 
-       command "CodigoHEX_mute", [
-            [name: "HEXcode", type: "STRING", description: "MUTE = COLAR O CODIGO HEX"]
+       command "CodigoSendIR_mute", [
+            [name: "SendIRcode", type: "STRING", description: "MUTE = COLAR O CODIGO SendIR"]
         ]          
-        command "CodigoHEX_source", [
-            [name: "HEXcode", type: "STRING", description: "SOURCE = COLAR O CODIGO HEX"]
+        command "CodigoSendIR_source", [
+            [name: "SendIRcode", type: "STRING", description: "SOURCE = COLAR O CODIGO SendIR"]
         ]      
-        command "CodigoHEX_back", [
-            [name: "HEXcode", type: "STRING", description: "BACK = COLAR O CODIGO HEX"]
+        command "CodigoSendIR_back", [
+            [name: "SendIRcode", type: "STRING", description: "BACK = COLAR O CODIGO SendIR"]
         ]         
-        command "CodigoHEX_menu", [
-            [name: "HEXcode", type: "STRING", description: "MENU = COLAR O CODIGO HEX"]
+        command "CodigoSendIR_menu", [
+            [name: "SendIRcode", type: "STRING", description: "MENU = COLAR O CODIGO SendIR"]
         ]      
-        command "CodigoHEX_hdmi1", [
-            [name: "HEXcode", type: "STRING", description: "HDMI1 = COLAR O CODIGO HEX"]
+        command "CodigoSendIR_hdmi1", [
+            [name: "SendIRcode", type: "STRING", description: "HDMI1 = COLAR O CODIGO SendIR"]
         ]      
-   	    command "CodigoHEX_hdmi2" , [
-            [name: "HEXcode", type: "STRING", description: "HDMI2 = COLAR O CODIGO HEX"]
+   	    command "CodigoSendIR_hdmi2" , [
+            [name: "SendIRcode", type: "STRING", description: "HDMI2 = COLAR O CODIGO SendIR"]
         ]       
-        command "CodigoHEX_up", [
-            [name: "HEXcode", type: "STRING", description: "UP = COLAR O CODIGO HEX"]
+        command "CodigoSendIR_up", [
+            [name: "SendIRcode", type: "STRING", description: "UP = COLAR O CODIGO SendIR"]
         ]      
-    	command "CodigoHEX_down", [
-            [name: "HEXcode", type: "STRING", description: "DOWN = COLAR O CODIGO HEX"]
+    	command "CodigoSendIR_down", [
+            [name: "SendIRcode", type: "STRING", description: "DOWN = COLAR O CODIGO SendIR"]
         ]      
-    	command "CodigoHEX_right", [
-            [name: "HEXcode", type: "STRING", description: "RIGHT = COLAR O CODIGO HEX"]
+    	command "CodigoSendIR_right", [
+            [name: "SendIRcode", type: "STRING", description: "RIGHT = COLAR O CODIGO SendIR"]
         ]      
-    	command "CodigoHEX_left", [
-            [name: "HEXcode", type: "STRING", description: "LEFT = COLAR O CODIGO HEX"]
+    	command "CodigoSendIR_left", [
+            [name: "SendIRcode", type: "STRING", description: "LEFT = COLAR O CODIGO SendIR"]
         ]      
-   	    command "CodigoHEX_confirm", [
-            [name: "HEXcode", type: "STRING", description: "CONFIRM = COLAR O CODIGO HEX"]
+   	    command "CodigoSendIR_confirm", [
+            [name: "SendIRcode", type: "STRING", description: "CONFIRM = COLAR O CODIGO SendIR"]
         ]      
-        command "CodigoHEX_exit"   , [
-            [name: "HEXcode", type: "STRING", description: "EXIT = COLAR O CODIGO HEX"]
+        command "CodigoSendIR_exit"   , [
+            [name: "SendIRcode", type: "STRING", description: "EXIT = COLAR O CODIGO SendIR"]
         ]      
-        command "CodigoHEX_home", [
-            [name: "HEXcode", type: "STRING", description: "HOME = COLAR O CODIGO HEX"]
+        command "CodigoSendIR_home", [
+            [name: "SendIRcode", type: "STRING", description: "HOME = COLAR O CODIGO SendIR"]
         ]      
-        command "CodigoHEX_channelUp", [
-            [name: "HEXcode", type: "STRING", description: "CHANUP = COLAR O CODIGO HEX"]
+        command "CodigoSendIR_channelUp", [
+            [name: "SendIRcode", type: "STRING", description: "CHANUP = COLAR O CODIGO SendIR"]
         ]      
-        command "CodigoHEX_channelDown", [
-            [name: "HEXcode", type: "STRING", description: "CHANDOWN = COLAR O CODIGO HEX"]
+        command "CodigoSendIR_channelDown", [
+            [name: "SendIRcode", type: "STRING", description: "CHANDOWN = COLAR O CODIGO SendIR"]
         ]      
-        command "CodigoHEX_volumeUp", [
-            [name: "HEXcode", type: "STRING", description: "VOLUP = COLAR O CODIGO HEX"]
+        command "CodigoSendIR_volumeUp", [
+            [name: "SendIRcode", type: "STRING", description: "VOLUP = COLAR O CODIGO SendIR"]
         ]      
-   	    command "CodigoHEX_volumeDown", [
-            [name: "HEXcode", type: "STRING", description: "VOLDOWN = COLAR O CODIGO HEX"]
+   	    command "CodigoSendIR_volumeDown", [
+            [name: "SendIRcode", type: "STRING", description: "VOLDOWN = COLAR O CODIGO SendIR"]
         ]      
-    	command "CodigoHEX_num0" , [
-            [name: "HEXcode", type: "STRING", description: "NUM0 = COLAR O CODIGO HEX"]
+    	command "CodigoSendIR_num0" , [
+            [name: "SendIRcode", type: "STRING", description: "NUM0 = COLAR O CODIGO SendIR"]
         ]      
-        command "CodigoHEX_num1", [
-            [name: "HEXcode", type: "STRING", description: "NUM1 = COLAR O CODIGO HEX"]
+        command "CodigoSendIR_num1", [
+            [name: "SendIRcode", type: "STRING", description: "NUM1 = COLAR O CODIGO SendIR"]
         ]      
-    	command "CodigoHEX_num2", [
-            [name: "HEXcode", type: "STRING", description: "NUM2 = COLAR O CODIGO HEX"]
+    	command "CodigoSendIR_num2", [
+            [name: "SendIRcode", type: "STRING", description: "NUM2 = COLAR O CODIGO SendIR"]
         ]      
-    	command "CodigoHEX_num3", [
-            [name: "HEXcode", type: "STRING", description: "NUM3 = COLAR O CODIGO HEX"]
+    	command "CodigoSendIR_num3", [
+            [name: "SendIRcode", type: "STRING", description: "NUM3 = COLAR O CODIGO SendIR"]
         ]      
-    	command "CodigoHEX_num4", [
-            [name: "HEXcode", type: "STRING", description: "NUM4 = COLAR O CODIGO HEX"]
+    	command "CodigoSendIR_num4", [
+            [name: "SendIRcode", type: "STRING", description: "NUM4 = COLAR O CODIGO SendIR"]
         ]      
-    	command "CodigoHEX_num5", [
-            [name: "HEXcode", type: "STRING", description: "NUM5 = COLAR O CODIGO HEX"]
+    	command "CodigoSendIR_num5", [
+            [name: "SendIRcode", type: "STRING", description: "NUM5 = COLAR O CODIGO SendIR"]
         ]      
-    	command "CodigoHEX_num6", [
-            [name: "HEXcode", type: "STRING", description: "NUM6 = COLAR O CODIGO HEX"]
+    	command "CodigoSendIR_num6", [
+            [name: "SendIRcode", type: "STRING", description: "NUM6 = COLAR O CODIGO SendIR"]
         ]      
-    	command "CodigoHEX_num7", [
-            [name: "HEXcode", type: "STRING", description: "NUM7 = COLAR O CODIGO HEX"]
+    	command "CodigoSendIR_num7", [
+            [name: "SendIRcode", type: "STRING", description: "NUM7 = COLAR O CODIGO SendIR"]
         ]      
-    	command "CodigoHEX_num8", [
-            [name: "HEXcode", type: "STRING", description: "NUM8 = COLAR O CODIGO HEX"]
+    	command "CodigoSendIR_num8", [
+            [name: "SendIRcode", type: "STRING", description: "NUM8 = COLAR O CODIGO SendIR"]
         ]      
-    	command "CodigoHEX_num9", [
-            [name: "HEXcode", type: "STRING", description: "NUM9 = COLAR O CODIGO HEX"]
+    	command "CodigoSendIR_num9", [
+            [name: "SendIRcode", type: "STRING", description: "NUM9 = COLAR O CODIGO SendIR"]
         ]      
-        command "CodigoHEX_btnextra1" , [
-            [name: "HEXcode", type: "STRING", description: "EXTRA1 = COLAR O CODIGO HEX"]
+        command "CodigoSendIR_btnextra1" , [
+            [name: "SendIRcode", type: "STRING", description: "EXTRA1 = COLAR O CODIGO SendIR"]
         ]      
-    	command "CodigoHEX_btnextra2"  , [
-            [name: "HEXcode", type: "STRING", description: "EXTRA2 = COLAR O CODIGO HEX"]
+    	command "CodigoSendIR_btnextra2"  , [
+            [name: "SendIRcode", type: "STRING", description: "EXTRA2 = COLAR O CODIGO SendIR"]
         ]           
-    	command "CodigoHEX_btnextra3"  , [
-            [name: "HEXcode", type: "STRING", description: "EXTRA3 = COLAR O CODIGO HEX"]
+    	command "CodigoSendIR_btnextra3"  , [
+            [name: "SendIRcode", type: "STRING", description: "EXTRA3 = COLAR O CODIGO SendIR"]
         ]        
-        command "CodigoHEX_APP_NETFLIX" , [
-            [name: "HEXcode", type: "STRING", description: "NETFLIX = COLAR O CODIGO HEX"]
+        command "CodigoSendIR_APP_NETFLIX" , [
+            [name: "SendIRcode", type: "STRING", description: "NETFLIX = COLAR O CODIGO SendIR"]
         ]      
-        command "CodigoHEX_APP_AMAZON", [
-            [name: "HEXcode", type: "STRING", description: "AMAZON = COLAR O CODIGO HEX"]
+        command "CodigoSendIR_APP_AMAZON", [
+            [name: "SendIRcode", type: "STRING", description: "AMAZON = COLAR O CODIGO SendIR"]
         ]      
-        command "CodigoHEX_APP_YOUTUBE"  , [
-            [name: "HEXcode", type: "STRING", description: "YOUTUBE = COLAR O CODIGO HEX"]
+        command "CodigoSendIR_APP_YOUTUBE"  , [
+            [name: "SendIRcode", type: "STRING", description: "YOUTUBE = COLAR O CODIGO SendIR"]
         ]  
-        command "CodigoHEX_ON"  , [
-            [name: "HEXcode", type: "STRING", description: "ON = COLAR O CODIGO HEX"]
+        command "CodigoSendIR_ON"  , [
+            [name: "SendIRcode", type: "STRING", description: "ON = COLAR O CODIGO SendIR"]
         ]  
-        command "CodigoHEX_OFF"  , [
-            [name: "HEXcode", type: "STRING", description: "OFF = COLAR O CODIGO HEX"]
+        command "CodigoSendIR_OFF"  , [
+            [name: "SendIRcode", type: "STRING", description: "OFF = COLAR O CODIGO SendIR"]
         ]          
 
   }
@@ -153,7 +153,6 @@ metadata {
     	input name: "serialNum", title:"Numero de serie (Etiqueta GW3)", type: "string", required: true
 	    input name: "verifyCode", title:"Verify code (Etiqueta GW3)", type: "string", required: true
 	    input name: "channel", title:"Canal Infravermelho (1/2 ou 3)", type: "string", required: true        
-        input name: "repeatSendHEX", title:"Repeat for SendHex", type: "string", defaultValue: "1"   // REPEAT SEND PRONTO HEX
          
       
       
@@ -192,197 +191,197 @@ def AtualizaDadosGW3() {
 
 }
 
-def CodigoHEX_ON(final String HEXcode){
-    info "CodigoHEX_ON(${HEXcode})"
-    state.OnIRsend  = HEXcode
+def CodigoSendIR_ON(final String SendIRcode){
+    info "CodigoSendIR_ON(${SendIRcode})"
+    state.OnIRsend  = SendIRcode
 }
 
-def CodigoHEX_OFF(final String HEXcode){
-    info "CodigoHEX_OFF(${HEXcode})"
-    state.OFFIRsend  = HEXcode
+def CodigoSendIR_OFF(final String SendIRcode){
+    info "CodigoSendIR_OFF(${SendIRcode})"
+    state.OFFIRsend  = SendIRcode
 }
 
-def CodigoHEX_mute(final String HEXcode){
-    info "CodigoHEX_mute(${HEXcode})"
-    state.muteIRsend  = HEXcode
-}
-
-
-def CodigoHEX_source(final String HEXcode){
-    info "CodigoHEX_source(${HEXcode})"
-    state.sourceIRsend  = HEXcode
+def CodigoSendIR_mute(final String SendIRcode){
+    info "CodigoSendIR_mute(${SendIRcode})"
+    state.muteIRsend  = SendIRcode
 }
 
 
-def CodigoHEX_back(final String HEXcode){
-    info "CodigoHEX_back(${HEXcode})"
-    state.backIRsend  = HEXcode
+def CodigoSendIR_source(final String SendIRcode){
+    info "CodigoSendIR_source(${SendIRcode})"
+    state.sourceIRsend  = SendIRcode
 }
 
 
-def CodigoHEX_menu(final String HEXcode){
-    info "CodigoHEX_menu(${HEXcode})"
-    state.menuIRsend  = HEXcode
+def CodigoSendIR_back(final String SendIRcode){
+    info "CodigoSendIR_back(${SendIRcode})"
+    state.backIRsend  = SendIRcode
 }
 
 
-def CodigoHEX_hdmi1(final String HEXcode){
-    info "CodigoHEX_hdmi1(${HEXcode})"
-    state.hdmi1IRsend  = HEXcode
+def CodigoSendIR_menu(final String SendIRcode){
+    info "CodigoSendIR_menu(${SendIRcode})"
+    state.menuIRsend  = SendIRcode
 }
 
 
-def CodigoHEX_hdmi2(final String HEXcode){
-    info "CodigoHEX_hdmi2(${HEXcode})"
-    state.hdmi2IRsend  = HEXcode
+def CodigoSendIR_hdmi1(final String SendIRcode){
+    info "CodigoSendIR_hdmi1(${SendIRcode})"
+    state.hdmi1IRsend  = SendIRcode
 }
 
 
-def CodigoHEX_up(final String HEXcode){
-    info "CodigoHEX_up(${HEXcode})"
-    state.upIRsend  = HEXcode
+def CodigoSendIR_hdmi2(final String SendIRcode){
+    info "CodigoSendIR_hdmi2(${SendIRcode})"
+    state.hdmi2IRsend  = SendIRcode
 }
 
 
-def CodigoHEX_down(final String HEXcode){
-    info "CodigoHEX_down(${HEXcode})"
-    state.downIRsend  = HEXcode
+def CodigoSendIR_up(final String SendIRcode){
+    info "CodigoSendIR_up(${SendIRcode})"
+    state.upIRsend  = SendIRcode
 }
 
 
-def CodigoHEX_right(final String HEXcode){
-    info "CodigoHEX_right(${HEXcode})"
-    state.rightIRsend  = HEXcode
-}
-
-def CodigoHEX_left(final String HEXcode){
-    info "CodigoHEX_left(${HEXcode})"
-    state.leftIRsend  = HEXcode
-}
-
-def CodigoHEX_confirm(final String HEXcode){
-    info "CodigoHEX_confirm(${HEXcode})"
-    state.confirmIRsend  = HEXcode
+def CodigoSendIR_down(final String SendIRcode){
+    info "CodigoSendIR_down(${SendIRcode})"
+    state.downIRsend  = SendIRcode
 }
 
 
-def CodigoHEX_exit(final String HEXcode){
-    info "CodigoHEX_exit(${HEXcode})"
-    state.exitIRsend  = HEXcode
+def CodigoSendIR_right(final String SendIRcode){
+    info "CodigoSendIR_right(${SendIRcode})"
+    state.rightIRsend  = SendIRcode
+}
+
+def CodigoSendIR_left(final String SendIRcode){
+    info "CodigoSendIR_left(${SendIRcode})"
+    state.leftIRsend  = SendIRcode
+}
+
+def CodigoSendIR_confirm(final String SendIRcode){
+    info "CodigoSendIR_confirm(${SendIRcode})"
+    state.confirmIRsend  = SendIRcode
 }
 
 
-def CodigoHEX_home(final String HEXcode){
-    info "CodigoHEX_home(${HEXcode})"
-    state.homeIRsend  = HEXcode
+def CodigoSendIR_exit(final String SendIRcode){
+    info "CodigoSendIR_exit(${SendIRcode})"
+    state.exitIRsend  = SendIRcode
 }
 
 
-def CodigoHEX_channelUp(final String HEXcode){
-    info "CodigoHEX_channelUp(${HEXcode})"
-    state.ChanUpIRsend  = HEXcode
+def CodigoSendIR_home(final String SendIRcode){
+    info "CodigoSendIR_home(${SendIRcode})"
+    state.homeIRsend  = SendIRcode
 }
 
 
-def CodigoHEX_channelDown(final String HEXcode){
-    info "CodigoHEX_channelDown(${HEXcode})"
-    state.ChanDownIRsend  = HEXcode
+def CodigoSendIR_channelUp(final String SendIRcode){
+    info "CodigoSendIR_channelUp(${SendIRcode})"
+    state.ChanUpIRsend  = SendIRcode
 }
 
 
-def CodigoHEX_volumeUp(final String HEXcode){
-    info "CodigoHEX_volumeUp(${HEXcode})"
-    state.VolUpIRsend  = HEXcode
+def CodigoSendIR_channelDown(final String SendIRcode){
+    info "CodigoSendIR_channelDown(${SendIRcode})"
+    state.ChanDownIRsend  = SendIRcode
 }
 
 
-def CodigoHEX_volumeDown(final String HEXcode){
-    info "CodigoHEX_volumeDown(${HEXcode})"
-    state.VolDownIRsend  = HEXcode
+def CodigoSendIR_volumeUp(final String SendIRcode){
+    info "CodigoSendIR_volumeUp(${SendIRcode})"
+    state.VolUpIRsend  = SendIRcode
 }
 
 
-def CodigoHEX_num0(final String HEXcode){
-    info "CodigoHEX_num0(${HEXcode})"
-    state.num0IRsend  = HEXcode
+def CodigoSendIR_volumeDown(final String SendIRcode){
+    info "CodigoSendIR_volumeDown(${SendIRcode})"
+    state.VolDownIRsend  = SendIRcode
 }
 
 
-def CodigoHEX_num1(final String HEXcode){
-    info "CodigoHEX_num1(${HEXcode})"
-    state.num1IRsend  = HEXcode
+def CodigoSendIR_num0(final String SendIRcode){
+    info "CodigoSendIR_num0(${SendIRcode})"
+    state.num0IRsend  = SendIRcode
 }
 
 
-def CodigoHEX_num2(final String HEXcode){
-    info "CodigoHEX_num2(${HEXcode})"
-    state.num2IRsend  = HEXcode
+def CodigoSendIR_num1(final String SendIRcode){
+    info "CodigoSendIR_num1(${SendIRcode})"
+    state.num1IRsend  = SendIRcode
 }
 
 
-def CodigoHEX_num3(final String HEXcode){
-    info "CodigoHEX_num3(${HEXcode})"
-    state.num3IRsend  = HEXcode
+def CodigoSendIR_num2(final String SendIRcode){
+    info "CodigoSendIR_num2(${SendIRcode})"
+    state.num2IRsend  = SendIRcode
 }
 
-def CodigoHEX_num4(final String HEXcode){
-    info "CodigoHEX_num4(${HEXcode})"
-    state.num4IRsend  = HEXcode
+
+def CodigoSendIR_num3(final String SendIRcode){
+    info "CodigoSendIR_num3(${SendIRcode})"
+    state.num3IRsend  = SendIRcode
 }
 
-def CodigoHEX_num5(final String HEXcode){
-    info "CodigoHEX_num5(${HEXcode})"
-    state.num5IRsend  = HEXcode
+def CodigoSendIR_num4(final String SendIRcode){
+    info "CodigoSendIR_num4(${SendIRcode})"
+    state.num4IRsend  = SendIRcode
 }
 
-def CodigoHEX_num6(final String HEXcode){
-    info "CodigoHEX_num6(${HEXcode})"
-    state.num6IRsend  = HEXcode
+def CodigoSendIR_num5(final String SendIRcode){
+    info "CodigoSendIR_num5(${SendIRcode})"
+    state.num5IRsend  = SendIRcode
 }
 
-def CodigoHEX_num7(final String HEXcode){
-    info "CodigoHEX_num7(${HEXcode})"
-    state.num7IRsend  = HEXcode
+def CodigoSendIR_num6(final String SendIRcode){
+    info "CodigoSendIR_num6(${SendIRcode})"
+    state.num6IRsend  = SendIRcode
 }
 
-def CodigoHEX_num8(final String HEXcode){
-    info "CodigoHEX_num8(${HEXcode})"
-    state.num8IRsend  = HEXcode
+def CodigoSendIR_num7(final String SendIRcode){
+    info "CodigoSendIR_num7(${SendIRcode})"
+    state.num7IRsend  = SendIRcode
 }
 
-def CodigoHEX_num9(final String HEXcode){
-    info "CodigoHEX_num9(${HEXcode})"
-    state.num9IRsend  = HEXcode
+def CodigoSendIR_num8(final String SendIRcode){
+    info "CodigoSendIR_num8(${SendIRcode})"
+    state.num8IRsend  = SendIRcode
 }
 
-def CodigoHEX_btnextra1(final String HEXcode){
-    info "CodigoHEX_btnextra1(${HEXcode})"
-    state.btnextra1IRsend  = HEXcode
+def CodigoSendIR_num9(final String SendIRcode){
+    info "CodigoSendIR_num9(${SendIRcode})"
+    state.num9IRsend  = SendIRcode
 }
 
-def CodigoHEX_btnextra2(final String HEXcode){
-    info "CodigoHEX_btnextra2(${HEXcode})"
-    state.btnextra2IRsend  = HEXcode
+def CodigoSendIR_btnextra1(final String SendIRcode){
+    info "CodigoSendIR_btnextra1(${SendIRcode})"
+    state.btnextra1IRsend  = SendIRcode
 }
 
-def CodigoHEX_btnextra3(final String HEXcode){
-    info "CodigoHEX_btnextra3(${HEXcode})"
-    state.btnextra3IRsend  = HEXcode
+def CodigoSendIR_btnextra2(final String SendIRcode){
+    info "CodigoSendIR_btnextra2(${SendIRcode})"
+    state.btnextra2IRsend  = SendIRcode
 }
 
-def CodigoHEX_APP_NETFLIX(final String HEXcode){
-    info "CodigoHEX_appnetflix(${HEXcode})"
-    state.netflixIRsend  = HEXcode
+def CodigoSendIR_btnextra3(final String SendIRcode){
+    info "CodigoSendIR_btnextra3(${SendIRcode})"
+    state.btnextra3IRsend  = SendIRcode
 }
 
-def CodigoHEX_APP_AMAZON(final String HEXcode){
-    info "CodigoHEX_appamazon(${HEXcode})"
-    state.amazonIRsend  = HEXcode
+def CodigoSendIR_APP_NETFLIX(final String SendIRcode){
+    info "CodigoSendIR_APP_NETFLIX(${SendIRcode})"
+    state.netflixIRsend  = SendIRcode
 }
 
-def CodigoHEX_APP_YOUTUBE(final String HEXcode){
-    info "CodigoHEX_appyoutube(${HEXcode})"
-    state.youtubeIRsend  = HEXcode
+def CodigoSendIR_APP_AMAZON(final String SendIRcode){
+    info "CodigoSendIR_APP_AMAZON(${SendIRcode})"
+    state.amazonIRsend  = SendIRcode
+}
+
+def CodigoSendIR_APP_YOUTUBE(final String SendIRcode){
+    info "CodigoSendIR_APP_YOUTUBE(${SendIRcode})"
+    state.youtubeIRsend  = SendIRcode
 }
 
 
@@ -705,12 +704,9 @@ def appnetflix(){
 
 def EnviaComando(command) {
     
-    def URI = "http://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&pronto=" + command + "&cId=" + state.channel + "&r=" + settings.repeatSendHEX        
+    def URI = "http://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&cId=" + state.channel + "&gc=" + command       
     httpPOSTExec(URI)
-    log.info "HTTP" +  URI + "commando = "
-    
-    //sendEvent(name: "status", value: tempStatus)
-    
+    log.info "Enviado...HTTP" +  URI + " commando = "   
     
 }
 
@@ -727,13 +723,8 @@ def httpPOSTExec(URI)
             if (resp.data)
             {
                        
-                        //def resp_json
-                        //def coverfile
-                        //resp_json = resp.data
-                        //coverfile = resp_json.track.album.image[1]."#text"
-                        log.info "Response " + resp.data 
-                       
-                                  
+                         log.info "Response " + resp.data 
+                                    
             }
         }
     }
