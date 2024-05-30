@@ -3,29 +3,23 @@
 Existem 3 formas de utilizar o GW3 via IR. <br><br>
 <strong>A)</strong> Podem ser enviados os códigos IR diretamente para ele usando alguma biblioteca (Global Caché ou outras), e enviar os comandos SENDIR direto para ele.
 Para essa finalidade não precisa de nenhuma configuração adicional no Idoor. Só precisa ter o GW3 na rede, e os dados de acesso dele.<br>
-Para esse método, Escolher o APP+Driver correto: <br><br>
-<strong>TV Com códigos Sendir</strong><br>
+Para esse método, Escolher o Driver correto: <br><br>
+<strong>TV e Som Com códigos Sendir</strong><br>
   +Hubitat_TRATO_MolSmart_GW3_IR-TV-SendIR_Driver.groovy<br>
-  +Hubitat_TRATO_MolSmart_GW3_IR-TV-SendIR_App.groovy <br><br>
   *Nessa opção, os códigos SendIR para cada comando, devem ser gravados na página do dispositivo, dentro da configuração do HE. <br><br></li>
 <strong>TV Com códigos HEX Pronto</strong><br>
   +Hubitat_TRATO_MolSmart_GW3_IR-TV-HEX_Driver.groovy<br>
-  +Hubitat_TRATO_MolSmart_GW3_IR-TV-HEX_App.groovy <br><br>
-  *Nessa opção, os códigos HEX para cada comando, devem ser inseridos e configurados na pagina de configuração do DRIVER na HUbitat, dentro da configuração do HE. <br><br>
+  *Nessa opção, os códigos SendIR para cada comando, devem ser gravados na página do dispositivo, dentro da configuração do HE. <br><br>
 <strong>AC Com códigos Sendir</strong><br>
   +Hubitat_TRATO_MolSmart_GW3_IR-AC-SendIR_Driver.groovy<br>
-  +Hubitat_TRATO_MolSmart_GW3_IR-AC-SendIR_App.groovy <br><br>
 <strong>AC Com códigos HEX Pronto</strong><br>
   +Hubitat_TRATO_MolSmart_GW3_IR-AC-HEX_Driver.groovy<br>
-  +Hubitat_TRATO_MolSmart_GW3_IR-AC-HEX_App.groovy <br><br>
 <strong>AC Com Learning via iDoor</strong><br>
-  +Hubitat_TRATO_MolSmart_GW3_IR-AC-HEX_Driver.groovy<br>
-  +Hubitat_TRATO_MolSmart_GW3_IR-AC-HEX_App.groovy <br><br>  
+  +Hubitat_TRATO_MolSmart_GW3_IR-AC-HEX_Driver.groovy<br><br>  
 
 
 <br>
-1- Instalar o código do Driver Hub. <br>
-2- Instalar o código do APP no Hub.<br><br>
+1-2 Instalar o código do Driver Hub. <br><br>
 <br>
 Antes de seguir para o passo 3, recomendamos já ter o Gateway instalado na rede, cadastrado no APP iDoor, e criado/aprendido o "Controle Remoto" como informa o manual
 <br><br>
@@ -35,7 +29,7 @@ Video de instalação do GW: https://youtu.be/EIgOz2DrALA?si=8kOFyFPpvq7FjPaY <b
 Dicas de integração do GW: https://youtu.be/Ex9b1RNuMUs?si=Kt0DbUi9_nxtS-E5<br>
 <br>
 
-3. Instalar um novo "APP de usuário" no Hub, e seleccionar o MolSmart GW3 (IR TV).<br>
+3. Instalar o DRIVER no Hub, e seleccionar o MolSmart GW3 (IR TV).<br>
   a) Ingressar os dados do Gateway:Endereço IP - sempre recomendado fixar o IP, ou reservar no DHCP); Numero de Serie; Código de Verificação (esses dados estão na etiqueta na parte de baixo do gateway); e Porta IR que vai ser utilizada para comandar o equipamento infravermelho. <br>
   b) Por default, o driver vai criar um Device no Hub, com todos os comandos e botões. Agora precisa inserir em cada comando o código SENDIR correspondente.<br>
   c) Adicionar o device no Dashboard<br>
@@ -45,11 +39,10 @@ Dicas de integração do GW: https://youtu.be/Ex9b1RNuMUs?si=Kt0DbUi9_nxtS-E5<br
 <br><br>
 <strong>Controle UNIVERSAL com Learning</strong><br>
   +Hubitat_TRATO_MolSmart_GW3_IR_Universal_Learning_Driver<br>
-  +Hubitat_TRATO_MolSmart_GW3_IR_Universal_Learning_App<br><br>  <br>
+ <br>  <br>
   <br>
 <strong>C)</strong> Pode ser aprendido o controle remoto diretamente no iDoor usando a biblioteca existente em ele, e enviar os comandos direto para o iDoor dos botões em ele. 
 <strong>Controle para AC - Já criado no Idoor aproveitando a biblioteca. Precisa pegar o Cid. </strong><br>
-  +Hubitat_TRATO_MolSmart_GW3_IR_iDoor_App.groovy<br>
   +Hubitat_TRATO_MolSmart_GW3_IR_iDoor_Driver.groovy<br><br>
 <strong>Controle para TV - Já criado no Idoor aproveitando a biblioteca. Precisa pegar o Cid. </strong><br>
   +EM DESENVOLVIMENTO
