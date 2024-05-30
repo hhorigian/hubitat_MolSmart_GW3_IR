@@ -1,5 +1,5 @@
 /**
- *  MolSmart GW3 Driver - IR(HEX) para TV. Usando HEX PRONTO
+ *  MolSmart GW3 Driver - IR(HEX) para TV. Usando HEX PRONTO v.2
  *
  *  Copyright 2024 VH 
  *
@@ -14,21 +14,18 @@
  *
  *
  *            --- Driver para GW3 - IR - para TV --- Usando HEX PRONTO
- *            V.2. com botões para o dashboard. Cada comando tem um numero de botão para incluir no dashboard. 31/3/2024 
-
+ *              V.2.0   - Versão com Driver sem precissar do APP
  *
  */
 metadata {
-  definition (name: "MolSmart - GW3 - IR(HEX) - TV", namespace: "TRATO", author: "VH", vid: "generic-contact") {
-    capability "Switch"  
-    capability "Actuator"
+  definition (name: "MolSmart - GW3 - IR(HEX) - TV e SOM", namespace: "TRATO", author: "VH", vid: "generic-contact") {
     capability "TV"  
     capability "SamsungTV"
+    capability "Switch"  
+    capability "Actuator"
     capability "PushableButton"
 	capability "Variable"      
   
-      
-      
 	attribute "channel", "number"
 	attribute "volume", "number"
 	attribute "movieMode", "string"
@@ -37,83 +34,126 @@ metadata {
 	attribute "picture", "string"  
     
 
+       command "CodigoHEXmute", [
+            [name: "HEXcode", type: "STRING", description: "MUTE = COLAR O CODIGO HEX"]
+        ]          
+        command "CodigoHEXsource", [
+            [name: "HEXcode", type: "STRING", description: "SOURCE = COLAR O CODIGO HEX"]
+        ]      
+        command "CodigoHEXback", [
+            [name: "HEXcode", type: "STRING", description: "BACK = COLAR O CODIGO HEX"]
+        ]         
+        command "CodigoHEXmenu", [
+            [name: "HEXcode", type: "STRING", description: "MENU = COLAR O CODIGO HEX"]
+        ]      
+        command "CodigoHEXhdmi1", [
+            [name: "HEXcode", type: "STRING", description: "HDMI1 = COLAR O CODIGO HEX"]
+        ]      
+   	    command "CodigoHEXhdmi2" , [
+            [name: "HEXcode", type: "STRING", description: "HDMI2 = COLAR O CODIGO HEX"]
+        ]       
+        command "CodigoHEXup", [
+            [name: "HEXcode", type: "STRING", description: "UP = COLAR O CODIGO HEX"]
+        ]      
+    	command "CodigoHEXdown", [
+            [name: "HEXcode", type: "STRING", description: "DOWN = COLAR O CODIGO HEX"]
+        ]      
+    	command "CodigoHEXright", [
+            [name: "HEXcode", type: "STRING", description: "RIGHT = COLAR O CODIGO HEX"]
+        ]      
+    	command "CodigoHEXleft", [
+            [name: "HEXcode", type: "STRING", description: "LEFT = COLAR O CODIGO HEX"]
+        ]      
+   	    command "CodigoHEXconfirm", [
+            [name: "HEXcode", type: "STRING", description: "CONFIRM = COLAR O CODIGO HEX"]
+        ]      
+        command "CodigoHEXexit"   , [
+            [name: "HEXcode", type: "STRING", description: "EXIT = COLAR O CODIGO HEX"]
+        ]      
+        command "CodigoHEXhome", [
+            [name: "HEXcode", type: "STRING", description: "HOME = COLAR O CODIGO HEX"]
+        ]      
+        command "CodigoHEXchannelUp", [
+            [name: "HEXcode", type: "STRING", description: "CHANUP = COLAR O CODIGO HEX"]
+        ]      
+        command "CodigoHEXchannelDown", [
+            [name: "HEXcode", type: "STRING", description: "CHANDOWN = COLAR O CODIGO HEX"]
+        ]      
+        command "CodigoHEXvolumeUp", [
+            [name: "HEXcode", type: "STRING", description: "VOLUP = COLAR O CODIGO HEX"]
+        ]      
+   	    command "CodigoHEXvolumeDown", [
+            [name: "HEXcode", type: "STRING", description: "VOLDOWN = COLAR O CODIGO HEX"]
+        ]      
+    	command "CodigoHEXnum0" , [
+            [name: "HEXcode", type: "STRING", description: "NUM0 = COLAR O CODIGO HEX"]
+        ]      
+        command "CodigoHEXnum1", [
+            [name: "HEXcode", type: "STRING", description: "NUM1 = COLAR O CODIGO HEX"]
+        ]      
+    	command "CodigoHEXnum2", [
+            [name: "HEXcode", type: "STRING", description: "NUM2 = COLAR O CODIGO HEX"]
+        ]      
+    	command "CodigoHEXnum3", [
+            [name: "HEXcode", type: "STRING", description: "NUM3 = COLAR O CODIGO HEX"]
+        ]      
+    	command "CodigoHEXnum4", [
+            [name: "HEXcode", type: "STRING", description: "NUM4 = COLAR O CODIGO HEX"]
+        ]      
+    	command "CodigoHEXnum5", [
+            [name: "HEXcode", type: "STRING", description: "NUM5 = COLAR O CODIGO HEX"]
+        ]      
+    	command "CodigoHEXnum6", [
+            [name: "HEXcode", type: "STRING", description: "NUM6 = COLAR O CODIGO HEX"]
+        ]      
+    	command "CodigoHEXnum7", [
+            [name: "HEXcode", type: "STRING", description: "NUM7 = COLAR O CODIGO HEX"]
+        ]      
+    	command "CodigoHEXnum8", [
+            [name: "HEXcode", type: "STRING", description: "NUM8 = COLAR O CODIGO HEX"]
+        ]      
+    	command "CodigoHEXnum9", [
+            [name: "HEXcode", type: "STRING", description: "NUM9 = COLAR O CODIGO HEX"]
+        ]      
+        command "CodigoHEXbtnextra1" , [
+            [name: "HEXcode", type: "STRING", description: "EXTRA1 = COLAR O CODIGO HEX"]
+        ]      
+    	command "CodigoHEXbtnextra2"  , [
+            [name: "HEXcode", type: "STRING", description: "EXTRA2 = COLAR O CODIGO HEX"]
+        ]           
+    	command "CodigoHEXbtnextra3"  , [
+            [name: "HEXcode", type: "STRING", description: "EXTRA3 = COLAR O CODIGO HEX"]
+        ]        
+        command "CodigoHEXappnetflix" , [
+            [name: "HEXcode", type: "STRING", description: "NETFLIX = COLAR O CODIGO HEX"]
+        ]      
+        command "CodigoHEXappamazon", [
+            [name: "HEXcode", type: "STRING", description: "AMAZON = COLAR O CODIGO HEX"]
+        ]      
+        command "CodigoHEXappyoutube"  , [
+            [name: "HEXcode", type: "STRING", description: "YOUTUBE = COLAR O CODIGO HEX"]
+        ]  
+        command "CodigoHEXON"  , [
+            [name: "HEXcode", type: "STRING", description: "ON = COLAR O CODIGO HEX"]
+        ]  
+        command "CodigoHEXOFF"  , [
+            [name: "HEXcode", type: "STRING", description: "OFF = COLAR O CODIGO HEX"]
+        ]          
 
-        command "mute"      
-        command "source"
-        command "back"   
-        command "menu"
-        command "hdmi1"
-   	    command "hdmi2"  
-        command "up"
-    	command "down"
-    	command "right"
-    	command "left"
-   	    command "confirm"
-        command "exit"   
-        command "home"
-        command "channelUp"
-        command "channelDown"
-        command "volumeUp"
-   	    command "volumeDown"
-    	command "num0" 
-        command "num1"
-    	command "num2"
-    	command "num3"
-    	command "num4"
-    	command "num5"
-    	command "num6"
-    	command "num7"
-    	command "num8"
-    	command "num9"
-        command "btnextra1" 
-    	command "btnextra2"       
-    	command "btnextra3"    
-        command "appnetflix" 
-        command "appamazon"
-        command "appyoutube"  
-          
   }
       
+      
+
+
 }
 
   preferences {
     input name: "logEnable", type: "bool", title: "Enable debug logging", defaultValue: false
-	input name: "OnIRsend", title:"On-Sendir", type: "textarea"
-	input name: "OffIRsend", title:"Off-Sendir", type: "textarea"
-    input name: "muteIRsend", title:"Mute-Sendir(2)", type: "textarea"  
-	input name: "sourceIRsend", title:"Source-Sendir(3)", type: "textarea"	
-    input name: "backIRsend", title:"Back-Sendir(4)", type: "textarea"  
-    input name: "menuIRsend", title:"Menu-Sendir(5)", type: "textarea"	
-    input name: "hdmi1IRsend", title:"Hdmi1-Sendir(6)", type: "textarea"
-	input name: "hdmi2IRsend", title:"Hdmi2-Sendir(7)", type: "textarea"
-	input name: "upIRsend", title:"Up-Sendir(8)", type: "textarea"
-	input name: "downIRsend", title:"Down-Sendir(9)", type: "textarea"
-	input name: "rightIRsend", title:"Right-Sendir(10)", type: "textarea"
-	input name: "leftIRsend", title:"Left-Sendir(11)", type: "textarea"
-	input name: "confirmIRsend", title:"Confirm-Sendir(12)", type: "textarea"      
-    input name: "exitIRsend", title:"Exit-Sendir(13)", type: "textarea"  
-    input name: "homeIRsend", title:"Home-Sendir(14)", type: "textarea"  
-    input name: "ChanUpIRsend", title:"Channel Up-Sendir(18)", type: "textarea"
- 	input name: "ChanDownIRsend", title:"Channel Down-Sendir(19)", type: "textarea"
- 	input name: "VolUpIRsend", title:"Volume Up-Sendir(21)", type: "textarea"
- 	input name: "VolDownIRsend", title:"Volume Down-Sendir(22)", type: "textarea"
-	input name: "num0IRsend", title:"Num0-Sendir(23)", type: "textarea"
-    input name: "num1IRsend", title:"Num1-Sendir(24)", type: "textarea"
-	input name: "num2IRsend", title:"Num2-Sendir(25)", type: "textarea"
-	input name: "num3IRsend", title:"Num3-Sendir(26)", type: "textarea"
-	input name: "num4IRsend", title:"Num4-Sendir(27)", type: "textarea"
-	input name: "num5IRsend", title:"Num5-Sendir(28)", type: "textarea"
-	input name: "num6IRsend", title:"Num6-Sendir(29)", type: "textarea"
-	input name: "num7IRsend", title:"Num7-Sendir(30)", type: "textarea"
-	input name: "num8IRsend", title:"Num8-Sendir(31)", type: "textarea"
-	input name: "num9IRsend", title:"Num9-Sendir(32)", type: "string"
-    input name: "btnextra1IRsend", title:"Botonextra1-Sendir(33)", type: "textarea"  
-    input name: "btnextra2IRsend", title:"Botonextra2-Sendir(34)", type: "textarea"        
-    input name: "btnextra3IRsend", title:"Botonextra2-Sendir(35)", type: "textarea"     
-    input name: "netflixIRsend", title:"Netflix-Sendir(38)", type: "textarea"
-	input name: "amazonIRsend", title:"Amazon Prime-Sendir(39)", type: "textarea" 
-    input name: "youtubeIRsend", title:"Youtube-Sendir(40)", type: "textarea"             
-    input name: "repeatSendHEX", title:"Repeat for SendHex", type: "string", defaultValue: "1"   // REPEAT SEND PRONTO HEX
+        input name: "molIPAddress", type: "text", title: "MolSmart GW3 IP Address", submitOnChange: true, required: true, defaultValue: "192.168.1.100" 
+    	input name: "serialNum", title:"Numero de serie (Etiqueta GW3)", type: "string", required: true
+	    input name: "verifyCode", title:"Verify code (Etiqueta GW3)", type: "string", required: true
+	    input name: "channel", title:"Canal Infravermelho (1/2 ou 3)", type: "string", required: true        
+        input name: "repeatSendHEX", title:"Repeat for SendHex", type: "string", defaultValue: "1"   // REPEAT SEND PRONTO HEX
          
       
       
@@ -129,12 +169,8 @@ def initialized()
 
 def installed()
 {
-   
-
-    //sendEvent(name:"numberOfButtons", value:3)   
-    //sendEvent(name: "status", value: "stop")   
-    log.debug "installed()"
     
+    log.debug "installed()"
 }
 
 def updated()
@@ -142,21 +178,227 @@ def updated()
    
     sendEvent(name:"numberOfButtons", value:45)    
     log.debug "updated()"
-    
+
 }
+
+//Get Device info and set as state to use during driver.
+def AtualizaDadosGW3() {
+    state.currentip = settings.molIPAddress
+    state.serialNum = settings.serialNum
+    state.verifyCode = settings.verifyCode
+    state.channel = settings.channel
+    log.info "Dados do GW3 atualizados: " + state.currentip + " -- " + state.serialNum + " -- " +  state.verifyCode + " -- " + state.channel 
+
+}
+
+def CodigoHEXON(final String HEXcode){
+    info "CodigoHEXON(${HEXcode})"
+    state.OnIRsend  = HEXcode
+}
+
+def CodigoHEXOFF(final String HEXcode){
+    info "CodigoHEXOFF(${HEXcode})"
+    state.OFFIRsend  = HEXcode
+}
+
+def CodigoHEXmute(final String HEXcode){
+    info "CodigoHEXmute(${HEXcode})"
+    state.muteIRsend  = HEXcode
+}
+
+
+def CodigoHEXsource(final String HEXcode){
+    info "CodigoHEXsource(${HEXcode})"
+    state.sourceIRsend  = HEXcode
+}
+
+
+def CodigoHEXback(final String HEXcode){
+    info "CodigoHEXback(${HEXcode})"
+    state.backIRsend  = HEXcode
+}
+
+
+def CodigoHEXmenu(final String HEXcode){
+    info "CodigoHEXmenu(${HEXcode})"
+    state.menuIRsend  = HEXcode
+}
+
+
+def CodigoHEXhdmi1(final String HEXcode){
+    info "CodigoHEXhdmi1(${HEXcode})"
+    state.hdmi1IRsend  = HEXcode
+}
+
+
+def CodigoHEXhdmi2(final String HEXcode){
+    info "CodigoHEXhdmi2(${HEXcode})"
+    state.hdmi2IRsend  = HEXcode
+}
+
+
+def CodigoHEXup(final String HEXcode){
+    info "CodigoHEXup(${HEXcode})"
+    state.upIRsend  = HEXcode
+}
+
+
+def CodigoHEXdown(final String HEXcode){
+    info "CodigoHEXdown(${HEXcode})"
+    state.downIRsend  = HEXcode
+}
+
+
+def CodigoHEXright(final String HEXcode){
+    info "CodigoHEXright(${HEXcode})"
+    state.rightIRsend  = HEXcode
+}
+
+def CodigoHEXleft(final String HEXcode){
+    info "CodigoHEXleft(${HEXcode})"
+    state.leftIRsend  = HEXcode
+}
+
+def CodigoHEXconfirm(final String HEXcode){
+    info "CodigoHEXconfirm(${HEXcode})"
+    state.confirmIRsend  = HEXcode
+}
+
+
+def CodigoHEXexit(final String HEXcode){
+    info "CodigoHEXexit(${HEXcode})"
+    state.exitIRsend  = HEXcode
+}
+
+
+def CodigoHEXhome(final String HEXcode){
+    info "CodigoHEXhome(${HEXcode})"
+    state.homeIRsend  = HEXcode
+}
+
+
+def CodigoHEXchannelUp(final String HEXcode){
+    info "CodigoHEXchannelUp(${HEXcode})"
+    state.ChanUpIRsend  = HEXcode
+}
+
+
+def CodigoHEXchannelDown(final String HEXcode){
+    info "CodigoHEXchannelDown(${HEXcode})"
+    state.ChanDownIRsend  = HEXcode
+}
+
+
+def CodigoHEXvolumeUp(final String HEXcode){
+    info "CodigoHEXvolumeUp(${HEXcode})"
+    state.VolUpIRsend  = HEXcode
+}
+
+
+def CodigoHEXvolumeDown(final String HEXcode){
+    info "CodigoHEXvolumeDown(${HEXcode})"
+    state.VolDownIRsend  = HEXcode
+}
+
+
+def CodigoHEXnum0(final String HEXcode){
+    info "CodigoHEXnum0(${HEXcode})"
+    state.num0IRsend  = HEXcode
+}
+
+
+def CodigoHEXnum1(final String HEXcode){
+    info "CodigoHEXnum1(${HEXcode})"
+    state.num1IRsend  = HEXcode
+}
+
+
+def CodigoHEXnum2(final String HEXcode){
+    info "CodigoHEXnum2(${HEXcode})"
+    state.num2IRsend  = HEXcode
+}
+
+
+def CodigoHEXnum3(final String HEXcode){
+    info "CodigoHEXnum3(${HEXcode})"
+    state.num3IRsend  = HEXcode
+}
+
+def CodigoHEXnum4(final String HEXcode){
+    info "CodigoHEXnum4(${HEXcode})"
+    state.num4IRsend  = HEXcode
+}
+
+def CodigoHEXnum5(final String HEXcode){
+    info "CodigoHEXnum5(${HEXcode})"
+    state.num5IRsend  = HEXcode
+}
+
+def CodigoHEXnum6(final String HEXcode){
+    info "CodigoHEXnum6(${HEXcode})"
+    state.num6IRsend  = HEXcode
+}
+
+def CodigoHEXnum7(final String HEXcode){
+    info "CodigoHEXnum7(${HEXcode})"
+    state.num7IRsend  = HEXcode
+}
+
+def CodigoHEXnum8(final String HEXcode){
+    info "CodigoHEXnum8(${HEXcode})"
+    state.num8IRsend  = HEXcode
+}
+
+def CodigoHEXnum9(final String HEXcode){
+    info "CodigoHEXnum9(${HEXcode})"
+    state.num9IRsend  = HEXcode
+}
+
+def CodigoHEXbtnextra1(final String HEXcode){
+    info "CodigoHEXbtnextra1(${HEXcode})"
+    state.btnextra1IRsend  = HEXcode
+}
+
+def CodigoHEXbtnextra2(final String HEXcode){
+    info "CodigoHEXbtnextra2(${HEXcode})"
+    state.btnextra2IRsend  = HEXcode
+}
+
+def CodigoHEXbtnextra3(final String HEXcode){
+    info "CodigoHEXbtnextra3(${HEXcode})"
+    state.btnextra3IRsend  = HEXcode
+}
+
+def CodigoHEXappnetflix(final String HEXcode){
+    info "CodigoHEXappnetflix(${HEXcode})"
+    state.netflixIRsend  = HEXcode
+}
+
+def CodigoHEXappamazon(final String HEXcode){
+    info "CodigoHEXappamazon(${HEXcode})"
+    state.amazonIRsend  = HEXcode
+}
+
+def CodigoHEXappyoutube(final String HEXcode){
+    info "CodigoHEXappyoutube(${HEXcode})"
+    state.youtubeIRsend  = HEXcode
+}
+
+
+
 
 
 //Basico on e off para Switch 
 def on() {
      sendEvent(name: "switch", value: "on", isStateChange: true)
-     def ircode =  (settings.OnIRsend ?: "")
+     def ircode =  state.OnIRsend    
      EnviaComando(ircode)
 
 }
 
 def off() {
      sendEvent(name: "switch", value: "off", isStateChange: true)
-     def ircode =  (settings.OffIRsend ?: "")    
+     def ircode =  state.OFFIRsend    
      EnviaComando(ircode)
          
 }
@@ -213,7 +455,7 @@ def push(pushed) {
 //Botão #2 para dashboard
 def mute(){
 	sendEvent(name: "volume", value: "mute")
-    def ircode =  (settings.muteIRsend ?: "")
+    def ircode =  state.muteIRsend
     EnviaComando(ircode)    
 }
 
@@ -221,21 +463,21 @@ def mute(){
 //Botão #3 para dashboard
 def source(){
 	sendEvent(name: "action", value: "source")
-    def ircode =  (settings.sourceIRsend ?: "")
+    def ircode =  state.sourceIRsend
     EnviaComando(ircode)    
 }
 
 //Botão #4 para dashboard
 def back(){
 	sendEvent(name: "action", value: "back")
-    def ircode =  (settings.backIRsend ?: "")
+    def ircode = state.backIRsend
     EnviaComando(ircode)    
 }
 
 //Botão #5 para dashboard
 def menu(){
 	sendEvent(name: "action", value: "menu")
-    def ircode =  (settings.menuIRsend ?: "")
+    def ircode =  state.menuIRsend
     EnviaComando(ircode)    
 }
 
@@ -243,14 +485,14 @@ def menu(){
 //Botão #6 para dashboard
 def hdmi1(){
     sendEvent(name: "input", value: "hdmi1")
-    def ircode =  (settings.hdmi1IRsend ?: "")
+    def ircode =   state.hdmi1IRsend
     EnviaComando(ircode)
 }
 
 //Botão #7 para dashboard
 def hdmi2(){
     sendEvent(name: "input", value: "hdmi2")
-    def ircode =  (settings.hdmi2IRsend ?: "")
+    def ircode =  state.hdmi2IRsend
     EnviaComando(ircode)
 }
 
@@ -259,14 +501,14 @@ def hdmi2(){
 //Botão #8 para dashboard
 def left(){
     sendEvent(name: "action", value: "left")
-    def ircode =  (settings.btnextra1IRsend ?: "")
+    def ircode =   state.leftIRsend
     EnviaComando(ircode)
 }
 
 //Botão #9 para dashboard
 def right(){
     sendEvent(name: "action", value: "right")
-     def ircode =  (settings.btnextra1IRsend ?: "")
+     def ircode =  state.rightIRsend
     EnviaComando(ircode)
 }
 
@@ -275,21 +517,21 @@ def right(){
 //Botão #10 para dashboard
 def up(){
     sendEvent(name: "action", value: "up")
-    def ircode =  (settings.upIRsend ?: "")
+    def ircode =  state.upIRsend
     EnviaComando(ircode)
 }
 
 //Botão #11 para dashboard
 def down(){
     sendEvent(name: "action", value: "down")
-    def ircode =  (settings.hdmi1 ?: "")
+    def ircode =  state.downIRsend
     EnviaComando(ircode)
 }
 
 //Botão #12 para dashboard
 def confirm(){
     sendEvent(name: "action", value: "confirm")
-    def ircode =  (settings.confirmIRsend ?: "")
+    def ircode =  state.confirmIRsend
     EnviaComando(ircode)
 }
 
@@ -297,7 +539,7 @@ def confirm(){
 //Botão #13 para dashboard
 def exit(){
 	sendEvent(name: "action", value: "exit")
-    def ircode =  (settings.exitIRsend ?: "")
+    def ircode =  state.exitIRsend
     EnviaComando(ircode)    
 }
 
@@ -307,7 +549,7 @@ def exit(){
 //Botão #14 para dashboard
 def home(){
     sendEvent(name: "action", value: "home")
-    def ircode =  (settings.homeIRsend ?: "")
+    def ircode =  state.homeIRsend
     EnviaComando(ircode)
 }
 
@@ -316,28 +558,28 @@ def home(){
 //Botão #18 para dashboard
 def channelUp(){
 	sendEvent(name: "channel", value: "chup")
-   def ircode =  (settings.ChanUpIRsend ?: "")
+   def ircode =   state.ChanUpIRsend
     EnviaComando(ircode)    
 }
 
 //Botão #19 para dashboard
 def channelDown(){
 	sendEvent(name: "channel", value: "chdown")
-    def ircode =  (settings.ChanDownIRsend ?: "")
+    def ircode =  state.ChanDownIRsend
     EnviaComando(ircode)    
 }
 
 //Botão #21 para dashboard
 def volumeUp(){
 	sendEvent(name: "volume", value: "volup")
-    def ircode =  (settings.VolUpIRsend ?: "")
+    def ircode = state.VolUpIRsend
     EnviaComando(ircode)    
 }
 
 //Botão #22 para dashboard
 def volumeDown(){
 	sendEvent(name: "volume", value: "voldown")
-    def ircode =  (settings.VolDownIRsend ?: "")
+    def ircode = state.VolDownIRsend
     EnviaComando(ircode)    
 }
 
@@ -345,21 +587,21 @@ def volumeDown(){
 //Botão #23 para dashboard
 def num0(){
     sendEvent(name: "action", value: "num0")
-    def ircode =  (settings.num0IRsend ?: "")
+    def ircode =  state.num0IRsend
     EnviaComando(ircode)
 }
 
 //Botão #24 para dashboard
 def num1(){
     sendEvent(name: "action", value: "num1")
-   def ircode =  (settings.num1IRsend ?: "")
+   def ircode =  state.num1IRsend
     EnviaComando(ircode)
 }
 
 //Botão #25 para dashboard
 def num2(){
     sendEvent(name: "action", value: "num2")
-    def ircode =  (settings.num2IRsend ?: "")
+    def ircode =  state.num2IRsend
     EnviaComando(ircode)
 }
 
@@ -367,28 +609,28 @@ def num2(){
 //Botão #26 para dashboard
 def num3(){
     sendEvent(name: "action", value: "num3")
-    def ircode =  (settings.num3IRsend ?: "")
+    def ircode =  state.num3IRsend
     EnviaComando(ircode)
 }
 
 //Botão #27 para dashboard
 def num4(){
     sendEvent(name: "action", value: "num4")
-    def ircode =  (settings.num4IRsend ?: "")
+    def ircode =  state.num4IRsend
     EnviaComando(ircode)
 }
 
 //Botão #28 para dashboard
 def num5(){
     sendEvent(name: "action", value: "num5")
-    def ircode =  (settings.num5IRsend ?: "")
+    def ircode =   state.num5IRsend
     EnviaComando(ircode)
 }
 
 //Botão #29 para dashboard
 def num6(){
     sendEvent(name: "action", value: "num6")
-    def ircode =  (settings.num6IRsend ?: "")
+    def ircode =  state.num6IRsend
     EnviaComando(ircode)
 }
 
@@ -396,56 +638,56 @@ def num6(){
 //Botão #30 para dashboard
 def num7(){
     sendEvent(name: "action", value: "num7")
-    def ircode =  (settings.num7IRsend ?: "")
+    def ircode =  state.num7IRsend
     EnviaComando(ircode)
 }
 
 //Botão #31 para dashboard
 def num8(){
     sendEvent(name: "action", value: "num8")
-    def ircode =  (settings.num8IRsend ?: "")
+    def ircode =  state.num8IRsend
     EnviaComando(ircode)
 }
 
 //Botão #32 para dashboard
 def num9(){
     sendEvent(name: "action", value: "num9")
-    def ircode =  (settings.num9IRsend ?: "")
+    def ircode = state.num9IRsend
     EnviaComando(ircode)
 }
 
 //Botão #33 para dashboard
 def btnextra1(){
     sendEvent(name: "action", value: "confirm")
-    def ircode =  (settings.btnextra1IRsend ?: "")
+    def ircode =  state.btnextra1IRsend
     EnviaComando(ircode)
 }
 
 //Botão #34 para dashboard
 def btnextra2(){
     sendEvent(name: "action", value: "btnextra2")
-    def ircode =  (settings.btnextra2IRsend ?: "")
+    def ircode =  state.btnextra2IRsend
     EnviaComando(ircode)
 }
 
 //Botão #35 para dashboard
 def btnextra3(){
     sendEvent(name: "action", value: "btnextra3")
-    def ircode =  (settings.btnextra3IRsend ?: "")
+    def ircode =  state.btnextra3IRsend
     EnviaComando(ircode)
 }
 
 //Botão #38 para dashboard
 def appAmazonPrime(){
     sendEvent(name: "input", value: "amazon")
-    def ircode =  (settings.amazonIRsend ?: "")
+    def ircode =   state.amazonIRsend
     EnviaComando(ircode)
 }
 
 //Botão #39 para dashboard
 def appyoutube(){
     sendEvent(name: "input", value: "youtube")
-   def ircode =  (settings.youtubeIRsend ?: "")
+   def ircode =  state.youtubeIRsend
     EnviaComando(ircode)
 }
 
@@ -453,18 +695,11 @@ def appyoutube(){
 //Botão #40 para dashboard
 def appnetflix(){
     sendEvent(name: "input", value: "netflix")
-    def ircode =  (settings.netflixIRsend ?: "")
+    def ircode =  state.netflixIRsend
     EnviaComando(ircode)
 }
   
 
-def AtualizaDadosGW3(ipADD,TempserialNum,TempverifyCode,Tempchannel) {
-    state.currentip = ipADD
-    state.serialNum = TempserialNum
-    state.verifyCode = TempverifyCode
-    state.channel = Tempchannel
-    log.info "Dados do GW3 atualizados: " + state.currentip + " -- " + state.serialNum + " -- " +  state.verifyCode + " -- " + state.channel 
-}
 
 
 def EnviaComando(command) {
@@ -510,5 +745,18 @@ def httpPOSTExec(URI)
     
 }
 
+def info(msg) {
+    if (logLevel == "INFO" || logLevel == "DEBUG") {
+        log.info(msg)
+    }
+}
+
+
+//DEBUG
+private logDebug(msg) {
+  if (settings?.debugOutput || settings?.debugOutput == null) {
+    log.debug "$msg"
+  }
+}
 
 
