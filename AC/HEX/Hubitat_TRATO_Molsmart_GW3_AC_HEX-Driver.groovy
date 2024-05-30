@@ -20,7 +20,7 @@
 
 
 metadata {
-  definition (name: "MolSmart - GW3 HEX- AC Driver DEV", namespace: "TRATO", author: "VH", vid: "generic-contact") {
+  definition (name: "MolSmart - GW3 - IR(HEX)- AC", namespace: "TRATO", author: "VH", vid: "generic-contact") {
     capability "Switch"
 	capability "Thermostat"
 	capability "Thermostat Cooling Setpoint"
