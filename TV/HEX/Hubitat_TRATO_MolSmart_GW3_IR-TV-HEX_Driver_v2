@@ -745,5 +745,18 @@ def httpPOSTExec(URI)
     
 }
 
+def info(msg) {
+    if (logLevel == "INFO" || logLevel == "DEBUG") {
+        log.info(msg)
+    }
+}
+
+
+//DEBUG
+private logDebug(msg) {
+  if (settings?.debugOutput || settings?.debugOutput == null) {
+    log.debug "$msg"
+  }
+}
 
 
