@@ -1,28 +1,17 @@
 {
  "packageName":"MolSmart GW3-IR(HEX) - AC",
  "author":"TRATO",
- "version":"1.0",
+ "version":"2.0",
  "minimumHEVersion":"2.3.7.100",
  "dateReleased":"2024-05-20",
- "releaseNotes":"first version pushed to HPM",
+ "releaseNotes":"Version fix with only Driver, no APP",
  "documentationLink":"https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main/AC",
- "apps": [
-  {
-     "id":"d39f4fc3-6128-4f71-ae23-8727ce9a12d5",
-     "name":"MolSmart - GW3-IR(HEX) - AC",
-     "namespace":"TRATO",
-     "location":"https://raw.githubusercontent.com/hhorigian/hubitat_MolSmart_GW3_IR/main/AC/HEX/Hubitat_TRATO_MolSmart_GW3_IR-AC-HEX_App.groovy",
-     "required":true,
-     "oauth":false,
-     "primary":true
-  }
-  ],
  "drivers": [
   {
      "id":"2237df52-5f74-4887-9818-0f30574193b8",
      "name":"MolSmart - GW3 - IR(HEX)- AC",
      "namespace":"TRATO",
-     "location":"https://raw.githubusercontent.com/hhorigian/hubitat_MolSmart_GW3_IR/main/AC/HEX/Hubitat_TRATO_MolSmart_GW3_IR-AC-HEX_Driver.groovy",
+     "location":"https://raw.githubusercontent.com/hhorigian/hubitat_MolSmart_GW3_IR/main/AC/HEX/Hubitat_TRATO_Molsmart_GW3_AC_HEX-Driver.groovy",
      "required":true
   }
   ]
