@@ -1,17 +1,18 @@
 {
-   "packageName":"MolSmart GW3-IR(SendIR) - TV e SOM",
-   "author":"TRATO",
-   "version":"2.0",
-   "minimumHEVersion":"2.3.7.100",
-   "dateReleased":"2024-05-30",
-   "releaseNotes":"First Version ",
-   "drivers": [
-    {
-       "id":"70652239-84b9-4439-a2f2-68cc6179cbb0",
-       "name":"MolSmart - GW3 - IR(SendIR)- TV e SOM",
-       "namespace":"TRATO",
-       "location":"https://raw.githubusercontent.com/hhorigian/hubitat_MolSmart_GW3_IR/main/TV/SendIR/Hubitat_TRATO_MolSmart_GW3_IR-TV-SendIR_Driver_v2.groovy",
-       "required":true
-    }
-    ]
+ "packageName":"MolSmart GW3-IR(SendIR) - TV e SOM",
+ "author":"TRATO",
+ "version":"2.0",
+ "minimumHEVersion":"2.3.7.100",
+ "dateReleased":"2024-06-04",
+ "releaseNotes":"Second Version",
+ "documentationLink":"https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main/TV/SendIR",
+ "drivers": [
+  {
+     "id":"1e9c5ef7-700e-460b-844c-f713123279c7",
+     "name":"MolSmart - GW3 - IR(SendIR)- TV e SOM",
+     "namespace":"TRATO",
+     "location":"https://raw.githubusercontent.com/hhorigian/hubitat_MolSmart_GW3_IR/main/TV/SendIR/Hubitat_TRATO_MolSmart_GW3_IR-TV-SendIR_Driver_v2.groovy",
+     "required":true
   }
+  ]
+}
