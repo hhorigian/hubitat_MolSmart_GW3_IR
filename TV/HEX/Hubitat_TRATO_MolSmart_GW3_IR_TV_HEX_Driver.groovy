@@ -15,7 +15,7 @@
  *
  *            --- Driver para GW3 - IR - para TV --- Usando HEX PRONTO
  *              V.2.0   - Versão com Driver sem precissar do APP + Códigos salvos no driver page.
- *              V.2.1   - Fix URL 
+ *              V.2.1   - 10/6/2024 - Fix URL
  *
  */
 metadata {
