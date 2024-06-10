@@ -15,6 +15,7 @@
  *
  *            --- Driver para GW3 - IR - para Ar Condicionado ---
  *                  V.2.0  - 30/05/2024 - Versão com Driver sem precissar do APP
+ *                  V.2.1  - 10/6/2024 - Fix URL
  * 
 */
 
@@ -588,7 +589,7 @@ def setThermostatFanMode(modo){
 //CONSTRUCT URI
 def EnviaComando(command) {
     
-    def URI = "http://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&pronto=" + command + "&cId=" + state.channel + "&r=" + settings.repeatSendHEX        
+    def URI = "http://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&pronto=" + command + "&c=" + state.channel + "&r=" + settings.repeatSendHEX        
     httpPOSTExec(URI)
     log.info "Sent HTTP: " +  URI + " // com commando = " + command
     
