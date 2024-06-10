@@ -16,8 +16,8 @@
  *            --- Driver para GW3 - IR Universal do iDoor ---
  *            V.1. 2/4/2024 
  *	      V.1.1 6/4/2024 - corregimos bom joão o erro no código. 
- *            V.2.0 30/5/2024 - Versão Driver sem APP. 
- *            V.2.1 10/6/2024 - Fix Update State variables  
+ *        V.2.0 30/5/2024 - Versão Driver sem APP. 
+ *        V.2.1 10/6/2024 - Fix Update State variables  
  *
  */
 metadata {
@@ -48,6 +48,17 @@ metadata {
     
     
   }
+
+    import groovy.transform.Field
+    @Field static final String DRIVER = "by TRATO"
+    @Field static final String USER_GUIDE = "https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/blob/main/README.md"
+
+
+    String fmtHelpInfo(String str) {
+    String prefLink = "<a href='${USER_GUIDE}' target='_blank'>${str}<br><div style='font-size: 70%;'>${DRIVER}</div></a>"
+    return "<div style='font-size: 160%; font-style: bold; padding: 2px 0px; text-align: center;'>${prefLink}</div>"
+    }
+
 
   preferences {
       input name: "molIPAddress", type: "text", title: "MolSmart GW3 IP Address", submitOnChange: true, required: true, defaultValue: "192.168.1.100" 
