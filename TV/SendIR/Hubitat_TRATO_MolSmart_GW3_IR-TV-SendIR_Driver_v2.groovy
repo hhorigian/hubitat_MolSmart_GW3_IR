@@ -15,6 +15,7 @@
  *
  *            --- Driver para GW3 - IR - para TV --- Usando SendIR PRONTO
  *              V.2.0   - Versão com Driver sem precissar do APP + Códigos salvos no driver page.
+ *              V.2.1   - Fix URL
  *
  */
 metadata {
@@ -704,7 +705,7 @@ def appnetflix(){
 
 def EnviaComando(command) {
     
-    def URI = "http://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&cId=" + state.channel + "&gc=" + command       
+    def URI = "http://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&c=" + state.channel + "&gc=" + command       
     httpPOSTExec(URI)
     log.info "Enviado...HTTP" +  URI + " commando = "   
     
