@@ -16,7 +16,8 @@
  *            --- Driver para GW3 - IR Universal do iDoor ---
  *            V.1. 2/4/2024 
  *	      V.1.1 6/4/2024 - corregimos bom joão o erro no código. 
- *        V.2.0 30/5/2024 - Versão Driver sem APP. 
+ *            V.2.0 30/5/2024 - Versão Driver sem APP. 
+ *            V.2.1 10/6/2024 - Fix Update State variables  
  *
  */
 metadata {
@@ -84,8 +85,7 @@ def installed()
    
 
     sendEvent(name:"numberOfButtons", value:10)     
-    log.debug "installed()"
-    
+    log.debug "installed()" 
 }
 
 def updated()
@@ -93,6 +93,7 @@ def updated()
    
     sendEvent(name:"numberOfButtons", value:10)    
     log.debug "updated()"
+    AtualizaDadosGW3()    
     
 }
 
