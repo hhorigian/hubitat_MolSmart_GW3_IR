@@ -45,6 +45,17 @@ metadata {
     
   }
 
+    import groovy.transform.Field
+    @Field static final String DRIVER = "by TRATO"
+    @Field static final String USER_GUIDE = "https://github.com/hhorigian/hubitat_SoundSmart/blob/main/Player/README.md"
+
+
+    String fmtHelpInfo(String str) {
+    String prefLink = "<a href='${USER_GUIDE}' target='_blank'>${str}<br><div style='font-size: 70%;'>${DRIVER}</div></a>"
+    return "<div style='font-size: 160%; font-style: bold; padding: 2px 0px; text-align: center;'>${prefLink}</div>"
+    }
+
+
   preferences {
 
         input name: "molIPAddress", type: "text", title: "MolSmart GW3 IP Address", submitOnChange: true, required: true, defaultValue: "192.168.1.100" 
@@ -53,7 +64,10 @@ metadata {
     	input name: "cId", title:"Control ID (pego no idoor)", type: "string", required: true  
         input name: "logEnable", type: "bool", title: "Enable debug logging", defaultValue: false
         input name: "debugOutput", type: "bool", title: "Habilitar Log", defaultValue: false           
+        //help guide
+        input name: "UserGuide", type: "hidden", title: fmtHelpInfo("Manual do Driver") 
 
+	  
     input name: "OnIRsend", title:"On-Sendir", type: "string"
 	input name: "OffIRsend", title:"Off-Sendir", type: "string"
     input name: "autoIRsend", title:"Auto-Sendir(2)", type: "string"  
