@@ -16,6 +16,7 @@
  *            --- Driver para GW3 - IR - para TV --- Usando HEX PRONTO
  *              V.2.0   - Versão com Driver sem precissar do APP + Códigos salvos no driver page.
  *              V.2.1   - 10/6/2024 - Fix URL
+  *              V.2.2   - 13/6/2024 - Added User guide
  *
  */
 metadata {
@@ -150,7 +151,7 @@ metadata {
 
     import groovy.transform.Field
     @Field static final String DRIVER = "by TRATO"
-    @Field static final String USER_GUIDE = "https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/blob/main/README.md"
+    @Field static final String USER_GUIDE = "https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main/TV"
 
 
     String fmtHelpInfo(String str) {
@@ -166,6 +167,9 @@ metadata {
 	    input name: "verifyCode", title:"Verify code (Etiqueta GW3)", type: "string", required: true
 	    input name: "channel", title:"Canal Infravermelho (1/2 ou 3)", type: "string", required: true        
         input name: "repeatSendHEX", title:"Repeat for SendHex", type: "string", defaultValue: "1"   // REPEAT SEND PRONTO HEX
+        //help guide
+        input name: "UserGuide", type: "hidden", title: fmtHelpInfo("Manual do Driver") 	  
+	  
          
       
       
