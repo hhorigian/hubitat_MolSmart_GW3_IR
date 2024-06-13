@@ -16,6 +16,7 @@
  *            --- Driver para GW3 - IR - SendIR para Ar Condicionado ---
   *                  V.2.0  - 30/05/2024 - Versão com Driver sem precissar do APP
  *                   V.2.1  - 10/6/2024 - Fix URL
+ *                   V.2.1  - 13/6/2024 - User guide link
  * 
 */
 
@@ -106,7 +107,7 @@ metadata {
 
     import groovy.transform.Field
     @Field static final String DRIVER = "by TRATO"
-    @Field static final String USER_GUIDE = "https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/blob/main/README.md"
+    @Field static final String USER_GUIDE = "https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main/AC/SendIR"
 
 
     String fmtHelpInfo(String str) {
@@ -123,7 +124,8 @@ metadata {
 	input name: "setCoolingSetpointIRsend", title:"setCooling-HEX(7)", type: "string"
 	input name: "setHeatingSetpointIRsend", title:"setHeating-HEX(8)", type: "string"      
     input name: "logEnable", type: "bool", title: "Enable debug logging", defaultValue: false
-
+        //help guide
+        input name: "UserGuide", type: "hidden", title: fmtHelpInfo("Manual do Driver") 
       
   }   
 
