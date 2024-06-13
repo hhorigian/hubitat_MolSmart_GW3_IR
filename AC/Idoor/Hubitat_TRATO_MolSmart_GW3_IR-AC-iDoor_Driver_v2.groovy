@@ -14,7 +14,8 @@
  *
  *
  *            --- Driver para GW3 - AC - idoor
- *            V.2 1 30/05/2024 - Removed the APP file. Only Driver File. 
+ *            V.2.1 30/05/2024 - Removed the APP file. Only Driver File. 
+ *            V.2.2 13/06/2024 - Added User Guide link 
  *
  */
 
@@ -47,7 +48,7 @@ metadata {
 
     import groovy.transform.Field
     @Field static final String DRIVER = "by TRATO"
-    @Field static final String USER_GUIDE = "https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/blob/main/README.md"
+    @Field static final String USER_GUIDE = "https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main/AC/Idoor"
 
 
     String fmtHelpInfo(String str) {
@@ -64,7 +65,9 @@ metadata {
     	input name: "cId", title:"Control ID (pego no idoor)", type: "string", required: true  
     	input name: "setCoolingSetpointIRsend", title:"setCooling-HEX(7)", type: "string"
 	    input name: "setHeatingSetpointIRsend", title:"setHeating-HEX(8)", type: "string"      
-        input name: "logEnable", type: "bool", title: "Enable debug logging", defaultValue: false      
+        input name: "logEnable", type: "bool", title: "Enable debug logging", defaultValue: false 
+        //help guide
+        input name: "UserGuide", type: "hidden", title: fmtHelpInfo("Manual do Driver") 	  
   }   
   
 def initialized()
