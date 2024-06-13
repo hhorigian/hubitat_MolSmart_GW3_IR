@@ -48,7 +48,7 @@ metadata {
 
     import groovy.transform.Field
     @Field static final String DRIVER = "by TRATO"
-    @Field static final String USER_GUIDE = "https://github.com/hhorigian/hubitat_SoundSmart/blob/main/Player/README.md"
+    @Field static final String USER_GUIDE = "https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main/AC/Learning"
 
 
     String fmtHelpInfo(String str) {
