@@ -16,6 +16,8 @@
  *            --- Driver para GW3 - IR - para TV --- Usando SendIR PRONTO
  *              V.2.0   - Versão com Driver sem precissar do APP + Códigos salvos no driver page.
  *              V.2.1   - 10/6/2024 - Fix URL
+ *              V.2.2   - 13/6/2024 - User Guide
+
  *
  */
 metadata {
@@ -149,7 +151,7 @@ metadata {
 }
     import groovy.transform.Field
     @Field static final String DRIVER = "by TRATO"
-    @Field static final String USER_GUIDE = "https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/blob/main/README.md"
+    @Field static final String USER_GUIDE = "https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main/TV"
 
 
     String fmtHelpInfo(String str) {
@@ -164,6 +166,8 @@ metadata {
     	input name: "serialNum", title:"Numero de serie (Etiqueta GW3)", type: "string", required: true
 	    input name: "verifyCode", title:"Verify code (Etiqueta GW3)", type: "string", required: true
 	    input name: "channel", title:"Canal Infravermelho (1/2 ou 3)", type: "string", required: true        
+        //help guide
+        input name: "UserGuide", type: "hidden", title: fmtHelpInfo("Manual do Driver") 
          
       
       
