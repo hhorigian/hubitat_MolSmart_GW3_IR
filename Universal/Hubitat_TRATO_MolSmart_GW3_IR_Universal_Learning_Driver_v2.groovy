@@ -18,6 +18,7 @@
  *	      V.1.1 6/4/2024 - corregimos bom joão o erro no código. 
  *        V.2.0 30/5/2024 - Versão Driver sem APP. 
  *        V.2.1 10/6/2024 - Fix Update State variables  
+ *        V.2.2 13/6/2024 - Fix Update State variables  
  *
  */
 metadata {
@@ -51,7 +52,7 @@ metadata {
 
     import groovy.transform.Field
     @Field static final String DRIVER = "by TRATO"
-    @Field static final String USER_GUIDE = "https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/blob/main/README.md"
+    @Field static final String USER_GUIDE = "https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main/Universal"
 
 
     String fmtHelpInfo(String str) {
@@ -68,6 +69,8 @@ metadata {
         input name: "logEnable", type: "bool", title: "Enable debug logging", defaultValue: false
         input name: "debugOutput", type: "bool", title: "Habilitar Log", defaultValue: false           
 
+	  //help guide
+        input name: "UserGuide", type: "hidden", title: fmtHelpInfo("Manual do Driver") 
 
 	input name: "BotaoOn", title:"ComandoOn-Botão(1)", type: "string" , defaultValue: "1"
 	input name: "BotaoOff", title:"BotaoOff-Botão(2)", type: "string" , defaultValue: "2"
