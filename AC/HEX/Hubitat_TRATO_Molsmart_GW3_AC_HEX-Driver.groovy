@@ -16,6 +16,7 @@
  *            --- Driver para GW3 - IR - para Ar Condicionado ---
  *                  V.2.0  - 30/05/2024 - Versão com Driver sem precissar do APP
  *                  V.2.1  - 10/6/2024 - Fix URL
+ *		    V.2.2  - 13/6/2024 - Added User Guide Link
  * 
 */
 
