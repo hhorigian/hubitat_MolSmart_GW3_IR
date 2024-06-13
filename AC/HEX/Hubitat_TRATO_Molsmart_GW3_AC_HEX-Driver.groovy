@@ -106,7 +106,7 @@ metadata {
 
     import groovy.transform.Field
     @Field static final String DRIVER = "by TRATO"
-    @Field static final String USER_GUIDE = "https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/blob/main/README.md"
+    @Field static final String USER_GUIDE = "https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main/AC/HEX"
 
 
     String fmtHelpInfo(String str) {
@@ -116,14 +116,15 @@ metadata {
 
 
   preferences {
-    input name: "molIPAddress", type: "text", title: "MolSmart GW3 IP Address",  required: true, defaultValue: "192.168.1.100" 
-    input name: "serialNum", title:"Numero de serie (Etiqueta GW3)", type: "string", defaultValue: "111111" 
+	input name: "molIPAddress", type: "text", title: "MolSmart GW3 IP Address",  required: true, defaultValue: "192.168.1.100" 
+	input name: "serialNum", title:"Numero de serie (Etiqueta GW3)", type: "string", defaultValue: "111111" 
 	input name: "verifyCode", title:"Verify code (Etiqueta GW3)", type: "string", defaultValue: "111111" 
 	input name: "channel", title:"Canal Infravermelho (1/2 ou 3)", type: "string", defaultValue: "1"                 	
-    input name: "repeatSendHEX", title:"Repeat for SendHex", type: "string", defaultValue: "1"        
+	input name: "repeatSendHEX", title:"Repeat for SendHex", type: "string", defaultValue: "1"        
 	input name: "setCoolingSetpointIRsend", title:"setCooling-HEX(7)", type: "string"
 	input name: "setHeatingSetpointIRsend", title:"setHeating-HEX(8)", type: "string"      
-    input name: "logEnable", type: "bool", title: "Enable debug logging", defaultValue: false
+	input name: "logEnable", type: "bool", title: "Enable debug logging", defaultValue: false
+	input name: "UserGuide", type: "hidden", title: fmtHelpInfo("Manual do Driver") 	  
 
       
   }   
