@@ -1,10 +1,10 @@
 {
    "packageName":"MolSmart GW3-IR(HEX) - TV e SOM",
    "author":"TRATO",
-   "version":"2.1",
+   "version":"2.2",
    "minimumHEVersion":"2.3.7.100",
    "dateReleased":"2024-05-30",
-   "releaseNotes":"First Version ",
+   "releaseNotes":"Added User Guide ",
    "documentationLink":"https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main",
    "drivers": [
     {
