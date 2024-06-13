@@ -14,7 +14,8 @@
  *
  *
  *            --- Driver para GW3 - IR Universal do iDoor ---
- *            V.2. 30/5/2024 - versão com driver e app todo em um só. 
+ *            V.2.1 30/5/2024 - versão com driver e app todo em um só. 
+ *            V.2.2 13/6/2024 - User Guide Link  
  *
  */
 metadata {
