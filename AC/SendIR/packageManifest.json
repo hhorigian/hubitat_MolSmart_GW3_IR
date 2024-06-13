@@ -1,10 +1,10 @@
 {
  "packageName":"MolSmart GW3-IR(SendIR) - AC",
  "author":"TRATO",
- "version":"2.1",
+ "version":"2.2",
  "minimumHEVersion":"2.3.7.100",
  "dateReleased":"2024-05-30",
- "releaseNotes":"Version without APP file",
+ "releaseNotes":"User Guide Link",
  "documentationLink":"https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main/AC",
  "drivers": [
   {
