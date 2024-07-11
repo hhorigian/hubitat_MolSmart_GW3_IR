@@ -1,0 +1,18 @@
+{
+ "packageName":"MolSmart GW3-IR(iDoor) - TV e SOM",
+ "author":"TRATO",
+ "version":"1.0",
+ "minimumHEVersion":"2.3.7.100",
+ "dateReleased":"2024-07-11",
+ "releaseNotes":"First Version",
+ "documentationLink":"https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main",
+ "drivers": [
+  {
+     "id":"1e9c5ef7-700e-460b-844c-f713123279c8",
+     "name":"MolSmart - GW3 - IR(iDoor)- TV e SOM",
+     "namespace":"TRATO",
+     "location":"https://raw.githubusercontent.com/hhorigian/hubitat_MolSmart_GW3_IR/main/TV/iDoor/Hubitat_TRATO_MolSmart_GW3_IR-TV-iDoor_Driver.groovy",
+     "required":true
+  }
+  ]
+}
