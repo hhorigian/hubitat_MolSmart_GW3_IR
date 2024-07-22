@@ -15,6 +15,7 @@
  *
  *            --- Driver para GW3 - TV e SOM - idoor
  *            V.1.0 11/07/2024 - First Version. Beta. 
+ *	      V.1.1 22/07/2024 - Added comments for buttons. 	
  *
  */
 
@@ -26,7 +27,7 @@ metadata {
     capability "Switch"  
     capability "Actuator"
     capability "PushableButton"
-	capability "Variable"      
+    capability "Variable"      
       
 	attribute "channel", "number"
 	attribute "volume", "number"
@@ -54,10 +55,10 @@ metadata {
 
   preferences {
         input name: "molIPAddress", type: "text", title: "MolSmart GW3 IP Address", submitOnChange: true, required: true, defaultValue: "192.168.1.100" 
-    	input name: "serialNum", title:"Numero de serie (Etiqueta GW3)", type: "string", required: true
-	    input name: "verifyCode", title:"Verify code (Etiqueta GW3)", type: "string", required: true
-	    input name: "channel", title:"Canal Infravermelho (1/2 ou 3)", type: "string", required: true
-    	input name: "cId", title:"Control ID (pego no idoor)", type: "string", required: true     
+    	input name: "serialNum", title:"Numero de serie (Etiqueta GW3)", type: "string", required: true  //Example: P130-C101-A0259
+	input name: "verifyCode", title:"Verify code (Etiqueta GW3)", type: "string", required: true //Example: 46866117
+        input name: "channel", title:"Canal Infravermelho (1/2 ou 3)", type: "string", required: true, defaultValue: "1"   
+    	input name: "cId", title:"Control ID (pego no idoor)", type: "string", required: true     //Example: 1800267462429118464
         input name: "logEnable", type: "bool", title: "Enable debug logging", defaultValue: false 
         //help guide
         input name: "UserGuide", type: "hidden", title: fmtHelpInfo("Manual do Driver") 	  
@@ -112,7 +113,7 @@ def off() {
          
 }
 
-//Case para los botones de push en el dashboard. 
+//Case for the buttons to be used in the Dashboard 
 def push(pushed) {
 	logDebug("push: button = ${pushed}")
 	if (pushed == null) {
@@ -122,13 +123,13 @@ def push(pushed) {
 	pushed = pushed.toInteger()
 	switch(pushed) {
         case 1 : power(); break
-		case 2 : mute(); break
-		case 3 : source(); break
-		case 4 : back(); break
+	case 2 : mute(); break
+	case 3 : source(); break
+	case 4 : back(); break
         case 5 : menu(); break
         case 6 : hdmi1(); break
         case 7 : hdmi2(); break                
-		case 8 : left(); break
+	case 8 : left(); break
 		case 9 : right(); break
 		case 10: up(); break
 		case 11: down(); break
@@ -144,17 +145,17 @@ def push(pushed) {
 		case 25: num2(); break
 		case 26: num3(); break
     	case 27: num4(); break        
-		case 28: num5(); break
+	case 28: num5(); break
     	case 29: num6(); break
-	    case 30: num7(); break
+	case 30: num7(); break
     	case 31: num8(); break            
-	    case 32: num9(); break       
-	    case 33: btnextra1(); break                
-		case 34: btnextra2(); break
-		case 35: btnextra3(); break
-		case 38: appAmazonPrime(); break
-		case 39: appYouTube(); break
-		case 40: appNetflix(); break  
+	case 32: num9(); break       
+	case 33: btnextra1(); break                
+	case 34: btnextra2(); break
+	case 35: btnextra3(); break
+	case 38: appAmazonPrime(); break
+	case 39: appYouTube(); break
+	case 40: appNetflix(); break  
 		default:
 			logDebug("push: Botão inválido.")
 			break
@@ -162,7 +163,7 @@ def push(pushed) {
 }
 
 		
-//Botão #2 para dashboard
+//Botão #1 para dashboard
 def power(){
 	sendEvent(name: "power", value: "toggle")
     def ircode =  "1"
@@ -355,6 +356,27 @@ def num8(){
 def num9(){
     sendEvent(name: "action", value: "num9")
     def ircode = "24"
+    EnviaComando(ircode)
+}
+
+//Botão #38 para dashboard
+def appAmazonPrime(){
+    sendEvent(name: "action", value: "appAmazonPrime")
+    def ircode = "38"
+    EnviaComando(ircode)
+}
+
+//Botão #39 para dashboard
+def appYouTube(){
+    sendEvent(name: "action", value: "appYouTube")
+    def ircode = "39"
+    EnviaComando(ircode)
+}
+
+//Botão #40 para dashboard
+def appNetflix(){
+    sendEvent(name: "action", value: "appNetflix")
+    def ircode = "40"
     EnviaComando(ircode)
 }
 	
