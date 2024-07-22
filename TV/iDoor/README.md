@@ -1,5 +1,10 @@
 Para usar no controle remoto do IR do GW3 para iDoor para TV e Som no dashboard, adicionar botões.  
 Aqui a referencia dos Botões para adicionar no Dashboard   
+
+To use the GW3 IR remote control for iDoor for TV and Sound on the dashboard, add buttons.
+Here is the reference for Buttons to add to the Dashboard
+
+
  
 Botão# 1 = power  
 Botão# 2 = mute  
