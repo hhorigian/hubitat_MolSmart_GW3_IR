@@ -16,6 +16,7 @@
  *            --- Driver para GW3 - TV e SOM - idoor
  *            V.1.0 11/07/2024 - First Version. Beta. 
  *	      V.1.1 22/07/2024 - Added comments for buttons. 	
+ *	      V.1.1 23/07/2024 - Added extra buttons codes (6 buttons). 	
  *
  */
 
@@ -153,9 +154,9 @@ def push(pushed) {
 	case 33: btnextra1(); break                
 	case 34: btnextra2(); break
 	case 35: btnextra3(); break
-	case 38: appAmazonPrime(); break
-	case 39: appYouTube(); break
-	case 40: appNetflix(); break  
+	case 36: btnextra4(); break
+	case 37: btnextra5(); break
+	case 48: btnextra6(); break  
 		default:
 			logDebug("push: Botão inválido.")
 			break
@@ -359,24 +360,45 @@ def num9(){
     EnviaComando(ircode)
 }
 
+//Botão #33 para dashboard
+def btnextra1(){
+    sendEvent(name: "action", value: "btnextra1")
+    def ircode = "26"
+    EnviaComando(ircode)
+}
+
+//Botão #34 para dashboard
+def btnextra2(){
+    sendEvent(name: "action", value: "btnextra2")
+    def ircode = "34"
+    EnviaComando(ircode)
+}
+
+//Botão #35 para dashboard
+def btnextra3(){
+    sendEvent(name: "action", value: "btnextra3")
+    def ircode = "35"
+    EnviaComando(ircode)
+}
+
+//Botão #36 para dashboard
+def btnextra4(){
+    sendEvent(name: "action", value: "btnextra4")
+    def ircode = "36"
+    EnviaComando(ircode)
+}
+
+//Botão #37 para dashboard
+def btnextra5(){
+    sendEvent(name: "action", value: "btnextra5")
+    def ircode = "37"
+    EnviaComando(ircode)
+}
+
 //Botão #38 para dashboard
-def appAmazonPrime(){
-    sendEvent(name: "action", value: "appAmazonPrime")
+def btnextra6(){
+    sendEvent(name: "action", value: "btnextra6")
     def ircode = "38"
-    EnviaComando(ircode)
-}
-
-//Botão #39 para dashboard
-def appYouTube(){
-    sendEvent(name: "action", value: "appYouTube")
-    def ircode = "39"
-    EnviaComando(ircode)
-}
-
-//Botão #40 para dashboard
-def appNetflix(){
-    sendEvent(name: "action", value: "appNetflix")
-    def ircode = "40"
     EnviaComando(ircode)
 }
 	
