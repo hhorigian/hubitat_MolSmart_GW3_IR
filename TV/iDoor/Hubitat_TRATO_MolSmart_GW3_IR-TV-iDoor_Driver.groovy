@@ -16,7 +16,7 @@
  *            --- Driver para GW3 - TV e SOM - idoor
  *            V.1.0 11/07/2024 - First Version. Beta. 
  *	      V.1.1 22/07/2024 - Added comments for buttons. 	
- *	      V.1.1 23/07/2024 - Added extra buttons codes (6 buttons). 	
+ *	      V.1.2 23/07/2024 - Added extra buttons codes (6 buttons). 	
  *
  */
 
