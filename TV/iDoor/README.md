@@ -32,3 +32,10 @@ Botão# 29= num6
 Botão# 30= num7  
 Botão# 31= num8  
 Botão# 32= num9  
+Botão# 33= btn1  
+Botão# 34= btn2  
+Botão# 35= btn3  
+Botão# 36= btn4  
+Botão# 37= btn5  
+Botão# 38= btn6  
+
