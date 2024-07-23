@@ -1,10 +1,10 @@
 {
  "packageName":"MolSmart GW3-IR(iDoor) - TV e SOM",
  "author":"VH",
- "version":"1.1",
+ "version":"1.2",
  "minimumHEVersion":"2.3.7.100",
- "dateReleased":"2024-07-22",
- "releaseNotes":"Added comments",
+ "dateReleased":"2024-07-23",
+ "releaseNotes":"Added extra buttons codes (6 buttons). ",
  "documentationLink":"https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main/TV/iDoor",
  "drivers": [
   {
