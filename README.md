@@ -41,11 +41,11 @@ Dicas de integração do GW: https://youtu.be/Ex9b1RNuMUs?si=Kt0DbUi9_nxtS-E5<br
   +Hubitat_TRATO_MolSmart_GW3_IR_Universal_Learning_Driver<br>
  <br>  <br>
   <br>
-<strong>C)</strong> Pode ser aprendido o controle remoto diretamente no iDoor usando a biblioteca existente em ele, e enviar os comandos direto para o iDoor dos botões em ele. 
-<strong>Controle para AC - Já criado no Idoor aproveitando a biblioteca. Precisa pegar o Cid. </strong><br>
-  +Hubitat_TRATO_MolSmart_GW3_IR_iDoor_Driver.groovy<br><br>
-<strong>Controle para TV - Já criado no Idoor aproveitando a biblioteca. Precisa pegar o Cid. </strong><br>
-  +EM DESENVOLVIMENTO
-  +Hubitat_TRATO_MolSmart_GW3_IR_TV-iDoor_App.groovy<br>
-  +Hubitat_TRATO_MolSmart_GW3_IR_TV-iDoor_Driver.groovy<br><br>  
+<strong>C)</strong> Pode ser aprendido o controle remoto diretamente no iDoor usando a biblioteca existente em ele, e enviar os comandos direto para o iDoor dos botões em ele.  
 
+<strong>Controle para AC - Já criado no Idoor aproveitando a biblioteca. Precisa pegar o Cid. </strong><br>
+  https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main/AC/Idoor  
+  
+<strong>Controle para TV e SOM - Já criado no Idoor aproveitando o Learning. Precisa pegar o Cid. </strong><br>
+  https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main/TV/iDoor
+  
