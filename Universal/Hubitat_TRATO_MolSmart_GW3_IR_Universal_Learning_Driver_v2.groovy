@@ -19,6 +19,7 @@
  *        V.2.0 30/5/2024 - Versão Driver sem APP. 
  *        V.2.1 10/6/2024 - Fix Update State variables  
  *        V.2.2 13/6/2024 - Fix Update State variables  
+ *        V.2.3 24/7/2024 - Added buttons 1 and 2 codes  
  *
  */
 metadata {
@@ -32,16 +33,18 @@ metadata {
 	capability "Configuration"
 	capability "Refresh"
 	capability "HealthCheck"   
-    capability "PushableButton"
-    capability "TV"  
-    capability "Samsung TV"        
+        capability "PushableButton"
+        capability "TV"  
+        capability "Samsung TV"        
       
+        command "Botao1"      
+        command "Botao2"      
         command "Botao3"      
         command "Botao4"
         command "Botao5"   
         command "Botao6"
         command "Botao7"
-   	    command "Botao8"  
+        command "Botao8"  
         command "Botao9"
     	command "Botao10"
           
@@ -143,7 +146,9 @@ def push(pushed) {
 	}
 	pushed = pushed.toInteger()
 	switch(pushed) {
-		case 3 : Botao3(); break
+        case 1: Botao1(); break
+        case 2: Botao2(); break
+        case 3: Botao3(); break
 		case 4 : Botao4(); break
 		case 5 : Botao5(); break
         case 6 : Botao6(); break
@@ -156,11 +161,27 @@ def push(pushed) {
 			break
 	}
 }
+		
+//Botão #1 para dashboard
+def Botao1(){
+    sendEvent(name: "status", value: "Botao1")
+    def ircode =  "1"
+    EnviaComando(ircode)    
+    state.botaouniversal = ircode
+}
+
+//Botão #1 para dashboard
+def Botao2(){
+    sendEvent(name: "status", value: "Botao2")
+    def ircode =  "2"
+    EnviaComando(ircode)    
+    state.botaouniversal = ircode
+}
 
 //Botão #3 para dashboard
 def Botao3(){
     sendEvent(name: "status", value: "Botao3")
-    def ircode =  (settings.Botao3 ?: "")
+    def ircode =  "3"
     EnviaComando(ircode)    
     state.botaouniversal = ircode
 }
@@ -223,7 +244,7 @@ def EnviaComando(buttonnumber) {
 
     def URI = "http://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&cId=" + state.cId + "&state=" + buttonnumber + "&rcId=" + state.rcId                                                                                                        
     httpPOSTExec(URI)
-    log.info "HTTP" +  URI + "+ commando = "
+    log.info "Comando Enviad HTTP = " +  URI + "+ commando = " + buttonnumber
     
     //sendEvent(name: "status", value: tempStatus)
     
