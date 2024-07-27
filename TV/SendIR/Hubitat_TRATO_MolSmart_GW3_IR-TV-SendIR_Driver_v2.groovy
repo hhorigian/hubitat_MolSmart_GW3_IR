@@ -17,6 +17,7 @@
  *              V.2.0   - Versão com Driver sem precissar do APP + Códigos salvos no driver page.
  *              V.2.1   - 10/6/2024 - Fix URL
  *              V.2.2   - 13/6/2024 - User Guide
+  *              V.2.3   - 27/7/2024 - Added power on power off buttons for dashboard
 
  *
  */
