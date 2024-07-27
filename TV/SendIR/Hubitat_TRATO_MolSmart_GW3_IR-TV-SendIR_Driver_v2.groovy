@@ -428,6 +428,8 @@ def push(pushed) {
 	}
 	pushed = pushed.toInteger()
 	switch(pushed) {
+		case 0 : poweroff(); break
+		case 1 : poweron(); break
 		case 2 : mute(); break
 		case 3 : source(); break
 		case 4 : back(); break
@@ -466,6 +468,21 @@ def push(pushed) {
 			break
 	}
 }
+
+//Botão #0 para dashboard
+def poweron(){
+	sendEvent(name: "power", value: "ON")
+    def ircode =  state.OnIRsend  
+    EnviaComando(ircode)    
+}
+
+//Botão #1 para dashboard
+def poweroff(){
+	sendEvent(name: "power", value: "OFF")
+    def ircode =  state.OFFIRsend  
+    EnviaComando(ircode)    
+}
+
 
 //Botão #2 para dashboard
 def mute(){
