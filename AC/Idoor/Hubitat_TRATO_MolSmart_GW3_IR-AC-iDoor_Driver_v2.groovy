@@ -31,15 +31,15 @@ metadata {
 	capability "Configuration"
 	capability "Refresh"
 	capability "HealthCheck"   
-    capability "PushableButton"
-    capability "FanControl"
+    	capability "PushableButton"
+   	capability "FanControl"
 
-		attribute "supportedThermostatFanModes", "JSON_OBJECT"
-		attribute "supportedThermostatModes", "JSON_OBJECT"
+	attribute "supportedThermostatFanModes", "JSON_OBJECT"
+	attribute "supportedThermostatModes", "JSON_OBJECT"
 
        	command "setSupportedThermostatFanModes", ["JSON_OBJECT"]
-		command "setSupportedThermostatModes", ["JSON_OBJECT"]
-		command "setTemperature", ["NUMBER"]
+	command "setSupportedThermostatModes", ["JSON_OBJECT"]
+	command "setTemperature", ["NUMBER"]
 
   }
     
