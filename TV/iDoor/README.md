@@ -1,3 +1,20 @@
+Para usar esse Controle para TV já criado no Idoor via LEARNING. 
+
+1- Cadastrar o controle no idoor e fazer o LEARNING dele. 
+2- Pegar o CID do controle remoto: https://www.youtube.com/watch?v=08Qb6pkxawM
+
+3- Instalar o driver via HPM ou manulamente aqui do github. 
+Dados do GW3: 
+- IP do GW3
+- Numero de Serie; 
+- Código de Verificação (esses dados estão na etiqueta na parte de baixo do gateway); 
+- Porta IR que vai ser utilizada para comandar o equipamento infravermelho. (Porta 1 = Blaster)
+- CID (passo 2)
+
+4- Adicionar o device no dashboard. 
+Comandar ele com botões: 
+
+
 Para usar no controle remoto do IR do GW3 para iDoor para TV e Som no dashboard, adicionar botões.  
 Aqui a referencia dos Botões para adicionar no Dashboard   
 
@@ -5,8 +22,8 @@ To use the GW3 IR remote control for iDoor for TV and Sound on the dashboard, ad
 Here is the reference for Buttons to add to the Dashboard
 
 
- 
-Botão# 1 = power  
+Botão# 0 = poweroff 
+Botão# 1 = poweron  
 Botão# 2 = mute  
 Botão# 3 = source  
 Botão# 4 = back  
