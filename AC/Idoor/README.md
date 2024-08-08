@@ -1,4 +1,4 @@
-Pode ser aprendido o controle remoto diretamente no iDoor usando a biblioteca existente no iDoor, e enviar os comandos direto para o iDoor dos botões cadastrados em ele. 
+Pode ser aprendido o controle remoto diretamente no iDoor usando a biblioteca de AC no iDoor, e enviar os comandos direto para o iDoor dos botões cadastrados em ele. 
 
 Para usar esse Controle para AC já criado no Idoor aproveitando a biblioteca. 
 
@@ -17,9 +17,9 @@ Dados do GW3:
 Comandar ele com botões: 
 
 
-	    	case 3 : auto(); break
-		    case 4 : heat(); break
-		    case 5 : cool(); break
+	case 3 : auto(); break
+	case 4 : heat(); break
+	case 5 : cool(); break
         case 6 : fan(); break
         case 7 : dry(); break
         case 8 : fanAuto(); break                
