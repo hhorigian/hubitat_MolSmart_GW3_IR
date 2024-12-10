@@ -16,37 +16,40 @@
  *            --- Driver para GW3 - AC - idoor
  *            V.2.1 30/05/2024 - Removed the APP file. Only Driver File. 
  *            V.2.2 13/06/2024 - Added User Guide link 
- *
+ *	      V.2.3 10/12/2024 -  BE CAREFUL - Removed SWITCH capability to fix ALEXA Synch .
+ * 			          Fixed Many Setup ThermoStat modes, ThermoStat Fan speeds. Added EZ Dashboard compatibility. 
  */
 
 
 metadata {
   definition (name: "MolSmart - GW3 - IR(idoor) - AC", namespace: "TRATO", author: "VH", vid: "generic-contact") {
-    capability "Switch"
-	capability "Thermostat"
-	capability "Thermostat Cooling Setpoint"
-	capability "Thermostat Setpoint"
-	capability "Sensor"
-	capability "Actuator"
-	capability "Configuration"
-	capability "Refresh"
-	capability "HealthCheck"   
-    	capability "PushableButton"
-   	capability "FanControl"
+		capability "Actuator"
+		capability "Sensor"
+		capability "Temperature Measurement"
+		capability "Thermostat"
 
-	attribute "supportedThermostatFanModes", "JSON_OBJECT"
-	attribute "supportedThermostatModes", "JSON_OBJECT"
-
-       	command "setSupportedThermostatFanModes", ["JSON_OBJECT"]
-	command "setSupportedThermostatModes", ["JSON_OBJECT"]
-	command "setTemperature", ["NUMBER"]
-
+		attribute "supportedThermostatFanModes", "JSON_OBJECT"
+		attribute "supportedThermostatModes", "JSON_OBJECT"	  
+		attribute "hysteresis", "NUMBER"
+	  
+	  
+		command "setTemperature", ["NUMBER"]
+		command "setThermostatOperatingState", ["ENUM"]
+		command "setThermostatSetpoint", ["NUMBER"]
+		command "setSupportedThermostatFanModes", ["JSON_OBJECT"]
+		command "setSupportedThermostatModes", ["JSON_OBJECT"]
+	  
+    command "cleanvars"  
+//  command "setdefaults"
+	  
   }
     
     
   }
 
     import groovy.transform.Field
+    import groovy.json.JsonOutput
+
     @Field static final String DRIVER = "by TRATO"
     @Field static final String USER_GUIDE = "https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main/AC/Idoor"
 
@@ -62,34 +65,54 @@ metadata {
     	input name: "serialNum", title:"Numero de serie (Etiqueta GW3)", type: "string", required: true
 	    input name: "verifyCode", title:"Verify code (Etiqueta GW3)", type: "string", required: true
 	    input name: "channel", title:"Canal Infravermelho (1/2 ou 3)", type: "string", required: true
-    	input name: "cId", title:"Control ID (pego no idoor)", type: "string", required: true  
-    	input name: "setCoolingSetpointIRsend", title:"setCooling-HEX(7)", type: "string"
-	    input name: "setHeatingSetpointIRsend", title:"setHeating-HEX(8)", type: "string"      
+    	input name: "cId", title:"Control ID (pego no idoor)", type: "string", required: true     
         input name: "logEnable", type: "bool", title: "Enable debug logging", defaultValue: false 
         //help guide
         input name: "UserGuide", type: "hidden", title: fmtHelpInfo("Manual do Driver") 	  
   }   
   
-def initialized()
-{
-    log.debug "initialized()"   
-    off()  
+
+def initialize() {
+	log.debug "initialized()"  
+	if (state?.lastRunningMode == null) {
+		sendEvent(name: "temperature", value: convertTemperatureIfNeeded(68.0,"F",1))
+		sendEvent(name: "thermostatSetpoint", value: convertTemperatureIfNeeded(68.0,"F",1))
+		sendEvent(name: "heatingSetpoint", value: convertTemperatureIfNeeded(68.0,"F",1))
+		sendEvent(name: "coolingSetpoint", value: convertTemperatureIfNeeded(75.0,"F",1))
+		state.lastRunningMode = "heat"
+		updateDataValue("lastRunningMode", "heat")
+		setThermostatOperatingState("idle")
+		setSupportedThermostatFanModes(JsonOutput.toJson(["auto","high","mid","low"]))
+		setSupportedThermostatModes(JsonOutput.toJson(["auto", "cool", "heat", "off"]))
+		off()
+		fanAuto()
+	}
+	sendEvent(name: "hysteresis", value: (hysteresis ?: 0.5).toBigDecimal())
 }
+
+
+def cleanvars()  //Usada para limpar todos os states e controles aprendidos. 
+{
+//state.remove()
+  state.clear() 
+  AtualizaDadosGW3()  
+}
+
 
 def installed()
 {
-    log.debug "installed()"
-	off()
-    setdefaults()  
+	log.warn "installed..."
+	initialize()
 
 }
 
 def updated()
 {  
     log.debug "updated()"
-    setdefaults()
-    off()
     AtualizaDadosGW3()   
+	//if (logEnable) runIn(1800,logsOff)
+	initialize()	
+	
 }
 
 def AtualizaDadosGW3() {
@@ -102,7 +125,9 @@ def AtualizaDadosGW3() {
     log.info "Dados do GW3 atualizados: " + state.currentip + " -- " + state.serialNum + " -- " +  state.verifyCode + " -- " + state.channel + " -- " + state.cId 
 }
 
+/*
 def setdefaults() {
+	log.info "Called SetDefaults Function " 
     sendEvent(name: "thermostatSetpoint", value: "20", descriptionText: "Thermostat thermostatSetpoint set to 20")
     sendEvent(name: "coolingSetpoint", value: "20", descriptionText: "Thermostat coolingSetpoint set to 20") 
     sendEvent(name: "heatingSetpoint", value: "20", descriptionText: "Thermostat heatingSetpoint set to 20")     
@@ -113,6 +138,21 @@ def setdefaults() {
 	sendEvent(name: "supportedThermostatFanModes", value: fanModes, descriptionText: "supportedThermostatFanModes set")
 	sendEvent(name: "supportedThermostatModes", value: modes, descriptionText: "supportedThermostatModes set ")
 }
+*/
+
+
+def setSupportedThermostatFanModes(fanModes) {
+	logDebug "setSupportedThermostatFanModes(${fanModes}) foi chamado"
+	// (auto, circulate, on)
+	sendEvent(name: "supportedThermostatFanModes", value: fanModes, descriptionText: getDescriptionText("supportedThermostatFanModes set to ${fanModes}"))
+}
+
+def setSupportedThermostatModes(modes) {
+	logDebug "setSupportedThermostatModes(${modes}) foi chamado"
+	// (auto, cool, emergency heat, heat, off)
+	sendEvent(name: "supportedThermostatModes", value: modes, descriptionText: getDescriptionText("supportedThermostatModes set to ${modes}"))
+}
+
 
 
 def on() {
@@ -121,6 +161,8 @@ def on() {
     state.pw = "1"
     def ircode = ircodetemp 
     EnviaComando(ircode)
+    log.info "Enviado o commando de thermostatMode =  on " 
+	
 
 }
 
@@ -130,8 +172,97 @@ def off() {
     state.pw = "0"    
     def ircode = ircodetemp 
     EnviaComando(ircode)
+    log.info "Enviado o commando de thermostatMode =  off " 
+	
          
 }
+
+
+def setThermostatOperatingState (operatingState) {
+	logDebug "setThermostatOperatingState (${operatingState}) was called"
+	updateSetpoints(null,null,null,operatingState)
+	sendEvent(name: "thermostatOperatingState", value: operatingState, descriptionText: getDescriptionText("thermostatOperatingState set to ${operatingState}"))
+
+}
+
+
+private updateSetpoints(sp = null, hsp = null, csp = null, operatingState = null){
+	if (operatingState in ["off"]) return
+	if (hsp == null) hsp = device.currentValue("heatingSetpoint",true)
+	if (csp == null) csp = device.currentValue("coolingSetpoint",true)
+	if (sp == null) sp = device.currentValue("thermostatSetpoint",true)
+
+	if (operatingState == null) operatingState = state.lastRunningMode
+
+	def hspChange = isStateChange(device,"heatingSetpoint",hsp.toString())
+	def cspChange = isStateChange(device,"coolingSetpoint",csp.toString())
+	def spChange = isStateChange(device,"thermostatSetpoint",sp.toString())
+	def osChange = operatingState != state.lastRunningMode
+
+	def newOS
+	def descriptionText
+	def name
+	def value
+	def unit = "°${location.temperatureScale}"
+	switch (operatingState) {
+		case ["pending heat","heating","heat"]:
+			newOS = "heat"
+			if (spChange) {
+				hspChange = true
+				hsp = sp
+			} else if (hspChange || osChange) {
+				spChange = true
+				sp = hsp
+			}
+			if (csp - 2 < hsp) {
+				csp = hsp + 2
+				cspChange = true
+			}
+			break
+		case ["pending cool","cooling","cool"]:
+			newOS = "cool"
+			if (spChange) {
+				cspChange = true
+				csp = sp
+			} else if (cspChange || osChange) {
+				spChange = true
+				sp = csp
+			}
+			if (hsp + 2 > csp) {
+				hsp = csp - 2
+				hspChange = true
+			}
+			break
+		default :
+			return
+	}
+
+	if (hspChange) {
+		value = hsp
+		name = "heatingSetpoint"
+		descriptionText = "${device.displayName} ${name} was set to ${value}${unit}"
+		if (txtEnable) log.info descriptionText
+		sendEvent(name: name, value: value, descriptionText: descriptionText, unit: unit, stateChange: true)
+	}
+	if (cspChange) {
+		value = csp
+		name = "coolingSetpoint"
+		descriptionText = "${device.displayName} ${name} was set to ${value}${unit}"
+		if (txtEnable) log.info descriptionText
+		sendEvent(name: name, value: value, descriptionText: descriptionText, unit: unit, stateChange: true)
+	}
+	if (spChange) {
+		value = sp
+		name = "thermostatSetpoint"
+		descriptionText = "${device.displayName} ${name} was set to ${value}${unit}"
+		if (txtEnable) log.info descriptionText
+		sendEvent(name: name, value: value, descriptionText: descriptionText, unit: unit, stateChange: true)
+	}
+
+	state.lastRunningMode = newOS
+	updateDataValue("lastRunningMode", newOS)
+}
+
 
 //Case para los botones de push en el dashboard. 
 def push(pushed) {
@@ -142,6 +273,7 @@ def push(pushed) {
 	}
 	pushed = pushed.toInteger()
 	switch(pushed) {
+		case 2 : off(); break
 		case 3 : auto(); break
 		case 4 : heat(); break
 		case 5 : cool(); break
@@ -167,6 +299,8 @@ def auto(){
     state.pw = "1"
     def ircode = ircodetemp + "&md=0&tp=2"
     EnviaComando(ircode)  
+    log.info "Enviado o commando de thermostatMode =  auto " 
+	
 }
 
 
@@ -177,6 +311,8 @@ def heat(){
     state.pw = "1"
     def ircode = ircodetemp + "&md=2&tp=2"
     EnviaComando(ircode)  
+    log.info "Enviado o commando de thermostatMode =  heat " 
+	
 }
 
 //Botão #4 para dashboard
@@ -186,6 +322,8 @@ def cool(){
     state.pw = "1"
     def ircode = ircodetemp + "&md=1&tp=2"
     EnviaComando(ircode)     
+    log.info "Enviado o commando de thermostatMode =  cool " 
+	
 }
 
 //Botão #5 para dashboard
@@ -195,6 +333,8 @@ def fan(){
     state.pw = "1"
     def ircode = ircodetemp + "&md=4&tp=2"
     EnviaComando(ircode)      
+    log.info "Enviado o commando de thermostatMode =  fan " 
+	
 }
 
 
@@ -205,6 +345,8 @@ def dry(){
     state.pw = "1"
     def ircode = ircodetemp + "&md=3&tp=2"
     EnviaComando(ircode)  
+    log.info "Enviado o commando de thermostatMode =  dry " 
+	
 }
 
 //Botão #7 para dashboard
@@ -214,33 +356,41 @@ def setCoolingSetpoint(temperature){
     state.pw = "1"
     def ircode = ircodetemp + "&t=" + temperature + "&tp=1"
     EnviaComando(ircode)  
+    log.info "Enviado o commando de setCoolingSetpoint =  temp " 
+	
 }
 
 //Botão #8 para dashboard
 def fanAuto(){
-    sendEvent(name: "FanMode", value: "fanAuto")
+    sendEvent(name: "setThermostatFanMode", value: "auto")
     def ircodetemp = 1
     state.pw = "1"
     def ircode = ircodetemp + "&s=0&tp=3"
     EnviaComando(ircode)  
+    log.info "Enviado o commando de setThermostatFanMode =  fanAuto " 
+	
 }
 
 //Botão #9 para dashboard
 def fanOn(){
-    sendEvent(name: "FanMode", value: "fanOn")
+    sendEvent(name: "setThermostatFanMode", value: "on")
     def ircodetemp = 1
     state.pw = "1"
     def ircode = ircodetemp + "&s=3&tp=3"
     EnviaComando(ircode)  
+    log.info "Enviado o commando de setThermostatFanMode =  fanOn " 
+	
 }
 
 //Botão #9 para dashboard
 def fanCirculate(){
-    sendEvent(name: "FanMode", value: "fanCirculate")
+    sendEvent(name: "setThermostatFanMode", value: "circulate")
     def ircodetemp = 1
     state.pw = "1"
     def ircode = ircodetemp + "&s=1&tp=3"
     EnviaComando(ircode)  
+    log.info "Enviado o commando de setThermostatFanMode =  fanCirculate " 
+	
 }
 
 //Botão #7 para dashboard
@@ -250,12 +400,14 @@ def setHeatingSetpoint(temperature){
     state.pw = "1"
     def ircode = ircodetemp + "&t=" + temperature + "&tp=1"
     EnviaComando(ircode)  
+    log.info "Enviado o commando de setHeatingSetpoint =  temp " 
+	
 }
 
 //Botão #7 para dashboard
 def setThermostatMode(modo){
-    def varmodo = modo
-    sendEvent(name: "thermostatMode", value: modo)
+    varmodo = modo
+    sendEvent(name: "thermostatMode", value: varmodo)
     def ircodetemp = 1
     state.pw = "1"
     def valormodo = " "
@@ -269,8 +421,15 @@ def setThermostatMode(modo){
 		case "cool" : 
             valormodo = "1"  ; 
             break        
-        case "off"  : 
+		case "fan" : 
+            valormodo = "4"  ; 
+            break        
+		case "dry" : 
+            valormodo = "3"  ; 
+            break        
+		case "off"  : 
             valormodo = "-1" ; 
+			ircodetemp = "0";
             break
         default: 
             logDebug("push: Botão inválido.")
@@ -278,15 +437,49 @@ def setThermostatMode(modo){
     }
     def ircode = ircodetemp + "&md=" + valormodo + "&tp=2"
     EnviaComando(ircode)  
+    log.info "Enviado o commando de set Thermostat Mode =   " + varmodo 
+	
 }
 
 def setThermostatFanMode(modo){
-    def varmodo = modo
-    sendEvent(name: "setThermostatFanMode", value: modo)
+    varmodo = modo
+    sendEvent(name: "setThermostatFanMode", value: varmodo)
     def ircodetemp = 1
     state.pw = "1"
-    def valormodo = " "
-    switch(modo) {
+    valormodo = " "
+//		setSupportedThermostatFanModes(JsonOutput.toJson(["auto","high","mid","low"]))
+	
+    switch(varmodo) {
+		case "high" : 
+            valormodo = "5"; 
+            break
+		case "mid" : 
+            valormodo = "3"; 
+            break  
+        case "low"  : 
+            valormodo = "1" ; 
+            break
+        case "auto"  : 
+            valormodo = "0" ; 
+            break		
+        default: 
+            logDebug("push: Botão inválido.")
+            break   
+    }
+    def ircode = ircodetemp + "&s=" + valormodo + "&tp=3"  
+    EnviaComando(ircode)  
+    log.info "Enviado o commando de set Thermostat Fan Mode =   " + varmodo 
+	
+}
+
+/*
+def setThermostatFanMode(modo){
+    varmodo = modo
+    sendEvent(name: "setThermostatFanMode", value: varmodo)
+    def ircodetemp = 1
+    state.pw = "1"
+    valormodo = " "
+    switch(varmodo) {
 		case "auto" : 
             valormodo = "0"; 
             break
@@ -302,29 +495,37 @@ def setThermostatFanMode(modo){
     }
     def ircode = ircodetemp + "&s=" + valormodo + "&tp=3"
     EnviaComando(ircode)  
+    log.info "Enviado o commando de set Thermostat Fan Mode =   " + varmodo 
+	
 }
-
+*/
 
 
 //Botão #14 para dashboard
 def fanLow(){
-    sendEvent(name: "thermostatMode", value: "fanLow")
+    sendEvent(name: "setThermostatFanMode", value: "fanLow")
     def ircode = ircodetemp + "&s=" + valormodo + "&tp=1"
     EnviaComando(ircode)    
+    log.info "Enviado o commando de setThermostatFanMode =  fanLow " 
+	
 }
 
 //Botão #15 para dashboard
 def fanMed(){
-    sendEvent(name: "thermostatMode", value: "fanMed")
+    sendEvent(name: "setThermostatFanMode", value: "fanMed")
     def ircode = ircodetemp + "&s=" + valormodo + "&tp=3"
     EnviaComando(ircode)    
+    log.info "Enviado o commando de setThermostatFanMode =  fanMed " 
+	
 }
 
 //Botão #16 para dashboard
 def fanHigh(){
-    sendEvent(name: "thermostatMode", value: "fanHigh")
+    sendEvent(name: "setThermostatFanMode", value: "fanHigh")
     def ircode = ircodetemp + "&s=" + valormodo + "&tp=5"
     EnviaComando(ircode)    
+    log.info "Enviado o commando de setThermostatFanMode =  fanHigh " 
+	
 }
 
 
@@ -332,7 +533,7 @@ def EnviaComando(command) {
     
     def URI = "http://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&cId=" + state.cId + "&rcId=52" + "&state=1" + "&pw=" + command 
     httpPOSTExec(URI)
-    log.info "HTTP" +  URI + " + commando = " + command
+    log.info "HTTP" +  URI +  " commando:  pw= " + command
         
 }
 
@@ -367,4 +568,11 @@ private logDebug(msg) {
   if (settings?.debugOutput || settings?.debugOutput == null) {
     log.debug "$msg"
   }
+}
+
+
+private getDescriptionText(msg) {
+	def descriptionText = "${device.displayName} ${msg}"
+	if (settings?.txtEnable) log.info "${descriptionText}"
+	return descriptionText
 }
