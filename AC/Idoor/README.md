@@ -13,6 +13,7 @@ Dados do GW3:
 - Porta IR que vai ser utilizada para comandar o equipamento infravermelho. (Porta 1 = Blaster)
 - CID (passo 2)
 
+PRECISA FAZER O INITIALIZE dentro do Device para ele pegar os dados certos. 
 
 Para usar no controle remoto do IR do GW3 para iDoor para TV e Som no dashboard, adicionar botões.  
 Aqui a referencia dos Botões para adicionar no Dashboard   
