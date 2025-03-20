@@ -16,8 +16,9 @@
  *            --- Driver para GW3 - AC - idoor
  *            V.2.1 30/05/2024 - Removed the APP file. Only Driver File. 
  *            V.2.2 13/06/2024 - Added User Guide link 
- *	      V.2.3 10/12/2024 -  BE CAREFUL - Removed SWITCH capability to fix ALEXA Synch .
+ *	          V.2.3 10/12/2024 -  BE CAREFUL - Removed SWITCH capability to fix ALEXA Synch .
  * 			          Fixed Many Setup ThermoStat modes, ThermoStat Fan speeds. Added EZ Dashboard compatibility. 
+ *	          V.2.4 20/3/2025 - Added Initialize function to Set Defaults values, fixed SetCoolpoint Decimal  			
  */
 
 
@@ -38,6 +39,8 @@ metadata {
 		command "setThermostatSetpoint", ["NUMBER"]
 		command "setSupportedThermostatFanModes", ["JSON_OBJECT"]
 		command "setSupportedThermostatModes", ["JSON_OBJECT"]
+        command  "setCoolingSetpoint", ["NUMBER"]
+         command  "initialize" 
 	  
     command "cleanvars"  
 //  command "setdefaults"
@@ -77,8 +80,8 @@ def initialize() {
 	if (state?.lastRunningMode == null) {
 		sendEvent(name: "temperature", value: convertTemperatureIfNeeded(68.0,"F",1))
 		sendEvent(name: "thermostatSetpoint", value: convertTemperatureIfNeeded(68.0,"F",1))
-		sendEvent(name: "heatingSetpoint", value: convertTemperatureIfNeeded(68.0,"F",1))
-		sendEvent(name: "coolingSetpoint", value: convertTemperatureIfNeeded(75.0,"F",1))
+    sendEvent(name: "coolingSetpoint", value: "20", descriptionText: "Thermostat coolingSetpoint set to 20") 
+    sendEvent(name: "heatingSetpoint", value: "20", descriptionText: "Thermostat heatingSetpoint set to 20")     
 		state.lastRunningMode = "heat"
 		updateDataValue("lastRunningMode", "heat")
 		setThermostatOperatingState("idle")
