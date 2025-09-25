@@ -20,7 +20,8 @@
  *        V.2.1 10/6/2024 - Fix Update State variables  
  *        V.2.2 13/6/2024 - Fix Update State variables  
  *        V.2.3 24/7/2024 - Added buttons 1 and 2 codes  
- *
+*         V.2.4 25/9/2025 - Added 10 extra buttons for Commands and Push   
+*
  */
 metadata {
   definition (name: "MolSmart GW3 - IR Universal(Learning)", namespace: "TRATO", author: "VH", vid: "generic-contact") {
@@ -47,7 +48,19 @@ metadata {
         command "Botao8"  
         command "Botao9"
     	command "Botao10"
-          
+    	command "Botao11"
+    	command "Botao12"
+    	command "Botao13"
+    	command "Botao14"
+    	command "Botao15"
+    	command "Botao16"
+    	command "Botao17"
+    	command "Botao18"
+    	command "Botao19"
+    	command "Botao20"
+   
+      
+      
   }
     
     
@@ -85,7 +98,19 @@ metadata {
 	input name: "Botao8", title:"Botao8-Botão(8)", type: "string" , defaultValue: "8"
 	input name: "Botao9", title:"Botao9-Botão(9)", type: "string" , defaultValue: "9"
 	input name: "Botao10", title:"Botao10-Botão(10)", type: "string" , defaultValue: "10"
-         
+	input name: "Botao11", title:"Botao10-Botão(11)", type: "string" , defaultValue: "11"
+	input name: "Botao12", title:"Botao10-Botão(12)", type: "string" , defaultValue: "12"
+	input name: "Botao13", title:"Botao10-Botão(13)", type: "string" , defaultValue: "13"
+	input name: "Botao14", title:"Botao10-Botão(14)", type: "string" , defaultValue: "14"
+	input name: "Botao15", title:"Botao10-Botão(15)", type: "string" , defaultValue: "15"
+	input name: "Botao16", title:"Botao10-Botão(16)", type: "string" , defaultValue: "16"
+	input name: "Botao17", title:"Botao10-Botão(17)", type: "string" , defaultValue: "17"
+	input name: "Botao18", title:"Botao10-Botão(18)", type: "string" , defaultValue: "18"
+	input name: "Botao19", title:"Botao10-Botão(19)", type: "string" , defaultValue: "19"
+	input name: "Botao20", title:"Botao10-Botão(20)", type: "string" , defaultValue: "20"
+
+      
+      
        
   }   
   
@@ -101,14 +126,14 @@ def installed()
 {
    
 
-    sendEvent(name:"numberOfButtons", value:10)     
+    sendEvent(name:"numberOfButtons", value:20)     
     log.debug "installed()" 
 }
 
 def updated()
 {
    
-    sendEvent(name:"numberOfButtons", value:10)    
+    sendEvent(name:"numberOfButtons", value:20)    
     log.debug "updated()"
     AtualizaDadosGW3()    
     
@@ -121,6 +146,8 @@ def AtualizaDadosGW3() {
     state.cId = settings.cId
     state.rcId = 61
     log.info "Dados do GW3 atualizados: " + state.currentip + " -- " + state.serialNum + " -- " +  state.verifyCode + " -- " + state.cId + " -- " +  state.rcId
+    sendEvent(name:"numberOfButtons", value:20)    
+
 }
 
 def on() {
@@ -156,7 +183,19 @@ def push(pushed) {
         case 8 : Botao8(); break                
         case 9 : Botao9(); break    
         case 10 : Botao10(); break            
-		default:
+        case 11 : Botao11(); break            
+        case 12 : Botao12(); break            
+        case 13 : Botao13(); break            
+        case 14 : Botao14(); break            
+        case 15 : Botao15(); break            
+        case 16 : Botao16(); break            
+        case 17 : Botao17(); break            
+        case 18 : Botao18(); break            
+        case 19 : Botao19(); break            
+        case 20 : Botao20(); break            
+
+        
+        default:
 			logDebug("push: Botão inválido.")
 			break
 	}
@@ -170,7 +209,7 @@ def Botao1(){
     state.botaouniversal = ircode
 }
 
-//Botão #1 para dashboard
+//Botão #2 para dashboard
 def Botao2(){
     sendEvent(name: "status", value: "Botao2")
     def ircode =  "2"
@@ -238,6 +277,77 @@ def Botao10(){
 }
 
 
+//Botão #10 para dashboard
+def Botao11(){
+    sendEvent(name: "status", value: "Botao11" )
+    def ircode =  (settings.Botao11 ?: "")
+    EnviaComando(ircode)
+}
+
+//Botão #10 para dashboard
+def Botao12(){
+    sendEvent(name: "status", value: "Botao12" )
+    def ircode =  (settings.Botao12 ?: "")
+    EnviaComando(ircode)
+}
+
+//Botão #10 para dashboard
+def Botao13(){
+    sendEvent(name: "status", value: "Botao13" )
+    def ircode =  (settings.Botao13 ?: "")
+    EnviaComando(ircode)
+}
+
+//Botão #10 para dashboard
+def Botao14(){
+    sendEvent(name: "status", value: "Botao14" )
+    def ircode =  (settings.Botao14 ?: "")
+    EnviaComando(ircode)
+}
+
+//Botão #10 para dashboard
+def Botao15(){
+    sendEvent(name: "status", value: "Botao15" )
+    def ircode =  (settings.Botao15 ?: "")
+    EnviaComando(ircode)
+}
+
+//Botão #10 para dashboard
+def Botao16(){
+    sendEvent(name: "status", value: "Botao16" )
+    def ircode =  (settings.Botao16 ?: "")
+    EnviaComando(ircode)
+}
+
+//Botão #10 para dashboard
+def Botao17(){
+    sendEvent(name: "status", value: "Botao17" )
+    def ircode =  (settings.Botao17 ?: "")
+    EnviaComando(ircode)
+}
+
+//Botão #10 para dashboard
+def Botao18(){
+    sendEvent(name: "status", value: "Botao18" )
+    def ircode =  (settings.Botao18 ?: "")
+    EnviaComando(ircode)
+}
+
+//Botão #10 para dashboard
+def Botao19(){
+    sendEvent(name: "status", value: "Botao19" )
+    def ircode =  (settings.Botao19 ?: "")
+    EnviaComando(ircode)
+}
+
+//Botão #10 para dashboard
+def Botao20(){
+    sendEvent(name: "status", value: "Botao20" )
+    def ircode =  (settings.Botao20 ?: "")
+    EnviaComando(ircode)
+}
+
+
 
 def EnviaComando(buttonnumber) {
 
@@ -284,7 +394,6 @@ private logDebug(msg) {
     log.debug "$msg"
   }
 }
-
 
 
 
