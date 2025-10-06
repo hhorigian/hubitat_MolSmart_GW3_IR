@@ -19,7 +19,9 @@
  *	          V.2.3 10/12/2024 -  BE CAREFUL - Removed SWITCH capability to fix ALEXA Synch .
  * 			          Fixed Many Setup ThermoStat modes, ThermoStat Fan speeds. Added EZ Dashboard compatibility. 
  *	          V.2.4 20/3/2025 - Added Initialize function to Set Defaults values, fixed SetCoolpoint Decimal  			
- */
+ *	          V.2.5 26/9/2025 - Changed to AsyncHTTPPost Method 	
+
+*/
 
 
 metadata {
@@ -70,6 +72,8 @@ metadata {
 	    input name: "channel", title:"Canal Infravermelho (1/2 ou 3)", type: "string", required: true
     	input name: "cId", title:"Control ID (pego no idoor)", type: "string", required: true     
         input name: "logEnable", type: "bool", title: "Enable debug logging", defaultValue: false 
+        input name: "timeoutSec",   type: "number", title: "HTTP timeout (seconds, sync mode only)", defaultValue: 7, range: "3..30"
+      
         //help guide
         input name: "UserGuide", type: "hidden", title: fmtHelpInfo("Manual do Driver") 	  
   }   
@@ -532,46 +536,62 @@ def fanHigh(){
 }
 
 
-def EnviaComando(command) {
+
+private String buildFullUrl(button) {
+    def ip   = settings.molIPAddress
+    def sn   = settings.serialNum
+    def vc   = settings.verifyCode
+    def cid  = settings.cId
+    def rcid = (settings.rcId ?: "52")
+    // IMPORTANT: we deliberately do NOT URL-encode 'pw' here
+    return "http://${ip}/api/device/deviceDetails/smartHomeAutoHttpControl" +
+           "?serialNum=${sn}&verifyCode=${vc}&cId=${cid}&rcId=${rcid}&state=1&pw=${button}"
     
-    def URI = "http://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&cId=" + state.cId + "&rcId=52" + "&state=1" + "&pw=" + command 
-    httpPOSTExec(URI)
-    log.info "HTTP" +  URI +  " commando:  pw= " + command
-        
 }
 
 
-def httpPOSTExec(URI)
-{
-    
-    try
-    {
-        getString = URI
-        segundo = ""
-        httpPost(getString.replaceAll(' ', '%20'),segundo,  )
-        { resp ->
-            if (resp.data)
-            {
-                    
-                        log.info "Response " + resp.data 
-            
-            }
+
+def EnviaComando(button) {
+	  
+    String fullUrl = buildFullUrl(button)
+    log.info "FullURL = " + fullUrl
+
+    // params: give only a 'uri' so Hubitat won't rebuild/encode the query
+    Map params = [ uri: fullUrl, timeout: (settings.timeoutSec ?: 7) as int ]
+    log.info "Params = " + params
+	
+        try {
+            asynchttpPost('gw3PostCallback', params, [cmd: button])
+        } catch (e) {
+            log.warn "${device.displayName} Async POST scheduling failed: ${e.message}"
+    }
+}
+
+void gw3PostCallback(resp, data) {
+    String cmd = data?.cmd
+    try {
+        if (resp?.status in 200..299) {
+            logDebug "POST OK (async) cmd=${cmd} status=${resp?.status}"
+        } else {
+            logWarn "POST error (async) status=${resp?.status} cmd=${cmd}"
         }
+    } catch (e) {
+        logWarn "Async callback exception: ${e.message} (cmd=${cmd})"
     }
-                            
-
-    catch (Exception e)
-    {
-        logDebug("httpPostExec() failed: ${e.message}")
-    }
-    
 }
 
-private logDebug(msg) {
-  if (settings?.debugOutput || settings?.debugOutput == null) {
-    log.debug "$msg"
-  }
-}
+
+
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* Helpers                                                                   */
+/* ────────────────────────────────────────────────────────────────────────── */
+
+private logInfo(msg)  { if (settings?.txtEnable   != false) log.info  "${device.displayName} ${msg}" }
+private logDebug(msg) { if (settings?.debugOutput == true)  log.debug "${device.displayName} ${msg}" }
+private logWarn(msg)  { log.warn "${device.displayName} ${msg}" }
+
+
 
 
 private getDescriptionText(msg) {
