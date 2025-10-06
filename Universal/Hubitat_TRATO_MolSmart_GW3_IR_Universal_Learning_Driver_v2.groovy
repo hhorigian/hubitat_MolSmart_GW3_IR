@@ -20,8 +20,9 @@
  *        V.2.1 10/6/2024 - Fix Update State variables  
  *        V.2.2 13/6/2024 - Fix Update State variables  
  *        V.2.3 24/7/2024 - Added buttons 1 and 2 codes  
-*         V.2.4 25/9/2025 - Added 10 extra buttons for Commands and Push   
-*
+ *        V.2.4 25/9/2025 - Added 10 extra buttons for Commands and Push   
+ *        V.2.5 26/9/2025 - Changed to ASYNC Http method  
+ *
  */
 metadata {
   definition (name: "MolSmart GW3 - IR Universal(Learning)", namespace: "TRATO", author: "VH", vid: "generic-contact") {
@@ -58,9 +59,7 @@ metadata {
     	command "Botao18"
     	command "Botao19"
     	command "Botao20"
-   
-      
-      
+          
   }
     
     
@@ -98,7 +97,7 @@ metadata {
 	input name: "Botao8", title:"Botao8-Botão(8)", type: "string" , defaultValue: "8"
 	input name: "Botao9", title:"Botao9-Botão(9)", type: "string" , defaultValue: "9"
 	input name: "Botao10", title:"Botao10-Botão(10)", type: "string" , defaultValue: "10"
-	input name: "Botao11", title:"Botao10-Botão(11)", type: "string" , defaultValue: "11"
+	input name: "Botao11", title:"Botao11-Botão(11)", type: "string" , defaultValue: "11"
 	input name: "Botao12", title:"Botao10-Botão(12)", type: "string" , defaultValue: "12"
 	input name: "Botao13", title:"Botao10-Botão(13)", type: "string" , defaultValue: "13"
 	input name: "Botao14", title:"Botao10-Botão(14)", type: "string" , defaultValue: "14"
@@ -107,10 +106,8 @@ metadata {
 	input name: "Botao17", title:"Botao10-Botão(17)", type: "string" , defaultValue: "17"
 	input name: "Botao18", title:"Botao10-Botão(18)", type: "string" , defaultValue: "18"
 	input name: "Botao19", title:"Botao10-Botão(19)", type: "string" , defaultValue: "19"
-	input name: "Botao20", title:"Botao10-Botão(20)", type: "string" , defaultValue: "20"
-
-      
-      
+	input name: "Botao20", title:"Botao10-Botão(20)", type: "string" , defaultValue: "20"      
+         
        
   }   
   
@@ -135,7 +132,9 @@ def updated()
    
     sendEvent(name:"numberOfButtons", value:20)    
     log.debug "updated()"
-    AtualizaDadosGW3()    
+    AtualizaDadosGW3()
+	if (logEnable) runIn(1800,logsOff)
+    
     
 }
 
@@ -146,8 +145,6 @@ def AtualizaDadosGW3() {
     state.cId = settings.cId
     state.rcId = 61
     log.info "Dados do GW3 atualizados: " + state.currentip + " -- " + state.serialNum + " -- " +  state.verifyCode + " -- " + state.cId + " -- " +  state.rcId
-    sendEvent(name:"numberOfButtons", value:20)    
-
 }
 
 def on() {
@@ -183,7 +180,7 @@ def push(pushed) {
         case 8 : Botao8(); break                
         case 9 : Botao9(); break    
         case 10 : Botao10(); break            
-        case 11 : Botao11(); break            
+        case 11 : Botao10(); break            
         case 12 : Botao12(); break            
         case 13 : Botao13(); break            
         case 14 : Botao14(); break            
@@ -192,10 +189,8 @@ def push(pushed) {
         case 17 : Botao17(); break            
         case 18 : Botao18(); break            
         case 19 : Botao19(); break            
-        case 20 : Botao20(); break            
-
-        
-        default:
+        case 20 : Botao20(); break           
+		default:
 			logDebug("push: Botão inválido.")
 			break
 	}
@@ -209,7 +204,7 @@ def Botao1(){
     state.botaouniversal = ircode
 }
 
-//Botão #2 para dashboard
+//Botão #1 para dashboard
 def Botao2(){
     sendEvent(name: "status", value: "Botao2")
     def ircode =  "2"
@@ -275,7 +270,6 @@ def Botao10(){
     def ircode =  (settings.Botao10 ?: "")
     EnviaComando(ircode)
 }
-
 
 //Botão #10 para dashboard
 def Botao11(){
@@ -349,51 +343,74 @@ def Botao20(){
 
 
 
-def EnviaComando(buttonnumber) {
+private String buildFullUrl(button) {
+    def ip   = settings.molIPAddress
+    def sn   = settings.serialNum
+    def vc   = settings.verifyCode
+    def cid  = settings.cId
+    def rcid = (settings.rcId ?: "61")
+    // IMPORTANT: we deliberately do NOT URL-encode 'pw' here
+    return "http://${ip}/api/device/deviceDetails/smartHomeAutoHttpControl" +
+           "?serialNum=${sn}&verifyCode=${vc}&state=${button}&rcId=${rcid}&cId=${cid}"
 
-
-    def URI = "http://" + state.currentip + "/api/device/deviceDetails/smartHomeAutoHttpControl?serialNum=" + state.serialNum + "&verifyCode="  + state.verifyCode + "&cId=" + state.cId + "&state=" + buttonnumber + "&rcId=" + state.rcId                                                                                                        
-    httpPOSTExec(URI)
-    log.info "Comando Enviad HTTP = " +  URI + "+ commando = " + buttonnumber
-    
-    //sendEvent(name: "status", value: tempStatus)
-    
     
 }
 
 
-def httpPOSTExec(URI)
-{
-    
-    try
-    {
-        getString = URI
-        segundo = ""
-        httpPost(getString.replaceAll(' ', '%20'),segundo,  )
-        { resp ->
-            if (resp.data)
-            {
-                       
-                      log.info "Response " + resp.data                                    
-            }
+
+def EnviaComando(button) {
+    //if (!pw) return
+	
+    settings.timeoutSec  = 7    
+    String fullUrl = buildFullUrl(button)
+    log.info "FullURL = " + fullUrl
+
+    // params: give only a 'uri' so Hubitat won't rebuild/encode the query
+    Map params = [ uri: fullUrl, timeout: (settings.timeoutSec ?: 7) as int ]
+    log.info "Params = " + params
+	
+        try {
+            asynchttpPost('gw3PostCallback', params, [cmd: button])
+        } catch (e) {
+            log.warn "${device.displayName} Async POST scheduling failed: ${e.message}"
+    }
+}
+
+void gw3PostCallback(resp, data) {
+    String cmd = data?.cmd
+    try {
+        if (resp?.status in 200..299) {
+            logDebug "POST OK (async) cmd=${cmd} status=${resp?.status}"
+             state.ultimamensagem =  "Resposta OK"
+
+        } else {
+            logWarn "POST error (async) status=${resp?.status} cmd=${cmd}"
+            state.ultimamensagem =  "Erro no envio do comando"
+            
         }
+    } catch (e) {
+        logWarn "Async callback exception: ${e.message} (cmd=${cmd})"
+        state.errormessage = e.message
+        
     }
-                            
-
-    catch (Exception e)
-    {
-        logDebug("httpPostExec() failed: ${e.message}")
-    }
-    
 }
 
 
 
-private logDebug(msg) {
-  if (settings?.debugOutput || settings?.debugOutput == null) {
-    log.debug "$msg"
-  }
-}
 
+
+
+
+private logInfo(msg)  { if (settings?.txtEnable   != false) log.info  "${device.displayName} ${msg}" }
+private logDebug(msg) { if (settings?.debugOutput == true)  log.debug "${device.displayName} ${msg}" }
+private logWarn(msg)  { log.warn "${device.displayName} ${msg}" }
+
+def logsOff() {
+    log.warn 'logging disabled...'
+    device.updateSetting('logInfo', [value:'false', type:'bool'])
+    device.updateSetting('logWarn', [value:'false', type:'bool'])
+    device.updateSetting('logDebug', [value:'false', type:'bool'])
+    device.updateSetting('logTrace', [value:'false', type:'bool'])
+}
 
 
