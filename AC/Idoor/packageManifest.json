@@ -1,10 +1,10 @@
 {
    "packageName":"MolSmart GW3-IR(iDoor) - AC",
    "author":"TRATO",
-   "version":"2.4",
+   "version":"2.5",
    "minimumHEVersion":"2.3.7.100",
    "dateReleased":"2024-12-10",
-   "releaseNotes":"Added Initialize Function",
+   "releaseNotes":"Changed to AsyncHTTPPost Method ",
    "documentationLink":"https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main",
    "drivers": [
     {
