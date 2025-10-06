@@ -1,10 +1,10 @@
 {
    "packageName":"MolSmart GW3 - IR Universal(Learning)",
    "author":"TRATO",
-   "version":"2.4",
+   "version":"2.5",
    "minimumHEVersion":"2.3.7.100",
-   "dateReleased":"2025-09-25",
-   "releaseNotes":"Added +10 buttons for Push and Commands ",
+   "dateReleased":"2025-10-05",
+   "releaseNotes":"Changed to ASYNC Http method ",
    "documentationLink":"https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main/Universal",
    "drivers": [
     {
