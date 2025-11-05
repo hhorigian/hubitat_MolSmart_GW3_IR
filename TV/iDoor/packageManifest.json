@@ -3,7 +3,7 @@
  "author":"VH",
  "version":"1.4",
  "minimumHEVersion":"2.3.7.100",
- "dateReleased":"2024-07-23",
+ "dateReleased":"2025-11-05",
  "releaseNotes":"Added  Buttons as Child Devices using Recreate Buttons. Buttons shown as Switch, easier for dashboard use",
  "documentationLink":"https://github.com/hhorigian/hubitat_MolSmart_GW3_IR/tree/main/TV/iDoor",
  "drivers": [
