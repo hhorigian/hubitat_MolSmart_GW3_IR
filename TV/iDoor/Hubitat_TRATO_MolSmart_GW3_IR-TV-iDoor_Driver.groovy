@@ -14,13 +14,13 @@
  *
  *
  *            --- Driver para GW3 - TV e SOM - idoor
- *            V.1.0 11/07/2024 - First Version. Beta. 
+ *        V.1.0 11/07/2024 - First Version. Beta. 
  *	      V.1.1 22/07/2024 - Added comments for buttons. 	
  *	      V.1.2 23/07/2024 - Added extra buttons codes (6 buttons). 	
  *	      V.1.3 7/09/2025  - Added HTTP Check for Online/Offline Status of GW3. Added Version attribute to show in device. 
+ *        V.1.4 5/11/2025  - Added  Buttons as Child Devices using "Recreate Buttons". Buttons shown as Switch, easier for dashboard use. 
  *
  */
-
 
 metadata {
   definition (name: "MolSmart - GW3 - IR(idoor) - TV e SOM", namespace: "TRATO", author: "VH", vid: "generic-contact") {
@@ -32,6 +32,8 @@ metadata {
     capability "Variable"      
 
 	command "healthCheckNow"
+        command "recreateChilds"
+        command "removeChilds"      
 
     // NOVOS atributos de saúde/conectividade
     attribute "gw3Online", "ENUM", ONLINE_ENUM
@@ -75,7 +77,8 @@ metadata {
     // === NOVO: Health Check ===
     input name: "enableHealthCheck", type: "bool",   title: "Ativar verificação de online (HTTP /info)", defaultValue: true
     input name: "healthCheckMins",   type: "number", title: "Intervalo do health check (min)", defaultValue: 30, range: "1..1440"
-      c	  
+      input name: "createChildsOnSave", type: "bool", title: "Criar/atualizar Child Switches ao salvar", defaultValue: false
+
         //help guide
         input name: "UserGuide", type: "hidden", title: fmtHelpInfo("Manual do Driver") 	  
   }   
@@ -104,6 +107,8 @@ def updated()
     //off()
     AtualizaDadosGW3()   
 	if (!device.currentValue("gw3Online")) sendEvent(name:"gw3Online", value:"unknown")    
+    if (createChildsOnSave) createOrUpdateChildButtons(true)
+    
 	
 }
 
@@ -553,3 +558,134 @@ void healthPollCB(resp, data) {
 def healthCheckNow() { healthPoll() }
 
 ////////
+
+// Lista de botões mapeados para métodos já existentes no driver.
+// Se algum método não existir no seu driver, ao acionar o child apenas será logado aviso.
+
+import groovy.transform.Field
+
+@Field static final List<Map> TV_CHILD_BUTTON_DEFS = [    
+  [label:"TV - Power",               handler:"power"],
+  [label:"TV - Mute",                handler:"mute"],
+  [label:"TV - Source",              handler:"source"],
+  [label:"TV - Back",                handler:"back"],
+  [label:"TV - Menu",                handler:"menu"],
+  [label:"TV - HDMI 1",              handler:"hdmi1"],
+  [label:"TV - HDMI 2",              handler:"hdmi2"],
+  [label:"TV - Left",                handler:"left"],
+  [label:"TV - Right",               handler:"right"],
+  [label:"TV - Up",                  handler:"up"],
+  [label:"TV - Down",                handler:"down"],
+  [label:"TV - OK/Confirm",          handler:"confirm"],
+  [label:"TV - Exit",                handler:"exit"],
+  [label:"TV - Home",                handler:"home"],
+  [label:"TV - Channel Up",          handler:"channelUp"],
+  [label:"TV - Channel Down",        handler:"channelDown"],
+  [label:"TV - Volume Up",           handler:"volumeUp"],
+  [label:"TV - Volume Down",         handler:"volumeDown"],
+  [label:"TV - 0",                   handler:"num0"],
+  [label:"TV - 1",                   handler:"num1"],
+  [label:"TV - 2",                   handler:"num2"],
+  [label:"TV - 3",                   handler:"num3"],
+  [label:"TV - 4",                   handler:"num4"],
+  [label:"TV - 5",                   handler:"num5"],
+  [label:"TV - 6",                   handler:"num6"],
+  [label:"TV - 7",                   handler:"num7"],
+  [label:"TV - 8",                   handler:"num8"],
+  [label:"TV - 9",                   handler:"num9"],
+  [label:"TV - Extra 1",             handler:"btnextra1"],
+  [label:"TV - Extra 2",             handler:"btnextra2"],
+  [label:"TV - Extra 3",             handler:"btnextra3"],
+  [label:"TV - Extra 4",             handler:"btnextra4"],
+  [label:"TV - Extra 5",             handler:"btnextra5"],
+  [label:"TV - Extra 6",             handler:"btnextra6"]
+]
+
+// Comandos públicos para o Hubitat
+def recreateChilds() { createOrUpdateChildButtons(true) }
+def removeChilds()  { removeAllChildButtons() }
+
+// Criação/atualização de children (momentary)
+private void createOrUpdateChildButtons(Boolean removeExtras=false) {
+  try { if (logEnable) log.debug "Criando/atualizando Child Switches para botões da TV..." } catch (ignored) { }
+
+  List<Map> defs = TV_CHILD_BUTTON_DEFS
+  Set<String> keep = [] as Set
+
+  defs.eachWithIndex { m, idx ->
+    String dni = "${device.id}-TVBTN-${idx+1}"
+    def child = getChildDevice(dni)
+    String label = m.label as String
+
+    if (!child) {
+      try {
+        child = addChildDevice("hubitat", "Generic Component Switch", dni,
+          [name: label, label: label, isComponent: true])
+        if (logEnable) log.debug "Child criado: ${label} (${dni})"
+      } catch (e) {
+        log.warn "Falha ao criar child '${label}': ${e.message}"
+      }
+    } else {
+      try { if (child.label != label) child.setLabel(label) } catch (ignored) { }
+    }
+
+    if (child) {
+      try {
+        child.updateDataValue("handler", (m.handler as String))
+        // garantir momento inicial OFF (componente momentâneo)
+        child.parse([[name:"switch", value:"off"]])
+      } catch (ignored) { }
+      keep << dni
+    }
+  }
+
+  if (removeExtras) {
+    childDevices?.findAll { !(it.deviceNetworkId in keep) }?.each {
+      try { deleteChildDevice(it.deviceNetworkId) } catch (ignored) { }
+    }
+  }
+}
+
+// Component callbacks do "Generic Component Switch"
+def componentOn(cd)  { handleChildPress(cd) }
+def componentOff(cd) { /* momentary: ignorar */ }
+
+// Ao ligar o child, chama o método mapeado no driver pai e volta para OFF
+private void handleChildPress(cd) {
+  String handler = cd?.getDataValue("handler") ?: ""
+  if (!handler) { log.warn "Child ${cd?.displayName} sem handler definido."; return }
+
+  try {
+    this."${handler}"()
+  } catch (MissingMethodException e) {
+    log.warn "Método '${handler}' não encontrado no driver pai."
+  } catch (e) {
+    log.warn "Falha ao executar handler '${handler}': ${e.message}"
+  }
+
+  // auto-off
+  runIn(1, "childOffSafe", [data:[dni: cd?.deviceNetworkId]])
+}
+
+def childOffSafe(data) {
+  def child = getChildDevice(data?.dni as String)
+  if (child) {
+    try { child.parse([[name:"switch", value:"off"]]) } catch (ignored) { }
+  }
+}
+
+// Remover todos os children criados por este bloco
+private void removeAllChildButtons() {
+  try { if (logEnable) log.warn "Removendo todos os Child Switches de botões..." } catch (ignored) { }
+  def toRemove = childDevices?.findAll { (it.deviceNetworkId ?: "").startsWith("${device.id}-TVBTN-") } ?: []
+  Integer removed = 0
+  toRemove.each { cd ->
+    try {
+      deleteChildDevice(cd.deviceNetworkId)
+      removed++
+    } catch (e) {
+      log.warn "Falha ao remover child '${cd.displayName}': ${e.message}"
+    }
+  }
+  if (logEnable) log.warn "Remoção concluída. Total removido: ${removed}"
+}
