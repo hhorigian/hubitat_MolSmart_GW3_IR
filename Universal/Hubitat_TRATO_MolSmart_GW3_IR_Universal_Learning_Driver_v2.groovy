@@ -23,7 +23,7 @@
  *        V.2.4 25/9/2025 - Added 10 extra buttons for Commands and Push   
  *        V.2.5 26/9/2025 - Changed to ASYNC Http method  
  *        V.2.6 7/10/2025 - Added HTTP Check for Online/Offline Status of GW3. Added Version attribute to show in device. 
- *
+ *        V.2.7 5/11/2025 - Added  Buttons as Child Devices using "Recreate Buttons". Buttons shown as Switch, easier for dashboard use. 
  */
 metadata {
   definition (name: "MolSmart GW3 - IR Universal(Learning)", namespace: "TRATO", author: "VH", vid: "generic-contact") {
@@ -60,6 +60,10 @@ metadata {
     	command "Botao18"
     	command "Botao19"
     	command "Botao20"
+        command "recreateButtons"
+        command "removeButtons"   
+
+
 
 	    command "healthCheckNow"
 
@@ -95,6 +99,7 @@ metadata {
     	input name: "cId", title:"Control ID (pego no idoor)", type: "string", required: true  
         input name: "logEnable", type: "bool", title: "Enable debug logging", defaultValue: false
         input name: "debugOutput", type: "bool", title: "Habilitar Log", defaultValue: false           
+	    input name: "createButtonsOnSave", type: "bool", title: "Criar/atualizar Child Switches para botões ao salvar", defaultValue: false
 
 	  //help guide
         input name: "UserGuide", type: "hidden", title: fmtHelpInfo("Manual do Driver") 
@@ -137,6 +142,10 @@ def initialized()
     
 }
 
+def refresh()
+{
+ log.info "Refresh"   
+}
 def installed()
 {
    
@@ -157,6 +166,7 @@ def updated()
 	if (!device.currentValue("gw3Online")) sendEvent(name:"gw3Online", value:"unknown")    
     AtualizaDadosGW3()
 	if (logEnable) runIn(1800,logsOff)
+    if (createButtonsOnSave) createOrUpdateChildButtons(true)    
     
     
 }
@@ -522,3 +532,120 @@ def logsOff() {
 }
 
 
+
+
+/* ======================= CHILD SWITCHES (Botões como Switch momentâneo) ======================= */
+
+@Field static final List<Map> UNIV_CHILD_BUTTON_DEFS = [
+  [label:"Universal - On",  handler:"on"],
+  [label:"Universal - Off", handler:"off"],
+  [label:"Universal - Botão 1",  handler:"Botao1"],
+  [label:"Universal - Botão 2",  handler:"Botao2"],
+  [label:"Universal - Botão 3",  handler:"Botao3"],
+  [label:"Universal - Botão 4",  handler:"Botao4"],
+  [label:"Universal - Botão 5",  handler:"Botao5"],
+  [label:"Universal - Botão 6",  handler:"Botao6"],
+  [label:"Universal - Botão 7",  handler:"Botao7"],
+  [label:"Universal - Botão 8",  handler:"Botao8"],
+  [label:"Universal - Botão 9",  handler:"Botao9"],
+  [label:"Universal - Botão 10", handler:"Botao10"],
+  [label:"Universal - Botão 11", handler:"Botao11"],
+  [label:"Universal - Botão 12", handler:"Botao12"],
+  [label:"Universal - Botão 13", handler:"Botao13"],
+  [label:"Universal - Botão 14", handler:"Botao14"],
+  [label:"Universal - Botão 15", handler:"Botao15"],
+  [label:"Universal - Botão 16", handler:"Botao16"],
+  [label:"Universal - Botão 17", handler:"Botao17"],
+  [label:"Universal - Botão 18", handler:"Botao18"],
+  [label:"Universal - Botão 19", handler:"Botao19"],
+  [label:"Universal - Botão 20", handler:"Botao20"]
+]
+
+// Alias para o comando pedido ("Create Childs")
+def CreateChilds() { recreateButtons() }
+// Comando utilitário para recriar via UI/Console
+def recreateButtons() { createOrUpdateChildButtons(true) }
+
+private void createOrUpdateChildButtons(Boolean removeExtras=false) {
+  try { if (logEnable) log.debug "Criando/atualizando Child Switches (Universal)..." } catch (ignored) { }
+
+  List<Map> defs = UNIV_CHILD_BUTTON_DEFS
+  Set<String> keep = [] as Set
+  defs.eachWithIndex { m, idx ->
+    String dni = "${device.id}-UNIVBTN-${idx+1}"
+    def child = getChildDevice(dni)
+    String label = m.label as String
+    if (!child) {
+      try {
+        child = addChildDevice("hubitat", "Generic Component Switch", dni,
+          [name: label, label: label, isComponent: true])
+        if (logEnable) log.debug "Child criado: ${label} (${dni})"
+      } catch (e) {
+        log.warn "Falha ao criar child '${label}': ${e.message}"
+      }
+    } else {
+      try { if (child.label != label) child.setLabel(label) } catch (ignored) { }
+    }
+    if (child) {
+      try {
+        child.updateDataValue("handler", (m.handler as String))
+        child.parse([[name:"switch", value:"off"]]) // estado inicial
+      } catch (ignored) { }
+      keep << dni
+    }
+  }
+
+  // Remove filhos não previstos quando removeExtras = true
+  if (removeExtras) {
+    childDevices?.findAll { !(it.deviceNetworkId in keep) }?.each {
+      try {
+        deleteChildDevice(it.deviceNetworkId)
+      } catch (ignored) { }
+    }
+  }
+}
+
+// Callbacks do Generic Component Switch
+def componentOn(cd)  { handleChildPress(cd) }
+def componentOff(cd) { /* momentary: ignorar o off manual */ }
+
+private void handleChildPress(cd) {
+  String handler = (cd?.getDataValue("handler") ?: "").trim()
+  if (!handler) {
+    log.warn "Child ${cd?.displayName} sem handler definido."
+    return
+  }
+  try {
+    this."${handler}"()
+  } catch (MissingMethodException e) {
+    log.warn "Método '${handler}' não encontrado. Verifique nomes dos handlers."
+  } catch (e) {
+    log.warn "Falha ao executar handler '${handler}': ${e.message}"
+  }
+  // auto-off em 1s para comportamento momentâneo
+  runIn(1, "childOffSafe", [data:[dni: cd?.deviceNetworkId]])
+}
+
+def childOffSafe(data) {
+  def child = getChildDevice(data?.dni as String)
+  if (child) {
+    try { child.parse([[name:"switch", value:"off"]]) } catch (ignored) { }
+  }
+}
+
+
+/* ===== Remover todos os Child Switches criados para os botões da TV ===== */
+def removeButtons() {
+  try { if (logEnable) log.warn "Removendo todos os Child Switches de botões..." } catch (ignored) { }
+  def toRemove = childDevices?.findAll { (it.deviceNetworkId ?: "").startsWith("${device.id}-UNIVBTN-") } ?: []
+  Integer removed = 0
+  toRemove.each { cd ->
+    try {
+      deleteChildDevice(cd.deviceNetworkId)
+      removed++
+    } catch (e) {
+      log.warn "Falha ao remover child '${cd.displayName}': ${e.message}"
+    }
+  }
+  if (logEnable) log.warn "Remoção concluída. Total removido: ${removed}"
+}
